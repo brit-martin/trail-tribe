@@ -177,8 +177,7 @@ Post.hasMany(Comment, {foreignKey: 'postId'})
 Comment.belongsTo(User, {foreignKey: 'userId'})
 User.hasMany(Comment, {foreignKey: 'userId'})
 
+export { sequelize, User, Post, Notification, Reaction, Comment} 
+export const db = await connectToDB(POSTGRES_CONNECTION_STRING);
 
 await sequelize.close();
-
-
-export const db = await connectToDB(POSTGRES_CONNECTION_STRING);
