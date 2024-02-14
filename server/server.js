@@ -1,6 +1,10 @@
 import Express  from "express";
 import session from "express-session";
 import viteExpress from "vite-express";
+import dotenv from 'dotenv';
+
+dotenv.config();
+const { PORT } = process.env;
 
 const app = Express();
 app.use(Express.urlencoded({ extended: false }));
@@ -20,4 +24,4 @@ function loginRequired(req, res, next) {
 // endpoints here
 
 
-  viteExpress(app, 8032, () => console.log(`Server is listening on port 8032`))
+  viteExpress(app, PORT, () => console.log(`Server is listening on port 8032`))

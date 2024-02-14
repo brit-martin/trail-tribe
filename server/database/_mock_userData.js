@@ -1,6 +1,6 @@
-[
+const userData = [
   {
-    "id": "1",
+    "id": 1,
     "fname": "test",
     "lname": "user",
     "email": "testuser@gmail.com",
@@ -9,7 +9,7 @@
     "bio": "example bio text"
   },
   {
-    "id": "2",
+    "id": 2,
     "fname": "Jake",
     "lname": "Nichols",
     "email": "jnichols@gmail.com",
@@ -18,7 +18,7 @@
     "bio": "I love hiking and I am the man"
   },
   {
-    "id": "3",
+    "id": 3,
     "fname": "Cody",
     "lname": "Farrington",
     "email": "cfarrington@gmail.com",
@@ -27,7 +27,7 @@
     "bio": "I can easily squat twice your body wait fool"
   },
   {
-    "id": "4",
+    "id": 4,
     "fname": "Brittany",
     "lname": "Larson",
     "email": "blarson@gmail.com",
@@ -36,7 +36,7 @@
     "bio": "I clean teeth and rob bitches"
   },
   {
-    "id": "5",
+    "id": 5,
     "fname": "Evan",
     "lname": "Marmer",
     "email": "emarmer@gmail.com",
@@ -45,3 +45,4 @@
     "bio": "I make vans to live in cuz fuck paying rent"
   }
 ]
+export default userData

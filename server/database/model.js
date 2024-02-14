@@ -4,15 +4,19 @@ import url from 'url';
 import util from 'util';
 import dotenv from 'dotenv';
 
+console.log('log1')
+
 dotenv.config();
 const { POSTGRES_CONNECTION_STRING } = process.env;
+
+const db = await connectToDB(POSTGRES_CONNECTION_STRING);
 
 class User extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
   }
 }
-
+console.log('log2')
 User.init(
   {
     id: {
@@ -49,7 +53,7 @@ User.init(
     sequelize: db,
   }
 );
-
+console.log('log3')
 class Post extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
@@ -92,7 +96,7 @@ class Notification extends Model {
     return this.toJSON();
   }
 }
-
+console.log('log4')
 Notification.init(
   {
     id: {
@@ -133,7 +137,7 @@ Reaction.init(
     sequelize: db,
   }
 );
-
+console.log('log5')
 class Comment extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
@@ -153,11 +157,11 @@ Comment.init(
   },
   {
     modelName: 'comment',
-    sequelize: 'db',
+    sequelize: db,
     timestamps: true,
   }
 );
-
+console.log('log6')
 User.hasMany(Post, { foreignKey: 'userId' });
 Post.belongsTo(User, { foreignKey: 'userId' });
 
@@ -173,7 +177,7 @@ Notification.belongsTo(Comment, { foreignKey: 'commentId' });
 Post.hasMany(Notification, { foreignKey: 'postId' });
 Notification.belongsTo(Post, { foreignKey: 'postId' });
 
-User.belongsToMany(User, { through: 'friends' });
+// User.belongsToMany(User, { through: 'friends' });
 
 User.hasMany(Reaction, { foreignKey: 'userId' });
 Reaction.belongsTo(User, { foreignKey: 'userId' });
@@ -189,8 +193,8 @@ Comment.belongsTo(Post, { foreignKey: 'postId' });
 
 User.hasMany(Comment, { foreignKey: 'userId' });
 Comment.belongsTo(User, { foreignKey: 'userId' });
+console.log('log7')
 
-export const db = await connectToDB(POSTGRES_CONNECTION_STRING);
 export { db, User, Post, Notification, Reaction, Comment} 
 
 
