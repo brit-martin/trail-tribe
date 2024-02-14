@@ -12,6 +12,7 @@ import Newsfeed from './components/Newsfeed.jsx';
 import Explore from './components/Explore.jsx';
 // 1: Router Imports:
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+
 // Redux 1: import redux & store
 import { Provider } from 'react-redux';
 import configureStore from './redux/store.js';
@@ -38,3 +39,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <RouterProvider router={router} />
   </Provider>
 );
+
