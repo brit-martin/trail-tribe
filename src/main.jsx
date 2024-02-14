@@ -13,6 +13,10 @@ import Explore from './components/Explore.jsx';
 // 1: Router Imports:
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
+// Redux 1: import redux & store
+import { Provider } from 'react-redux';
+import configureStore from './redux/store.js';
+
 // 2: Create Router Object
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,4 +34,9 @@ const router = createBrowserRouter(
 );
 
 // 3: set the Route Provider
-ReactDOM.createRoot(document.getElementById('root')).render(<RouterProvider router={router} />);
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={configureStore}>
+    <RouterProvider router={router} />
+  </Provider>
+);
+
