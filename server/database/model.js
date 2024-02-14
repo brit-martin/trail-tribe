@@ -159,8 +159,29 @@ Comment.init(
     modelName: 'comment',
     sequelize: db,
     timestamps: true,
-  }
+  },
 );
+
+class Friends extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  }
+}
+
+Friends.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+  },
+  {
+    modelName: 'friends',
+    sequelize: db,
+  },
+)
+
 console.log('log6')
 User.hasMany(Post, { foreignKey: 'userId' });
 Post.belongsTo(User, { foreignKey: 'userId' });
@@ -177,7 +198,8 @@ Notification.belongsTo(Comment, { foreignKey: 'commentId' });
 Post.hasMany(Notification, { foreignKey: 'postId' });
 Notification.belongsTo(Post, { foreignKey: 'postId' });
 
-// User.belongsToMany(User, { through: 'friends' });
+User.hasMany(Friends, { foreignKey: 'userId' });
+Friends.belongsTo(User, { foreignKey: 'userId' });
 
 User.hasMany(Reaction, { foreignKey: 'userId' });
 Reaction.belongsTo(User, { foreignKey: 'userId' });
