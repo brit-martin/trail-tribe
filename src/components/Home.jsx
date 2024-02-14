@@ -1,5 +1,11 @@
+import Benefits from './Benefits.jsx';
+
 function Home() {
-  return <h1>HOME</h1>;
+  return (
+    <>
+      <Benefits />
+    </>
+  );
 }
 
 export default Home;
