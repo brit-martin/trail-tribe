@@ -10,6 +10,12 @@ import Contact from './components/Contact.jsx';
 import About from './components/About.jsx';
 import Newsfeed from './components/Newsfeed.jsx';
 import Explore from './components/Explore.jsx';
+// Material UI Imports:
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 // 1: Router Imports:
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
@@ -39,4 +45,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <RouterProvider router={router} />
   </Provider>
 );
-
