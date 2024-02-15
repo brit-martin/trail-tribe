@@ -1,47 +1,53 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
-import './index.css';
-import Home from './components/Home.jsx';
-import Login from './components/Login.jsx';
-import Signup from './components/Signup.jsx';
-import Faq from './components/Faq.jsx';
-import Contact from './components/Contact.jsx';
-import About from './components/About.jsx';
-import Newsfeed from './components/Newsfeed.jsx';
-import Explore from './components/Explore.jsx';
-// Material UI Imports:
-// import '@fontsource/roboto/300.css';
-// import '@fontsource/roboto/400.css';
-// import '@fontsource/roboto/500.css';
-// import '@fontsource/roboto/700.css';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
+import Home from "./components/Home.jsx";
+import Login from "./components/Login.jsx";
+import Signup from "./components/Signup.jsx";
+import Faq from "./components/Faq.jsx";
+import Contact from "./components/Contact.jsx";
+import About from "./components/About.jsx";
+import Newsfeed from "./components/Newsfeed.jsx";
+import Explore from "./components/Explore.jsx";
+import { ThemeProvider } from "@mui/material/styles";
+import themes from "./components/Theme.jsx";
 
 // 1: Router Imports:
-import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
 
 // Redux 1: import redux & store
-import { Provider } from 'react-redux';
-import configureStore from './redux/store.js';
+import { Provider } from "react-redux";
+import configureStore from "./redux/store.js";
 
 // 2: Create Router Object
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<App />}>
+    <Route path="/" element={<App />}>
       <Route index element={<Home />} />
-      <Route path='/login' element={<Login />} />
-      <Route path='/signup' element={<Signup />} />
-      <Route path='/faq' element={<Faq />} />
-      <Route path='/contact' element={<Contact />} />
-      <Route path='/about' element={<About />} />
-      <Route path='/newsfeed' element={<Newsfeed />} />
-      <Route path='/explore' element={<Explore />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/faq" element={<Faq />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/newsfeed" element={<Newsfeed />} />
+      <Route path="/explore" element={<Explore />} />
     </Route>
   )
 );
 
+
+
 // 3: set the Route Provider
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={configureStore}>
-    <RouterProvider router={router} />
-  </Provider>
+      <ThemeProvider theme={themes}>
+      <RouterProvider router={router} />
+  </ThemeProvider>
+    </Provider>
 );

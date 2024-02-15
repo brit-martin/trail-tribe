@@ -15,6 +15,10 @@
     transform: translate(-50%, 0);
     bottom: 15%;
     left: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .hero__img {
@@ -27,10 +31,9 @@
 
 .hero__logo {
     position: absolute;
+    border: 1px solid aqua;
     top: 15%;
     left: 60%;
-    width: 100%;
-    height: 100%;
     object-fit: cover;
 }
 
