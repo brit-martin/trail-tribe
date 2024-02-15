@@ -1,0 +1,227 @@
+.benefits {
+  background: url('./benefits_1.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 50rem;
+  position: relative;
+}
+
+.benefits::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* CARDS */
+.benefit__card {
+  position: absolute;
+
+  width: 10rem;
+  height: 8rem;
+  background-color: rgba(0, 0, 0);
+  border-radius: 2px;
+  z-index: 1;
+  padding: 0.5rem;
+}
+
+.card--1 {
+  top: 5rem;
+  right: 22rem;
+}
+.card--2 {
+  top: 19rem;
+  left: 19rem;
+}
+.card--3 {
+  bottom: 3rem;
+  right: 20rem;
+}
+
+/* NODES */
+.benefit__node {
+  position: absolute;
+  z-index: 1;
+  font-size: 5rem;
+}
+
+.node--1 {
+  top: 6rem;
+  right: 16rem;
+}
+.node--2 {
+  top: 20rem;
+  left: 13rem;
+}
+.node--3 {
+  bottom: 5rem;
+  right: 14rem;
+}
+
+/* DOTS */
+.benefit__dot {
+  position: absolute;
+}
+.dot--1 {
+  top: 11rem;
+  right: 18rem;
+}
+.dot--2 {
+  top: 13rem;
+  right: 18rem;
+}
+.dot--3 {
+  top: 15rem;
+  right: 19rem;
+}
+.dot--4 {
+  top: 17rem;
+  right: 20rem;
+}
+.dot--5 {
+  top: 18rem;
+  right: 22rem;
+}
+.dot--6 {
+  top: 19rem;
+  right: 24rem;
+}
+.dot--7 {
+  top: 21rem;
+  right: 26rem;
+}
+.dot--8 {
+  top: 23rem;
+  right: 28rem;
+}
+.dot--9 {
+  top: 22rem;
+  right: 31rem;
+}
+.dot--10 {
+  top: 20rem;
+  right: 33rem;
+}
+.dot--11 {
+  top: 19rem;
+  right: 36rem;
+}
+.dot--12 {
+  top: 18rem;
+  right: 39rem;
+}
+.dot--13 {
+  top: 16rem;
+  right: 41rem;
+}
+.dot--14 {
+  top: 14rem;
+  right: 43rem;
+}
+.dot--15 {
+  top: 13rem;
+  right: 46rem;
+}
+.dot--16 {
+  top: 13rem;
+  right: 49rem;
+}
+.dot--17 {
+  top: 14rem;
+  right: 52rem;
+}
+.dot--18 {
+  top: 15rem;
+  right: 55rem;
+}
+.dot--19 {
+  top: 17rem;
+  right: 57rem;
+}
+.dot--20 {
+  top: 19rem;
+  right: 59rem;
+}
+.dot--21 {
+  top: 25rem;
+  right: 59rem;
+}
+.dot--22 {
+  top: 28rem;
+  right: 59rem;
+}
+.dot--23 {
+  top: 30rem;
+  right: 57rem;
+}
+.dot--24 {
+  top: 32rem;
+  right: 55rem;
+}
+.dot--25 {
+  top: 34rem;
+  right: 53rem;
+}
+.dot--26 {
+  top: 36rem;
+  right: 51rem;
+}
+.dot--27 {
+  top: 37rem;
+  right: 48rem;
+}
+.dot--28 {
+  top: 38rem;
+  right: 45rem;
+}
+.dot--29 {
+  top: 39rem;
+  right: 42rem;
+}
+.dot--30 {
+  top: 38rem;
+  right: 39rem;
+}
+.dot--31 {
+  top: 37rem;
+  right: 36rem;
+}
+.dot--32 {
+  top: 36rem;
+  right: 33rem;
+}
+.dot--33 {
+  top: 35rem;
+  right: 30rem;
+}
+.dot--34 {
+  top: 34rem;
+  right: 27rem;
+}
+.dot--35 {
+  top: 34rem;
+  right: 24rem;
+}
+.dot--36 {
+  top: 34rem;
+  right: 21rem;
+}
+.dot--37 {
+  top: 35rem;
+  right: 18rem;
+}
+.dot--38 {
+  top: 37rem;
+  right: 16rem;
+}
+.dot--39 {
+  top: 39rem;
+  right: 15rem;
+}
+/* .dot--40 {
+  top: 19rem;
+  right: 59rem;
+} */
