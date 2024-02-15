@@ -1,0 +1,18 @@
+.signup-page {
+ background-image: url('public/signup-three.jpeg');
+ background-repeat: no-repeat;
+ background-size:contain cover;
+ position: relative;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
