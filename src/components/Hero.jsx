@@ -5,7 +5,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import "./Hero.css";
+import "../styles/Hero.css";
 
 function SingleCard() {
   return (
@@ -29,7 +29,7 @@ export default function Hero() {
     <div className="hero__container">
       <img
         className="hero__img"
-        src="src\components\random-mountain.jpg"
+        src="\random-mountain.jpg"
         alt=""
       />
 

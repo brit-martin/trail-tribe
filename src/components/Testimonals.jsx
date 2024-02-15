@@ -8,7 +8,7 @@ import { CardActionArea } from "@mui/material";
 import Icon from '@mui/material/Icon'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import './testimonials.css';
+import '../styles/testimonials.css';
 
 function Testimonials() {
     useEffect(() => {
