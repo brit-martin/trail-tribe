@@ -181,7 +181,7 @@ function Testimonials() {
             <CardMedia 
                 className="testimonal-image"
                 component="img"
-                image="https://st2.depositphotos.com/4826249/7267/i/950/depositphotos_72675955-stock-photo-green-coniferous-forest-with-old.jpg"
+                image="public/testimonials-one.jpeg"
                 alt="pine trees"
             />
             <CardContent>
@@ -204,7 +204,7 @@ function Testimonials() {
                 className="testimonal-image"
                 component="img"
                 justify="center"
-                image="https://st2.depositphotos.com/4826249/7267/i/950/depositphotos_72675955-stock-photo-green-coniferous-forest-with-old.jpg"
+                image="public/testimonials-one.jpeg"
                 alt="pine trees"
             />
             <CardContent>
@@ -226,7 +226,7 @@ function Testimonials() {
             <CardMedia
                 className="testimonal-image"
                 component="img"
-                image="https://st2.depositphotos.com/4826249/7267/i/950/depositphotos_72675955-stock-photo-green-coniferous-forest-with-old.jpg"
+                image="public/testimonials-one.jpeg"
                 alt="pine trees"
             />
             <CardContent>
@@ -250,7 +250,7 @@ function Testimonials() {
             <CardMedia
                 className="testimonal-image"
                 component="img"
-                image="https://st2.depositphotos.com/4826249/7267/i/950/depositphotos_72675955-stock-photo-green-coniferous-forest-with-old.jpg"
+                image="public/testimonials-one.jpeg"
                 alt="pine trees"
             />
             <CardContent>
@@ -273,7 +273,7 @@ function Testimonials() {
             <CardMedia
                 className="testimonal-image"
                 component="img"
-                image="https://st2.depositphotos.com/4826249/7267/i/950/depositphotos_72675955-stock-photo-green-coniferous-forest-with-old.jpg"
+                image="public/testimonials-one.jpeg"
                 alt="pine trees"
             />
             <CardContent>
@@ -296,7 +296,7 @@ function Testimonials() {
             <CardMedia
                 className="testimonal-image"
                 component="img"
-                image="https://st2.depositphotos.com/4826249/7267/i/950/depositphotos_72675955-stock-photo-green-coniferous-forest-with-old.jpg"
+                image="public/testimonials-one.jpeg"
                 alt="pine trees"
             />
             <CardContent>
