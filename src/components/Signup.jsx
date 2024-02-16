@@ -13,6 +13,8 @@ import Button from "@mui/material/Button";
 import "../styles/signup.css";
 import { useState } from "react";
 import axios from "axios";
+import {useDispatch} from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 function Signup() {
   const [fnameInput, setFnameInput] = useState("");
@@ -20,6 +22,8 @@ function Signup() {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [confirmPasswordInput, setConfirmPasswordInput] = useState("");
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   function onSignUp(event){
     event.preventDefault()
@@ -34,16 +38,20 @@ function Signup() {
     }
     // send the request
     console.log(userBody);
-    axios.post("/signup", userBody).then((response) => {
+    axios.post("/signup", userBody)
+      .then((response) => {
       console.log(response.data);
-      // dispatch({type: 'SET_USER', payload: response.data.user});
+      dispatch({type: 'SET_USER', payload: response.data.newUser});
+      navigate('/newsfeed')
     });
   } else (
     console.log('password do not match')
     // <Alert variant="outlined" severity="warning">
     //   Passwords don't match. 
     // </Alert>
-  )
+  ).catch((error) => {
+    console.log(error)
+  })
 
   }
 
@@ -95,7 +103,7 @@ function Signup() {
             sx={{ m: 1, width: "25ch" }}
             variant="outlined"
             required
-            value={confirmPasswordInput}
+            value={passwordInput}
             onChange={(e) => setPasswordInput(e.target.value)}
           >
             <InputLabel htmlFor="outlined-adornment-password">

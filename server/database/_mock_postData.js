@@ -1,6 +1,5 @@
 const postData = [
   {
-    "id": 1,
     "hikeName": "Fun in the sun",
     "trailId": "trail_id",
     "description": "I went on this hike and had an absolute blast. I saw a nice waterfall halfway through the hike.",
@@ -10,7 +9,6 @@ const postData = [
     "review": "5"
   },
   {
-    "id": 2,
     "hikeName": "Almost Died",
     "trailId": "trail_id",
     "description": "I was attacked by a wild mongoose. Scariest 18 seconds of my life. wouldn't recommend.",
@@ -20,7 +18,6 @@ const postData = [
     "review": "1"
   },
   {
-    "id": 3,
     "hikeName": "Snowy at the top",
     "trailId": "trail_id",
     "description": "There was still snow at the top, making the steep part 3/4 of the way up pretty difficult. bring spikes!",
@@ -30,7 +27,6 @@ const postData = [
     "review": "4"
   },
   {
-    "id": 4,
     "hikeName": "Birds everywhere",
     "trailId": "trail_id",
     "description": "There are many birds along this trail that you can feed",
@@ -40,7 +36,6 @@ const postData = [
     "review": "5"
   },
   {
-    "id": 5,
     "hikeName": "Cliff Climb!",
     "trailId": "trail_id",
     "description": "This was one of the steepest and hardest hikes ive ever done! well worth the effort though with an amazing view at the top!",

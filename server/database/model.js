@@ -23,6 +23,8 @@ User.init(
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
+      unique: true,
+      allowNull: false,
     },
     fname: {
       type: DataTypes.STRING,
