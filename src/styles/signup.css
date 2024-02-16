@@ -10,6 +10,7 @@
     background-attachment: fixed;
     background-size: cover;
     position: relative;
+    font-family: sans-serif;
 }
 
 .signup-image {
@@ -43,4 +44,8 @@
 }
 .signup-footer {
     color: white
+}
+.signup-button {
+    color: #a1f7f5 !important;
+    margin: 8px !important;
 }

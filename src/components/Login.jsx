@@ -15,12 +15,16 @@ import '../styles/login.css'
 import axios from 'axios'
 import {useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { useTheme } from '@mui/material'
 
 function Login() {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const theme = useTheme()
+
+  const white = theme.palette.quadratiary.contrastText
 
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -60,7 +64,7 @@ function Login() {
         {/* LEFT SIDE */}
         <Grid item xs={7} className="login-left">
           <img className="login-image" src="public/login-three.jpeg" align="" />
-          <h4 className="login-welcome">Welcome back!</h4>
+          <h4 className="login-welcome" color="primary">Welcome back!</h4>
         </Grid>
 
         {/* RIGHT SIDE */}
@@ -68,45 +72,56 @@ function Login() {
           item xs={5}
           className="login-right"
           >
-
+            <div className="login-wrapper"></div>
           {/* login form */}
           <Box
-            sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
+            sx={{ "& .MuiTextField-root": { m: 2, width: "40ch", style: 'white' } }}
             noValidate
             autoComplete="off"
           >
             
             <form className='login-form' onSubmit={onLogin}>
-              <h1 className="login-header">Login</h1>
+              <h1>Login</h1>
               <h4 className="login-header">
                 Ready to make some more memories, please login to your account.
               </h4>
               <TextField
+                focused
+                color="white"
                 className="login-input"
                 required
                 id="outlined-required"
                 label="Email"
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
+                InputProps={{
+                  style: { color: white },
+                }}
               />
               <FormControl
+                focused
                 className="login-input"
-                sx={{ m: 1, width: "25ch" }}
+                sx={{ m: 2, width: "40ch", style: "white" }}
                 variant="outlined"
                 required
                 value={passwordInput}
                 onChange={(e) => setPasswordInput(e.target.value)}
               >
-                <InputLabel htmlFor="outlined-adornment-password">
+                <InputLabel 
+                  htmlFor="outlined-adornment-password"
+                  color="white"
+                  >
                   Password
                 </InputLabel>
                 <OutlinedInput
+                  color="white"
                   id="outlined-adornment-password"
                   // type='password'
                   type={showPassword ? "text" : "password"}
                   endAdornment={
-                    <InputAdornment position="end">
+                    <InputAdornment position="end" color='white'>
                       <IconButton
+                        color="white"
                         aria-label="toggle password visibility"
                         onClick={handleClickShowPassword}
                         // onMouseDown={handleMouseDownPassword}
