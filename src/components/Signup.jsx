@@ -15,8 +15,11 @@ import { useState } from "react";
 import axios from "axios";
 import {useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { useTheme } from '@mui/material'
 
 function Signup() {
+  const theme = useTheme()
+  // console.log(theme)
   const [fnameInput, setFnameInput] = useState("");
   const [lnameInput, setLnameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
@@ -25,6 +28,8 @@ function Signup() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  const white = theme.palette.quadratiary.contrastText
+  console.log(white)
   function onSignUp(event){
     event.preventDefault()
     // check that password and password confirm are the same
@@ -67,7 +72,7 @@ function Signup() {
       <div className="signup-wrapper"></div>
       <Box
         className="signup-form"
-        sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
+        sx={{ "& .MuiTextField-root": { m: 1, width: "30ch" } }}
         noValidate
         autoComplete="off"
       >
@@ -75,47 +80,73 @@ function Signup() {
           <h1 className="signup-header">Sign Up</h1>
           <h3 className="signup-header">Join the tribe today!</h3>
           <TextField
+            focused
+            color="white"
+            variant="outlined"
             className="singup-input"
             required
             id="outlined-required"
             label="First Name"
             value={fnameInput}
             onChange={(e) => setFnameInput(e.target.value)}
+            InputProps={{
+              style: { color: white },
+            }}
+            
           />
           <TextField
+            focused
+            color="white"
+            variant="outlined"
             className="singup-input"
             required
             id="outlined-required"
             label="Last Name"
             value={lnameInput}
             onChange={(e) => setLnameInput(e.target.value)}
+            InputProps={{
+              style: { color: white },
+            }}
           />
           <TextField
+            focused
+            variant="outlined"
+            color="white"
             className="singup-input"
             required
             id="outlined-required"
             label="Email"
             value={emailInput}
             onChange={(e) => setEmailInput(e.target.value)}
+            InputProps={{
+              style: { color: white },
+            }}
           />
           <FormControl
-            className="singup-input"
-            sx={{ m: 1, width: "25ch" }}
+            focused
+            color="white"
             variant="outlined"
+            className="singup-input"
+            sx={{ m: 1, width: "30ch" }}
             required
             value={passwordInput}
             onChange={(e) => setPasswordInput(e.target.value)}
-          >
-            <InputLabel htmlFor="outlined-adornment-password">
+
+            >
+            <InputLabel 
+              htmlFor="outlined-adornment-password"
+              color="white"
+            >
               Password
             </InputLabel>
             <OutlinedInput
               id="outlined-adornment-password"
-              // type='password'
+              color="white"
               type={showPassword ? "text" : "password"}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
+                    color="white"
                     aria-label="toggle password visibility"
                     onClick={handleClickShowPassword}
                     // onMouseDown={handleMouseDownPassword}
@@ -129,23 +160,29 @@ function Signup() {
             />
           </FormControl>
           <FormControl
-            className="singup-input"
-            sx={{ m: 1, width: "25ch" }}
+            focused
+            color="white"
             variant="outlined"
+            className="singup-input"
+            sx={{ m: 1, width: "30ch" }}
             required
             value={confirmPasswordInput}
             onChange={(e) => setConfirmPasswordInput(e.target.value)}
           >
-            <InputLabel htmlFor="outlined-adornment-password">
+            <InputLabel 
+              htmlFor="outlined-adornment-password"
+              color="white"
+              >
               Confirm Password
             </InputLabel>
             <OutlinedInput
               id="outlined-adornment-password"
-              // type='password'
+              color="white"
               type={showConfirmPassword ? "text" : "password"}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
+                    color="white"
                     aria-label="toggle password visibility"
                     onClick={handleClickShowConfirmPassword}
                     // onMouseDown={handleMouseDownPassword}
@@ -169,7 +206,7 @@ function Signup() {
                 setShowLogin(true);
               }}
             >
-              Sign in?
+              Login?
             </a>
           </span>
         </form>
