@@ -1,0 +1,49 @@
+.login-page {
+    border: 1px solid red;
+    background-color: rgb(255, 255, 255, 0.5);
+    display: flex !important;
+    flex-direction: row;
+}
+
+.login-left {
+    border: 1px solid blue;
+    /* max-width: 50%; */
+    height: 800px;
+    overflow: hidden;
+    /* display: flex; */
+}
+
+.login-welcome {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 275px;
+    left: 275px;
+    height: 250px;
+    width: 250px;
+    font-size: 50px;
+    font-family: "Permanent Marker", cursive;
+    border: 1px solid blue;
+}
+
+.login-image {
+    width: 100%;
+    border: 1px solid green;
+    float: left;
+    position: relative;
+
+}
+.login-right {
+    /* max-width: 50%; */
+    height: 100%;
+    border: 1px solid blue;
+    
+}
+
+.login-form {
+    display: flex !important;
+    flex-direction: column;
+    padding: 75px;
+}

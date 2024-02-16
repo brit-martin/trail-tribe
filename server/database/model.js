@@ -4,7 +4,7 @@ import url from 'url';
 import util from 'util';
 import dotenv from 'dotenv';
 
-console.log('log1')
+
 
 dotenv.config();
 const { POSTGRES_CONNECTION_STRING } = process.env;
@@ -16,13 +16,15 @@ class User extends Model {
     return this.toJSON();
   }
 }
-console.log('log2')
+
 User.init(
   {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
+      unique: true,
+      allowNull: false,
     },
     fname: {
       type: DataTypes.STRING,
@@ -53,7 +55,7 @@ User.init(
     sequelize: db,
   }
 );
-console.log('log3')
+
 class Post extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
@@ -96,7 +98,7 @@ class Notification extends Model {
     return this.toJSON();
   }
 }
-console.log('log4')
+
 Notification.init(
   {
     id: {
@@ -137,7 +139,7 @@ Reaction.init(
     sequelize: db,
   }
 );
-console.log('log5')
+
 class Comment extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
@@ -182,7 +184,7 @@ Friends.init(
   },
 )
 
-console.log('log6')
+
 User.hasMany(Post, { foreignKey: 'userId' });
 Post.belongsTo(User, { foreignKey: 'userId' });
 
@@ -215,7 +217,7 @@ Comment.belongsTo(Post, { foreignKey: 'postId' });
 
 User.hasMany(Comment, { foreignKey: 'userId' });
 Comment.belongsTo(User, { foreignKey: 'userId' });
-console.log('log7')
+
 
 export { db, User, Post, Notification, Reaction, Comment} 
 

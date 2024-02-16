@@ -2,6 +2,7 @@ import Express from 'express';
 import session from 'express-session';
 import viteExpress from 'vite-express';
 import dotenv from 'dotenv';
+import authCtrl from './controllers/authCtrl.js'
 
 dotenv.config();
 const { PORT } = process.env;
@@ -19,5 +20,9 @@ function loginRequired(req, res, next) {
 }
 
 // endpoints here
+const { signUp, login, logout, editUserInfo } = authCtrl
+
+app.post('/signup', signUp)
+app.post('/login', login)
 
 viteExpress.listen(app, PORT, () => console.log(`Server is listening on port ${PORT}`));
