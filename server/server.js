@@ -23,5 +23,6 @@ function loginRequired(req, res, next) {
 const { signUp, login, logout, editUserInfo } = authCtrl
 
 app.post('/signup', signUp)
+app.post('/login', login)
 
 viteExpress.listen(app, PORT, () => console.log(`Server is listening on port ${PORT}`));

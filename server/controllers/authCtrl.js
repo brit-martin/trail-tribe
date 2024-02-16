@@ -31,9 +31,21 @@ export default {
         }
     },
 
-
     login: async (req, res) => {
         console.log('login router')
+        const { email, password } = req.body;
+        const user = await User.findOne({ where: {email: email}})
+        console.log(req.body)
+        if (user && user.password === password){
+            req.session.userId = user.id
+            res.send({
+                // success: true,
+                user: user
+            })
+        } else {
+            res.send({message: 'Password is incorrect'})
+        }
+
     },
     logout: async (req, res) => {
         console.log('logout router')

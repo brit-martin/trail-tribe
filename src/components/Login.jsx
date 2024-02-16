@@ -12,25 +12,37 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
 import '../styles/login.css'
+import axios from 'axios'
+import {useDispatch} from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  function onLogin(){
+  function onLogin(event){
+    event.preventDefault()
+
     let userBodyLogin = {
       email: emailInput,
       password: passwordInput
     }
+    console.log(userBodyLogin)
     axios.post('/login', userBodyLogin)
     .then((response)=>{
       console.log(response.data)
+      dispatch({type: 'SET_USER', payload: response.data.user});
+      navigate('/newsfeed')
     })
     .catch((error)=>{
-      console.log(error)
+      console.log('error')
+      //add alert to let user know that password is incorrect
+      //error.data.message
     })
   }
 
