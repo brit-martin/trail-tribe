@@ -12,6 +12,7 @@ import Newsfeed from "./components/Newsfeed.jsx";
 import Explore from "./components/Explore.jsx";
 import { ThemeProvider } from "@mui/material/styles";
 import themes from "./components/Theme.jsx";
+import EditInfo from "./components/EditInfo.jsx";
 
 // 1: Router Imports:
 import {
@@ -37,6 +38,7 @@ const router = createBrowserRouter(
       <Route path="/about" element={<About />} />
       <Route path="/newsfeed" element={<Newsfeed />} />
       <Route path="/explore" element={<Explore />} />
+      <Route path="/edit-info" element={<EditInfo/>} />
     </Route>
   )
 );

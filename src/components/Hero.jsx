@@ -6,11 +6,15 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import "../styles/Hero.css";
-// import { useTheme } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 import { primHoverSX } from "./Theme.jsx";
 
 function SingleCard() {
-  
+  const navigate = useNavigate();
+
+  function handleFindTribe() {
+    navigate("/signup");
+  }
     
   return (
     <>
@@ -29,6 +33,7 @@ function SingleCard() {
           variant="contained"
           color='primary'
           sx={primHoverSX}
+          onClick={handleFindTribe}
           >
             Find your Tribe
           </Button>
@@ -39,6 +44,7 @@ function SingleCard() {
 }
 
 export default function Hero() {
+  
   return (
     <div className="hero__container">
       <img className="hero__img" src="\random-mountain.jpg" alt="" />

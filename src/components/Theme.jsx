@@ -23,6 +23,14 @@ const theme = createTheme({
             contrastText: '#fff'
 
         },
+        white: {
+            main: '#fff',
+            contrastText: '#000'
+        },
+        black: {
+            main: '#000',
+            contrastText: '#fff'
+        }, 
         error: {
             main: '#ff0000'
         },
