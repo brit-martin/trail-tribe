@@ -2,6 +2,7 @@ import Express from 'express';
 import session from 'express-session';
 import viteExpress from 'vite-express';
 import dotenv from 'dotenv';
+import postCtrl from './controllers/postCtrl.js';
 import authCtrl from './controllers/authCtrl.js'
 
 dotenv.config();
@@ -19,9 +20,14 @@ function loginRequired(req, res, next) {
   next();
 }
 
-// endpoints here
-const { signUp, login, logout, editUserInfo } = authCtrl
+// == ENDPOINTS ==
 
+// posts
+const { getPosts } = postCtrl;
+app.get('/posts', getPosts);
+
+// auth
+const { signUp, login, logout, editUserInfo } = authCtrl
 app.post('/signup', signUp)
 app.post('/login', login)
 

@@ -1,0 +1,117 @@
+.post {
+  border: 1px solid black;
+  margin: 4rem;
+  padding: 0.5rem;
+  max-width: 70rem;
+}
+.post__top {
+  display: flex !important;
+}
+
+/* GRAPHICS */
+.post__graphics {
+  /* border: 1px solid blue; */
+}
+
+.post__pictures {
+  width: 100%;
+  height: 50%;
+  /* border: 1px solid green; */
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid black;
+}
+
+.post__map {
+  height: 50%;
+  border: 1px solid black;
+  /* border: 1px solid green; */
+}
+
+/* CONTENT */
+.post__content {
+  /* border: 1px solid blue; */
+}
+
+.post__title {
+  /* border: 1px solid green; */
+  display: flex !important;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.post__name {
+  /* border: 1px solid orange; */
+}
+
+.post__date {
+  text-align: center;
+  /* border: 1px solid orange; */
+  padding: 0 0.5rem;
+}
+
+/* USER */
+.post__user {
+  /* border: 1px solid green; */
+  display: flex !important;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.post__user-pic {
+  width: 3rem;
+  height: 3rem;
+  /* background-color: black; */
+  /* border: 1px solid orange; */
+  border-radius: 50%;
+}
+
+.post__user-name {
+  /* border: 1px solid orange; */
+  padding: 0 0.5rem;
+}
+
+/* DESCRIPTION */
+.post__description {
+  /* display: flex !important; */
+  /* border: 1px solid green; */
+  padding: 0.5rem;
+}
+
+/* RATINGS */
+.post__ratings {
+  /* border: 1px solid green; */
+  /* display: flex !important; */
+  padding: 0.5rem;
+}
+
+.post__difficulty {
+  /* border: 1px solid orange; */
+  display: flex !important;
+  align-items: center;
+}
+
+.post__reviews {
+  /* border: 1px solid orange; */
+  display: flex !important;
+  align-items: center;
+}
+
+/* REACTIONS */
+.post__reactions {
+  padding: 0.5rem;
+  /* border: 1px solid green; */
+}
+.post__reaction {
+  /* border: 1px solid orange; */
+  display: flex !important;
+  align-items: center;
+}
+
+/* ACTIONS */
+.post__actions {
+  display: flex !important;
+  /* border: 1px solid green; */
+}

@@ -1,0 +1,31 @@
+.newsfeed {
+  border: 1px solid red;
+  /* height: 75vh; */
+  display: flex;
+  flex-direction: row !important;
+  /* overflow: hidden; */
+}
+
+.newsfeed__side-panel {
+  border: 1px solid blue;
+}
+
+.newsfeed__main {
+  border: 1px solid blue;
+  display: flex;
+}
+
+.newsfeed__posts {
+  border: 1px solid blue;
+  width: 100%;
+  display: flex !important;
+  flex-direction: column;
+}
+.newsfeed__posts > .post:nth-child(odd) {
+  align-self: flex-start;
+  /* border: 1px solid red; */
+}
+.newsfeed__posts > .post:nth-child(even) {
+  align-self: flex-end;
+  /* border: 1px solid red; */
+}

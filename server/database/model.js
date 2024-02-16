@@ -4,8 +4,6 @@ import url from 'url';
 import util from 'util';
 import dotenv from 'dotenv';
 
-
-
 dotenv.config();
 const { POSTGRES_CONNECTION_STRING } = process.env;
 
@@ -85,6 +83,39 @@ Post.init(
     review: {
       type: DataTypes.STRING,
     },
+    difficulty: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    likes: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    hearts: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    celebrates: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    trees: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    animals: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allownull: false,
+    },
   },
   {
     modelName: 'post',
@@ -161,7 +192,7 @@ Comment.init(
     modelName: 'comment',
     sequelize: db,
     timestamps: true,
-  },
+  }
 );
 
 class Friends extends Model {
@@ -181,9 +212,8 @@ Friends.init(
   {
     modelName: 'friends',
     sequelize: db,
-  },
-)
-
+  }
+);
 
 User.hasMany(Post, { foreignKey: 'userId' });
 Post.belongsTo(User, { foreignKey: 'userId' });
@@ -218,7 +248,4 @@ Comment.belongsTo(Post, { foreignKey: 'postId' });
 User.hasMany(Comment, { foreignKey: 'userId' });
 Comment.belongsTo(User, { foreignKey: 'userId' });
 
-
-export { db, User, Post, Notification, Reaction, Comment} 
-
-
+export { db, User, Post, Notification, Reaction, Comment };
