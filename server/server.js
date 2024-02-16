@@ -2,6 +2,7 @@ import Express from 'express';
 import session from 'express-session';
 import viteExpress from 'vite-express';
 import dotenv from 'dotenv';
+import postCtrl from './controllers/postCtrl.js';
 
 dotenv.config();
 const { PORT } = process.env;
@@ -18,6 +19,10 @@ function loginRequired(req, res, next) {
   next();
 }
 
-// endpoints here
+// == ENDPOINTS ==
+
+// posts
+const { getPosts } = postCtrl;
+app.get('/posts', getPosts);
 
 viteExpress.listen(app, PORT, () => console.log(`Server is listening on port ${PORT}`));

@@ -4,7 +4,7 @@ import url from 'url';
 import util from 'util';
 import dotenv from 'dotenv';
 
-console.log('log1')
+console.log('log1');
 
 dotenv.config();
 const { POSTGRES_CONNECTION_STRING } = process.env;
@@ -16,7 +16,7 @@ class User extends Model {
     return this.toJSON();
   }
 }
-console.log('log2')
+console.log('log2');
 User.init(
   {
     id: {
@@ -53,7 +53,7 @@ User.init(
     sequelize: db,
   }
 );
-console.log('log3')
+console.log('log3');
 class Post extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
@@ -83,6 +83,39 @@ Post.init(
     review: {
       type: DataTypes.STRING,
     },
+    difficulty: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    likes: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    hearts: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    celebrates: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    trees: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    animals: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allownull: false,
+    },
   },
   {
     modelName: 'post',
@@ -96,7 +129,7 @@ class Notification extends Model {
     return this.toJSON();
   }
 }
-console.log('log4')
+console.log('log4');
 Notification.init(
   {
     id: {
@@ -137,7 +170,7 @@ Reaction.init(
     sequelize: db,
   }
 );
-console.log('log5')
+console.log('log5');
 class Comment extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
@@ -159,7 +192,7 @@ Comment.init(
     modelName: 'comment',
     sequelize: db,
     timestamps: true,
-  },
+  }
 );
 
 class Friends extends Model {
@@ -179,10 +212,10 @@ Friends.init(
   {
     modelName: 'friends',
     sequelize: db,
-  },
-)
+  }
+);
 
-console.log('log6')
+console.log('log6');
 User.hasMany(Post, { foreignKey: 'userId' });
 Post.belongsTo(User, { foreignKey: 'userId' });
 
@@ -215,8 +248,6 @@ Comment.belongsTo(Post, { foreignKey: 'postId' });
 
 User.hasMany(Comment, { foreignKey: 'userId' });
 Comment.belongsTo(User, { foreignKey: 'userId' });
-console.log('log7')
+console.log('log7');
 
-export { db, User, Post, Notification, Reaction, Comment} 
-
-
+export { db, User, Post, Notification, Reaction, Comment };
