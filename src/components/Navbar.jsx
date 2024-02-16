@@ -14,15 +14,21 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useSelector } from "react-redux";
 import { primHoverSX, secHoverSX } from "./Theme";
+import { useNavigate } from "react-router-dom";
+import { Link } from "@mui/material";
+import { NavLink } from "react-router-dom";
+import "../styles/Navbar.css";
 
-const unAuthPages = ["About", "FAQ", "Contact"];
-const AuthPages = ["About", "FAQ", "Contact", "News Feed", "Explore"];
-const authSettings = ["Profile", "Account", "Dashboard", "Logout"];
-const unAuthSettings = ["Login", "Signup"];
+// const unAuthPages = ["About", "FAQ", "Contact"];
+// const AuthPages = ["About", "FAQ", "Contact", "News Feed", "Explore"];
+// const authSettings = ["Profile", "Account", "Dashboard", "Logout"];
+// const unAuthSettings = ["Login", "Signup"];
 
 function NavBar() {
+  const navigate = useNavigate();
+
   const reduxUser = useSelector((state) => state.userReducer);
-  console.log(reduxUser);
+
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -41,6 +47,61 @@ function NavBar() {
     setAnchorElUser(null);
   };
 
+  function handleAbout() {
+    navigate("/about");
+    setAnchorElUser(null);
+    setAnchorElNav(null);
+  }
+
+  function handleFAQ() {
+    navigate("/faq");
+    setAnchorElUser(null);
+    setAnchorElNav(null);
+  }
+
+  function handleContact() {
+    navigate("/contact");
+    setAnchorElUser(null);
+    setAnchorElNav(null);
+  }
+
+  function handleNewsFeed() {
+    navigate("/newsfeed");
+    setAnchorElUser(null);
+    setAnchorElNav(null);
+  }
+
+  function handleExplore() {
+    navigate("/explore");
+    setAnchorElUser(null);
+    setAnchorElNav(null);
+  }
+
+  function handleSignUp() {
+    navigate("/signup");
+    setAnchorElUser(null);
+    setAnchorElNav(null);
+  }
+
+  function handleLogin() {
+    navigate("/login");
+    setAnchorElUser(null);
+    setAnchorElNav(null);
+  }
+
+  function handleEditInfo() {
+    navigate("/edit-info");
+    setAnchorElUser(null);
+    setAnchorElNav(null);
+  }
+
+  function handleLogout() {
+    // add session logout
+    navigate("/");
+    setAnchorElUser(null);
+    setAnchorElNav(null);
+  }
+
   return (
     <AppBar position="static" color="tertiary">
       <Container maxWidth="xl">
@@ -49,7 +110,7 @@ function NavBar() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            onClick={() => navigate("/")}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -58,6 +119,7 @@ function NavBar() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              cursor: "pointer",
             }}
           >
             TrailTribe
@@ -92,17 +154,55 @@ function NavBar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {reduxUser.id
-                ? AuthPages.map((page) => (
-                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                      <Typography textAlign="center">{page}</Typography>
-                    </MenuItem>
-                  ))
-                : unAuthPages.map((page) => (
-                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                      <Typography textAlign="center">{page}</Typography>
-                    </MenuItem>
-                  ))}
+              {reduxUser.id ? (
+                <div>
+                  <MenuItem key="About" onClick={handleCloseNavMenu}>
+                    <NavLink className="nav" to="/about">
+                      <Typography textAlign="center">About</Typography>
+                    </NavLink>
+                  </MenuItem>
+                  <MenuItem key="FAQ" onClick={handleCloseNavMenu}>
+                    <NavLink className="nav" to="/faq">
+                      <Typography textAlign="center">FAQ</Typography>
+                    </NavLink>
+                  </MenuItem>
+                  <MenuItem key="Contact" onClick={handleCloseNavMenu}>
+                    <NavLink className="nav" to="/contact">
+                      <Typography textAlign="center">Contact</Typography>
+                    </NavLink>
+                  </MenuItem>
+                  <MenuItem key="News" onClick={handleCloseNavMenu}>
+                    <NavLink className="nav" to="/newsfeed">
+                      <Typography textAlign="center">News Feed</Typography>
+                    </NavLink>
+                  </MenuItem>
+                  <MenuItem key="Explore" onClick={handleCloseNavMenu}>
+                    <NavLink className="nav" to="/explore">
+                      <Typography textAlign="center">Explore</Typography>
+                    </NavLink>
+                  </MenuItem>
+                </div>
+              ) : (
+                <div>
+                  <MenuItem key="About" onClick={handleCloseNavMenu}>
+                    <NavLink className="nav" to="/about">
+                      <Typography textAlign="center" href="/about">
+                        About
+                      </Typography>
+                    </NavLink>
+                  </MenuItem>
+                  <MenuItem key="FAQ" onClick={handleCloseNavMenu}>
+                    <NavLink className="nav" to="faq">
+                      <Typography textAlign="center">FAQ</Typography>
+                    </NavLink>
+                  </MenuItem>
+                  <MenuItem key="Contact" onClick={handleCloseNavMenu}>
+                    <NavLink className="nav" to="/contact">
+                      <Typography textAlign="center">Contact</Typography>
+                    </NavLink>
+                  </MenuItem>
+                </div>
+              )}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -110,54 +210,55 @@ function NavBar() {
             variant="h5"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            onClick={() => navigate("/")}
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
+              fontFamily: "Permanent Marker, cursive",
               fontWeight: 700,
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              cursor: "pointer",
             }}
           >
-            LOGO
+            TrailTribe
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {reduxUser.id ? (
               <>
                 <Button
                   key="About"
-                  onClick={handleCloseNavMenu}
+                  onClick={handleAbout}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
                   About
                 </Button>
                 <Button
                   key="FAQ"
-                  onClick={handleCloseNavMenu}
+                  onClick={handleFAQ}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
                   FAQ
                 </Button>
                 <Button
                   key="Contact"
-                  onClick={handleCloseNavMenu}
+                  onClick={handleContact}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
                   Contact
                 </Button>
                 <Button
                   key="News"
-                  onClick={handleCloseNavMenu}
+                  onClick={handleNewsFeed}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
                   News Feed
                 </Button>
                 <Button
                   key="Explore"
-                  onClick={handleCloseNavMenu}
+                  onClick={handleExplore}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
                   Explore
@@ -167,21 +268,21 @@ function NavBar() {
               <>
                 <Button
                   key="About"
-                  onClick={handleCloseNavMenu}
+                  onClick={handleAbout}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
                   About
                 </Button>
                 <Button
                   key="FAQ"
-                  onClick={handleCloseNavMenu}
+                  onClick={handleFAQ}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
                   FAQ
                 </Button>
                 <Button
                   key="Contact"
-                  onClick={handleCloseNavMenu}
+                  onClick={handleContact}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
                   Contact
@@ -191,56 +292,57 @@ function NavBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            
-              {reduxUser.id
-                ? <>
+            {reduxUser.id ? (
+              <div>
                 <Tooltip title="Open Settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-                  <MenuItem key='Profile' onClick={handleCloseUserMenu}>
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar
+                      alt="Remy Sharp"
+                      src="/static/images/avatar/2.jpg"
+                    />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  <MenuItem key="Profile" onClick={handleCloseUserMenu}>
+                    <NavLink className="nav" to="/edit-info">
                       <Typography textAlign="center">Profile</Typography>
-                    </MenuItem>
-                    <MenuItem key='Logout' onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">Logout</Typography>
-                    </MenuItem>
-                    </Menu>
-                </>
-                  
-                : <>
+                    </NavLink>
+                  </MenuItem>
+                  <MenuItem key="Logout" onClick={handleLogout}>
+                    <Typography textAlign="center">Logout</Typography>
+                  </MenuItem>
+                </Menu>
+              </div>
+            ) : (
+              <div>
                 <Button
                   key="Login"
-                  onClick={handleCloseNavMenu}
+                  onClick={handleLogin}
                   sx={primHoverSX}
                   color="secondary"
-                  >
+                >
                   Login
-                  </Button>
-                  <Button
-                  key="Signup"
-                  onClick={handleCloseNavMenu}
-                  sx={secHoverSX}>
+                </Button>
+                <Button key="Signup" onClick={handleSignUp} sx={secHoverSX}>
                   Sign Up
-                  </Button>
-                </>}
-
+                </Button>
+              </div>
+            )}
           </Box>
         </Toolbar>
       </Container>
