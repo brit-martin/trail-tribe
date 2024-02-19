@@ -44,7 +44,10 @@ const theme = createTheme({
             main: '#0E3B43'
         }
     },
-    
+    shape: {
+        outerBorderRadius: 12,
+        innerBorderRadius: 4
+    },
 });
 
 const primHoverSX = {
