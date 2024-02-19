@@ -1,0 +1,42 @@
+.explore-post-container{
+    height: 67vh;
+    /* border: 1px solid red; */
+}
+.explore-post{
+    /* border: 1px solid purple; */
+    height: 25vw;
+}
+.explore-map-container {
+    /* height:70vw; */
+    /* border: 1px solid blue; */
+}
+.explore-map {
+    height: 67vh;
+    /* border: 1px solid green; */
+}
+.explore-header {
+    /* border: 1px solid blue; */
+}
+.explore-city {
+    border: 1px solid purple;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+
+}
+.explore-distance {
+    border: 1px solid red;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    align-items: center;
+}
+
+.explore-filter {
+    border: 1px solid green;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+  
+}
