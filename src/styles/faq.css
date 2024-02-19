@@ -1,0 +1,34 @@
+.faq-wrapper {
+    display: flex;
+    justify-content: center;
+    overflow-y: scroll;
+    border: 1px solid red;
+}
+.faq-page {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    width: 600px;
+    height: 700px;  
+    /* border: 1px solid blue; */
+    background-image: url('public/faq-two.jpeg');
+    /* background-color: rgb(114, 134, 160, .5); */
+    object-fit: cover;
+    padding-top: 75px;
+    /* overflow: hidden; */
+}
+.faq-heading {
+    font-family: sans-serif;
+    /* border: 1px solid green; */
+    padding: 40px 20px;
+  
+    background-color: white;
+}
+.faq-acccordion {
+    /* border: 3px solid red; */
+    width: 650px;
+}
+.faq-input {
+    font-family: sans-serif;
+    /* border: 1px solid purple; */
+}
