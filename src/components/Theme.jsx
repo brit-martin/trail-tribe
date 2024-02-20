@@ -45,8 +45,8 @@ const theme = createTheme({
         }
     },
     shape: {
-        outerBorderRadius: 12,
-        innerBorderRadius: 4
+        outerBorderRadius: '12px',
+        innerBorderRadius: '4px'
     },
 });
 
