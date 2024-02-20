@@ -1,4 +1,4 @@
-import { Post, User } from '../database/model.js';
+import { Post, User, Reaction } from '../database/model.js';
 
 export default {
   createPost: async (req, res) => {
@@ -13,6 +13,9 @@ export default {
           {
             model: User,
             //   attributes: ['name', 'street', 'city', 'state', 'zipcode'],
+          },
+          {
+            model: Reaction,
           },
         ],
       });
