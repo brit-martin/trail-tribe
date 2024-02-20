@@ -14,6 +14,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Slider from '@mui/material/Slider';
 import Typography from '@mui/material/Typography';
+import Mapbox from './Mapbox';
+import { useEffect } from 'react';
+import axios from 'axios'
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -22,8 +25,21 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
-
+// "http://www.overpass-api.de/api/xapi?way[highway=path|track|footway|steps|bridleway|cycleway][bbox=#{lng},#{lat},#{lng+TILE_DIM},#{lat+TILE_DIM}]"
+// base = 'https://www.alltrails.com/'
+// path = f'api/alltrails/locations/states/{stateid}/trails'
 function Explore() {
+  useEffect(() => {
+    // axios.get('http://www.overpass-api.de/api/xapi?way[highway=path][bbox=#{-111.8746681},#{40.4194344},#{-111.8746681-57},#{40.4194344-57}]')
+    // axios.get('https://www.alltrails.com/api/alltrails/locations/states/50/trails')
+    axios.get('"http://www.overpass-api.de/api/xapi?way[highway=path|track|footway|steps|bridleway|cycleway][bbox=#{-111.8746681},#{40.4194344},#{-111.8746681+.1},#{40.4194344+.1}]"')
+    .then((response) => {
+      console.log(response)
+    })
+    .catch ((error) => {
+      console.log(error)
+    })
+  },[])
 
   const [filter, setFilter] = React.useState('');
 
@@ -107,7 +123,9 @@ function Explore() {
           <Item className='explore-post'>Post Container</Item>
         </Grid>
         <Grid item xs={8} className='explore-map-container'>
-          <Item className='explore-map'>Explore Map</Item>
+          <Item className='explore-map'>
+             <Mapbox/>
+          </Item>
           </Grid>
         </Grid>
     </Box>
