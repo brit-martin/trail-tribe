@@ -95,8 +95,7 @@ export default function EditInfo() {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    
-  }
+  };
 
   const boxStyle = {
     border: "1px solid aqua",
@@ -112,11 +111,18 @@ export default function EditInfo() {
   const buttonStyle = {
     position: "absolute",
     top: 0,
-    left: "-10px",
+    right: "-10px",
   };
 
   const h1Style = {
     fontFamily: "Permanent Marker, cursive",
+  };
+
+  const passwordStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    fontWeight: 600,
   };
 
   const [editOn, setEditOn] = useState(false);
@@ -132,6 +138,8 @@ export default function EditInfo() {
   const [newPasswordShow, setNewPasswordShow] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmPasswordShow, setConfirmPasswordShow] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [deletePassword, setDeletePassword] = useState("");
 
   function handleClickShowOldPassword() {
     setOldPasswordShow(!oldPasswordShow);
@@ -143,7 +151,7 @@ export default function EditInfo() {
 
   function handleClickShowConfirmPassword() {
     setConfirmPasswordShow(!confirmPasswordShow);
-  }  
+  }
 
   function handleOpen() {
     setOpenModal(true);
@@ -151,6 +159,14 @@ export default function EditInfo() {
 
   function handleClose() {
     setOpenModal(false);
+  }
+
+  function handleOpenDeleteModal() {
+    setOpenDeleteModal(true);
+  }
+
+  function handleCloseDeleteModal() {
+    setOpenDeleteModal(false);
   }
 
   const reduxUser = useSelector((state) => state.userReducer);
@@ -244,8 +260,7 @@ export default function EditInfo() {
                   </div>
                 </div>
               )}
-              <div style={{ fontWeight: 600 }}>
-                Password:{" "}
+              <div style={passwordStyle}>
                 <Button
                   key="password change"
                   onClick={handleOpen}
@@ -263,17 +278,17 @@ export default function EditInfo() {
                   <Box sx={modalStyle}>
                     {verified ? (
                       <>
-                      <Button sx={buttonStyle} onClick={handleClose}>
+                        <Button sx={buttonStyle} onClick={handleClose}>
                           X
                         </Button>
                         <Typography
-                            id="modal-modal-title"
-                            variant="h6"
-                            component="h2"
-                          >
-                            Please enter and re-enter new password.
-                          </Typography>
-                          <FormControl
+                          id="modal-modal-title"
+                          variant="h6"
+                          component="h2"
+                        >
+                          Please enter and re-enter new password.
+                        </Typography>
+                        <FormControl
                           focused
                           color="black"
                           variant="outlined"
@@ -411,6 +426,69 @@ export default function EditInfo() {
                     )}
                   </Box>
                 </Modal>
+                <div id="delete__button">
+                  <Button onClick={handleOpenDeleteModal} color="quadratiary" sx={primHoverSX}>
+                    Delete Account
+                  </Button>
+                  <Modal
+                    open={openDeleteModal}
+                    onClose={handleCloseDeleteModal}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                  >
+                    <Box sx={modalStyle}>
+                    <Button sx={buttonStyle} onClick={handleCloseDeleteModal}>
+                          X
+                        </Button>
+                        <Typography
+                        id="modal-modal-title"
+                        variant="h6"
+                        component="h2"
+                        >
+                        Enter current password below to delete account.
+                        </Typography>
+                        <FormControl
+                          focused
+                          color="black"
+                          variant="outlined"
+                          sx={{ m: 1, width: "30ch" }}
+                          required
+                          value={deletePassword}
+                          onChange={(e) => setDeletePassword(e.target.value)}>
+                          <InputLabel
+                            htmlFor="outlined-adornment-password"
+                            color="black"
+                          >
+                            Password
+                          </InputLabel>
+                          <OutlinedInput
+                            id="outlined-adornment-password"
+                            color="black"
+                            label="Password"
+                            type={oldPasswordShow ? "text" : "password"}
+                            endAdornment={
+                              <InputAdornment position="end">
+                                <IconButton
+                                  color="black"
+                                  aria-label="toggle password visibility"
+                                  onClick={handleClickShowOldPassword}
+                                  // onMouseDown={handleMouseDownPassword}
+                                  edge="end"
+                                >
+                                  {oldPasswordShow ? (
+                                    <VisibilityOff />
+                                  ) : (
+                                    <Visibility />
+                                  )}
+                                </IconButton>
+                              </InputAdornment>
+                            }
+                          />
+                          <Button sx={terHoverSX}>Delete Account</Button>
+                          </FormControl>
+                    </Box>
+                  </Modal>
+                </div>
               </div>
             </div>
           </FormGroup>

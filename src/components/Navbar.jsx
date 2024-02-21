@@ -11,13 +11,12 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import { useSelector } from "react-redux";
 import { primHoverSX, secHoverSX } from "./Theme";
 import { useNavigate } from "react-router-dom";
-import { Link } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import "../styles/Navbar.css";
+import axios from "axios";
 
 // const unAuthPages = ["About", "FAQ", "Contact"];
 // const AuthPages = ["About", "FAQ", "Contact", "News Feed", "Explore"];
@@ -31,6 +30,14 @@ function NavBar() {
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const navButtonStyle = {
+    textDecoration: "none",
+    color: "white",
+    my: 2,
+    display: "block",
+
+  }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -95,8 +102,8 @@ function NavBar() {
     setAnchorElNav(null);
   }
 
-  function handleLogout() {
-    // add session logout
+  async function handleLogout() {
+    await axios.delete("/logout");
     navigate("/");
     setAnchorElUser(null);
     setAnchorElNav(null);
@@ -231,35 +238,35 @@ function NavBar() {
                 <Button
                   key="About"
                   onClick={handleAbout}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  style={navButtonStyle}
                 >
                   About
                 </Button>
                 <Button
                   key="FAQ"
                   onClick={handleFAQ}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  style={navButtonStyle}
                 >
                   FAQ
                 </Button>
                 <Button
                   key="Contact"
                   onClick={handleContact}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  style={navButtonStyle}
                 >
                   Contact
                 </Button>
                 <Button
                   key="News"
                   onClick={handleNewsFeed}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  style={navButtonStyle}
                 >
                   News Feed
                 </Button>
                 <Button
                   key="Explore"
                   onClick={handleExplore}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  style={navButtonStyle}
                 >
                   Explore
                 </Button>
@@ -269,21 +276,21 @@ function NavBar() {
                 <Button
                   key="About"
                   onClick={handleAbout}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  style={navButtonStyle}
                 >
                   About
                 </Button>
                 <Button
                   key="FAQ"
                   onClick={handleFAQ}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  style={navButtonStyle}
                 >
                   FAQ
                 </Button>
                 <Button
                   key="Contact"
                   onClick={handleContact}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  style={navButtonStyle}
                 >
                   Contact
                 </Button>

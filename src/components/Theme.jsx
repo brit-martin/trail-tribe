@@ -53,18 +53,21 @@ const theme = createTheme({
 const primHoverSX = {
     '&:hover': {
         backgroundColor: '#ff7c5c',
+        border: '.5px solid #3e3e3e'
     }
 }
 
 const secHoverSX ={
     '&:hover': {
         backgroundColor: '#c7faf9',
+        border: '.5px solid #ff7c5c'
     }
 }
 
 const terHoverSX ={
     '&:hover': {
         backgroundColor: '#aab6c5',
+        border: '.5px solid #ff7c5c'
     }
 }
 
