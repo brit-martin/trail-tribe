@@ -11,7 +11,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { primHoverSX, secHoverSX } from "./Theme";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
@@ -27,6 +27,7 @@ function NavBar() {
   const navigate = useNavigate();
 
   const reduxUser = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -103,11 +104,20 @@ function NavBar() {
   }
 
   async function handleLogout() {
-    await axios.delete("/logout");
-    navigate("/");
-    setAnchorElUser(null);
-    setAnchorElNav(null);
+    try {
+      const response = await axios.delete("/logout");
+      console.log("Logout response:", response);
+      dispatch({ type: "RESET_USER" });
+      navigate("/");
+      setAnchorElUser(null);
+      setAnchorElNav(null);
+    } catch (error) {
+      console.error("Error during logout:", error);
+      // Handle the error as needed
+    }
   }
+  
+  
 
   return (
     <AppBar position="static" color="tertiary">

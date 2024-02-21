@@ -29,10 +29,15 @@ const { getPosts } = postCtrl;
 app.get('/posts', loginRequired, getPosts);
 
 // auth
-const { signUp, login, logout, editUserInfo, checkLoginStatus } = authCtrl;
+const { signUp, login, logout, editUserInfo, checkLoginStatus, deleteUser, verifyOldPassword, changePassword } = authCtrl;
 app.post('/signup', signUp);
 app.post('/login', login);
 app.get('/checkLoginStatus', checkLoginStatus);
+app.delete('/logout',loginRequired, logout);
+app.put('/delete-user', loginRequired, deleteUser);
+app.post('/old-password', loginRequired, verifyOldPassword);
+app.put('/change-password', loginRequired, changePassword);
+app.put('/edit-user', loginRequired, editUserInfo);
 
 // reactions
 const { createReaction } = reactionCtrl;
