@@ -199,7 +199,7 @@ function Signup() {
                   </IconButton>
                 </InputAdornment>
               }
-              label="Password"
+              label="Confirm Password"
             />
           </FormControl>
           <Button className="signup-button" variant="contained" type="submit">
