@@ -9,25 +9,38 @@ import { useSelector, useDispatch } from "react-redux";
 
 function Comment({ comment }) {
   const theme = useTheme();
+  const containerStyles = {
+    border: "1px solid red",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "20px 10px",
+    backgroundColor: theme.palette.white.main,
+    borderRadius: theme.shape.innerBorderRadius,
+    boxShadow:
+      "inset -5px 0 10px lightgray, inset 0 -5px 10px gray, inset 5px 0 10px lightgray",
+  };
+
+  const paperStyles = {
+    borderRadius: theme.shape.innerBorderRadius,
+    padding: "20px 10px",
+    backgroundColor: theme.palette.tertiary.light,
+    maxWidth: '700px',
+    minWidth: '450px',
+  };
 
   const reduxUser = useSelector((state) => state.userReducer);
 
   console.log(comment);
-  const paperStyles = {
-    borderRadius: theme.shape.innerBorderRadius,
-    padding: "20px 10px",
-    backgroundColor: theme.palette.white.main,
-  };
-  
 
   return (
-    <Container className="comment">
-      <Paper elevation={8} sx={paperStyles}>
-        <h4>
-          {comment.user.fname} {comment.user.lname}
-        </h4>
-        <Typography>{comment.text}</Typography>
-      </Paper>
+    <Container sx={containerStyles}>
+        <Paper elevation={12} sx={paperStyles}>
+          <h4>
+            {comment.user.fname} {comment.user.lname}
+          </h4>
+          <Typography>{comment.text}</Typography>
+        </Paper>
     </Container>
   );
 }
