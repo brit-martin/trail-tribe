@@ -1,4 +1,4 @@
-import { Post, User, Reaction } from '../database/model.js';
+import { Post, User, Reaction, Comment } from '../database/model.js';
 
 export default {
   createPost: async (req, res) => {
@@ -17,11 +17,19 @@ export default {
           {
             model: Reaction,
           },
+          {
+            model: Comment,
+            include: [
+              {
+                model: User,
+              },
+            ],
+          },
         ],
       });
 
       console.log(posts);
-
+      
       //   Send response
       res.status(200).send({
         posts: posts,
