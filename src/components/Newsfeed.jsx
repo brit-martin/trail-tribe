@@ -33,6 +33,7 @@ function Newsfeed() {
       .then((response) => {
         console.log(response.data);
         setPosts(response.data.posts);
+        // setComments(response.data.posts.comments)
       })
       .catch((error) => {
         console.log(error);
@@ -57,7 +58,8 @@ function Newsfeed() {
           {/* map through posts render all posts */}
           {posts.length > 0 ? (
             posts.map((post, idx) => {
-              return <Post key={idx} post={post} />;
+              return <Post key={idx} post={post} />
+              
             })
           ) : (
             <h1>No Posts to Display...</h1>
