@@ -13,13 +13,16 @@ function Mapbox(props) {
   const reduxLocationData = useSelector((state) => state.locationData);
   // const reduxMarkers = useSelector((state) => state.currentMarkersReducer.currentMarkers);
   // console.log(reduxMarkers);
-  const [currentMarkers, setCurrentMarkers] = useState([]);
+  // const [currentMarkers, setCurrentMarkers] = useState([]);
+  const map = useRef(null);
+  // const [map, setMap] = useState();
+  const currentMarkers = useRef([]);
+  console.log(currentMarkers);
 
   // console.log(props.locationData);
   //stores the dom element in the useRef
   const [locationData, setLocationData] = useState(props.locationData);
   const mapContainer = useRef(null);
-  const map = useRef(null);
   // const currentMarkers = [];
   // const [lng, setLng] = useState(-111.8746681);
   // const [lat, setLat] = useState(40.4194344);
@@ -43,6 +46,7 @@ function Mapbox(props) {
         zoom: zoom,
       });
     }
+    console.log(map);
 
     // console.log('made it past the return statement');
 
@@ -58,15 +62,19 @@ function Mapbox(props) {
       console.log('locationData greater than 0');
 
       // remove all current markers
-      // console.log('checking currentMarkers.length');
-      // if (currentMarkers.length > 0) {
-      //   console.log('removing all currentMarkers');
-      //   currentMarkers.forEach((marker, idx) => {
-      //     console.log(marker);
-      //     marker.remove();
-      //     setCurrentMarkers(currentMarkers[idx].remove());
-      //   });
-      // }
+      console.log('checking currentMarkers.length');
+      // if (currentMarkers.current.length > 0) {
+      if (map.current._markers.length > 0) {
+        console.log(map.current._markers);
+        console.log('removing all currentMarkers');
+        map.current._markers.forEach((marker, idx) => {
+          console.log(marker);
+          // marker.remove();
+          // currentMarkers.current.shift(idx);
+          // setCurrentMarkers(currentMarkers[idx].remove());
+          marker.remove();
+        });
+      }
 
       props.locationData.forEach((marker) => {
         // console.log(marker);
@@ -110,7 +118,7 @@ function Mapbox(props) {
           .setLngLat([marker.geometry[0].lon, marker.geometry[0].lat])
           // .setPopup(new mapboxgl.Popup().setDOMContent(divElement))
           .addTo(map.current);
-        // currentMarkers.push(newMarker);
+        currentMarkers.current.push(newMarker);
         // dispatch({ type: 'ADD_MARKER', payload: newMarker });
         // setCurrentMarkers([...currentMarkers, newMarker]);
         // console.log(currentMarkers);
