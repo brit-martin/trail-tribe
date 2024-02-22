@@ -31,7 +31,7 @@ function Signup() {
   const navigate = useNavigate()
 
   const white = theme.palette.quadratiary.contrastText
-  console.log(white)
+
   function onSignUp(event){
     event.preventDefault()
     // check that password and password confirm are the same
@@ -131,7 +131,7 @@ function Signup() {
           />
           <FormControl
             focused
-            color="white"
+            style={{color: white}}
             variant="outlined"
             className="singup-input"
             sx={{ m: 1, width: "30ch" }}
@@ -142,13 +142,14 @@ function Signup() {
             >
             <InputLabel 
               htmlFor="outlined-adornment-password"
-              color="white"
+              style={{color: white}}
             >
               Password
             </InputLabel>
             <OutlinedInput
               id="outlined-adornment-password"
               color="white"
+              style={{color: white}}
               type={showPassword ? "text" : "password"}
               endAdornment={
                 <InputAdornment position="end">
@@ -185,6 +186,7 @@ function Signup() {
             <OutlinedInput
               id="outlined-adornment-password"
               color="white"
+              style={{color: white}}
               type={showConfirmPassword ? "text" : "password"}
               endAdornment={
                 <InputAdornment position="end">
