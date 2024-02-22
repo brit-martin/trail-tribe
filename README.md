@@ -26,3 +26,9 @@ Here (51.477,-0.001,51.478,0.001) represents the bounding box. The order of the 
 Simple Queries to make:
 natural=peak
 highway=path
+
+<!-- Multiple useEffects in a single component -->
+
+separate useEffect functions by concerns... 1. adding event listeners on mount 2. listeners for prop changes 3. api calls that make changes to props or states
+
+https://stackoverflow.com/questions/54002792/in-general-is-it-better-to-use-one-or-many-useeffect-hooks-in-a-single-component
