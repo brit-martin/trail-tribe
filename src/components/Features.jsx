@@ -26,21 +26,21 @@ export default function Features() {
       <Box>
         <Grid container rowSpacing={4} columnSpacing={8} justifyContent="center" alignItems="center">
           <Grid md={5}>
-            <Paper elevation="8" style={featuresStyles}>
+            <Paper elevation={8} style={featuresStyles}>
               <h3>Step 1: </h3>
               <h3> Simply Sign Up</h3>
             
             </Paper>
           </Grid>
           <Grid md={5}>
-            <Paper elevation="8" style={featuresStyles}>
+            <Paper elevation={8} style={featuresStyles}>
               {" "}
               <h3>Step 2: </h3>
               <h3>Find Friends, Find Hikes</h3>
             </Paper>
           </Grid>
           <Grid md={5}>
-            <Paper elevation="8" style={featuresStyles}>
+            <Paper elevation={8} style={featuresStyles}>
               {" "}
               <h3>Step 3: </h3>
               <h3>Go Hike!</h3>
@@ -50,7 +50,7 @@ export default function Features() {
             </Paper>
           </Grid>
           <Grid md={5}>
-            <Paper elevation="8" style={featuresStyles}>
+            <Paper elevation={8} style={featuresStyles}>
               {" "}
               <h3>Step 4:</h3>
               <h3>

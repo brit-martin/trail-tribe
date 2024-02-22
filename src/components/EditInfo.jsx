@@ -21,6 +21,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const EditSwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -78,6 +80,8 @@ const EditSwitch = styled(Switch)(({ theme }) => ({
 
 export default function EditInfo() {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const modalStyle = {
     position: "absolute",
     top: "50%",
@@ -95,8 +99,7 @@ export default function EditInfo() {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    
-  }
+  };
 
   const boxStyle = {
     border: "1px solid aqua",
@@ -112,18 +115,25 @@ export default function EditInfo() {
   const buttonStyle = {
     position: "absolute",
     top: 0,
-    left: "-10px",
+    right: "-10px",
   };
 
   const h1Style = {
     fontFamily: "Permanent Marker, cursive",
   };
 
+  const passwordStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    fontWeight: 600,
+  };
+
   const [editOn, setEditOn] = useState(false);
-  const [editFName, setEditFName] = useState("");
-  const [editLName, setEditLName] = useState("");
-  const [editEmail, setEditEmail] = useState("");
-  const [editBio, setEditBio] = useState("");
+  const [editFName, setEditFName] = useState(null);
+  const [editLName, setEditLName] = useState(null);
+  const [editEmail, setEditEmail] = useState(null);
+  const [editBio, setEditBio] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [verified, setVerified] = useState(false);
   const [oldPassword, setOldPassword] = useState("");
@@ -132,6 +142,8 @@ export default function EditInfo() {
   const [newPasswordShow, setNewPasswordShow] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmPasswordShow, setConfirmPasswordShow] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [deletePassword, setDeletePassword] = useState("");
 
   function handleClickShowOldPassword() {
     setOldPasswordShow(!oldPasswordShow);
@@ -143,7 +155,7 @@ export default function EditInfo() {
 
   function handleClickShowConfirmPassword() {
     setConfirmPasswordShow(!confirmPasswordShow);
-  }  
+  }
 
   function handleOpen() {
     setOpenModal(true);
@@ -151,11 +163,121 @@ export default function EditInfo() {
 
   function handleClose() {
     setOpenModal(false);
+    setVerified(false);
+  }
+
+  function handleOpenDeleteModal() {
+    setOpenDeleteModal(true);
+  }
+
+  function handleCloseDeleteModal() {
+    setOpenDeleteModal(false);
+  }
+
+  async function deleteUserHandler() {
+    let deleteMaBod = {
+      password: deletePassword,
+    };
+
+    try {
+      const res = await axios.put("/delete-user", deleteMaBod);
+      console.log(res);
+
+      if (res.status === 200) {
+        dispatch({ type: "RESET_USER" });
+        navigate("/");
+        alert("Account deleted");
+      }
+    } catch (err) {
+      if (err.response.status === 400) {
+        alert("Incorrect password");
+      } else {
+        console.error("Error during delete request:", err.response.status);
+      }
+    }
+  }
+
+  async function oldPasswordHandler() {
+    let oldMaBod = {
+      password: oldPassword,
+    };
+
+    try {
+      const res = await axios.post("/old-password", oldMaBod);
+      setVerified(true);
+      // setNewPassword("");
+      // setConfirmPassword("");
+      // setOldPassword("");
+    } catch (error) {
+      if (error.response.status === 400) {
+        alert("Incorrect password");
+      } else {
+        console.error(
+          "Error during old password request:",
+          error.response.status
+        );
+      }
+    }
+    setNewPassword("");
+    setConfirmPassword("");
+    setOldPassword("");
+
+  }
+
+  async function changePasswordHandler() {
+    let changeMaBod = {
+      nPassword: newPassword,
+      cPassword: confirmPassword,
+    };
+    if (newPassword !== confirmPassword) {
+      alert("Passwords do not match");
+    }
+
+    try {
+      const res = await axios.put("/change-password", changeMaBod);
+      alert("Password changed");
+      setVerified(false);
+      setOpenModal(false);
+    } catch (error) {
+      console.error("Error during change password request:", error);
+    }
+  }
+
+  async function editInfoHandler() {
+    // if(editEmail === "" || editFName === "" || editLName === "" || editBio === ""){
+    //   setEditEmail(reduxUser.email);
+    //   setEditFName(reduxUser.fname);
+    //   setEditLName(reduxUser.lname);
+    //   setEditBio(reduxUser.bio);
+
+    // }
+    if(editEmail !== reduxUser.email){
+      confirm("Are you sure you want to change your email?")
+    }
+
+    const editMaBod = {
+      fname: editFName ?? reduxUser.fname,
+      lname: editLName ?? reduxUser.lname,
+      email: editEmail ?? reduxUser.email,
+      bio: editBio ?? reduxUser.bio,
+    }
+    try{
+      axios.put('/edit-user', editMaBod);
+      alert("User info updated");
+      setEditFName(null);
+      setEditLName(null);
+      setEditEmail(null);
+      setEditBio(null);
+      setEditOn(false);
+      dispatch({type: "SET_USER", payload: editMaBod});
+
+    } catch (error) {
+      console.error("Error during edit info request:", error);
+    }
   }
 
   const reduxUser = useSelector((state) => state.userReducer);
   console.log(reduxUser);
-
   return (
     <>
       <div className="useless" style={boxStyle}>
@@ -221,7 +343,7 @@ export default function EditInfo() {
                       />
                     </div>
                     <div className="edit__field">
-                      <Button key="submit changes" sx={secHoverSX}>
+                      <Button onClick={editInfoHandler} key="submit changes" sx={secHoverSX}>
                         Submit Changes
                       </Button>
                     </div>
@@ -244,8 +366,7 @@ export default function EditInfo() {
                   </div>
                 </div>
               )}
-              <div style={{ fontWeight: 600 }}>
-                Password:{" "}
+              <div style={passwordStyle}>
                 <Button
                   key="password change"
                   onClick={handleOpen}
@@ -263,17 +384,17 @@ export default function EditInfo() {
                   <Box sx={modalStyle}>
                     {verified ? (
                       <>
-                      <Button sx={buttonStyle} onClick={handleClose}>
+                        <Button sx={buttonStyle} onClick={handleClose}>
                           X
                         </Button>
                         <Typography
-                            id="modal-modal-title"
-                            variant="h6"
-                            component="h2"
-                          >
-                            Please enter and re-enter new password.
-                          </Typography>
-                          <FormControl
+                          id="modal-modal-title"
+                          variant="h6"
+                          component="h2"
+                        >
+                          Please enter and re-enter new password.
+                        </Typography>
+                        <FormControl
                           focused
                           color="black"
                           variant="outlined"
@@ -281,6 +402,7 @@ export default function EditInfo() {
                           required
                           value={newPassword}
                           onChange={(e) => setNewPassword(e.target.value)}
+                          autoComplete="off"
                         >
                           <InputLabel
                             htmlFor="outlined-adornment-password"
@@ -290,6 +412,7 @@ export default function EditInfo() {
                           </InputLabel>
                           <OutlinedInput
                             id="outlined-adornment-password"
+                            value={newPassword}
                             color="black"
                             label="New Password"
                             type={newPasswordShow ? "text" : "password"}
@@ -350,7 +473,12 @@ export default function EditInfo() {
                               </InputAdornment>
                             }
                           />
-                          <Button sx={terHoverSX}>Verify Password</Button>
+                          <Button
+                            onClick={changePasswordHandler}
+                            sx={terHoverSX}
+                          >
+                            Verify Password
+                          </Button>
                         </FormControl>
                       </>
                     ) : (
@@ -405,12 +533,84 @@ export default function EditInfo() {
                               </InputAdornment>
                             }
                           />
-                          <Button sx={terHoverSX}>Verify Password</Button>
+                          <Button onClick={oldPasswordHandler} sx={terHoverSX}>
+                            Verify Password
+                          </Button>
                         </FormControl>
                       </>
                     )}
                   </Box>
                 </Modal>
+                <div id="delete__button">
+                  <Button
+                    onClick={handleOpenDeleteModal}
+                    color="quadratiary"
+                    sx={primHoverSX}
+                  >
+                    Delete Account
+                  </Button>
+                  <Modal
+                    open={openDeleteModal}
+                    onClose={handleCloseDeleteModal}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                  >
+                    <Box sx={modalStyle}>
+                      <Button sx={buttonStyle} onClick={handleCloseDeleteModal}>
+                        X
+                      </Button>
+                      <Typography
+                        id="modal-modal-title"
+                        variant="h6"
+                        component="h2"
+                      >
+                        Enter current password below to delete account.
+                      </Typography>
+                      <FormControl
+                        focused
+                        color="black"
+                        variant="outlined"
+                        sx={{ m: 1, width: "30ch" }}
+                        required
+                        value={deletePassword}
+                        onChange={(e) => setDeletePassword(e.target.value)}
+                      >
+                        <InputLabel
+                          htmlFor="outlined-adornment-password"
+                          color="black"
+                        >
+                          Password
+                        </InputLabel>
+                        <OutlinedInput
+                          id="outlined-adornment-password"
+                          color="black"
+                          label="Password"
+                          type={oldPasswordShow ? "text" : "password"}
+                          endAdornment={
+                            <InputAdornment position="end">
+                              <IconButton
+                                color="black"
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowOldPassword}
+                                // onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                              >
+                                {oldPasswordShow ? (
+                                  <VisibilityOff />
+                                ) : (
+                                  <Visibility />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          }
+                        />
+                        <Button onClick={deleteUserHandler} sx={terHoverSX}>
+                          Delete Account
+                        </Button>
+                      </FormControl>
+                    </Box>
+                  </Modal>
+                </div>
               </div>
             </div>
           </FormGroup>
