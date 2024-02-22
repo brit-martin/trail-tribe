@@ -16,6 +16,8 @@ import axios from "axios";
 import {useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '@mui/material'
+import { NavLink } from "react-router-dom";
+import Typography from "@mui/material/Typography";
 
 function Signup() {
   const theme = useTheme()
@@ -66,6 +68,11 @@ function Signup() {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleClickShowConfirmPassword = () =>
     setConfirmShowPassword((show) => !show);
+
+  function loginLink(){
+    navigate('/login')
+    
+  }
 
   return (
     <div className="signup-page">
@@ -192,7 +199,7 @@ function Signup() {
                   </IconButton>
                 </InputAdornment>
               }
-              label="Password"
+              label="Confirm Password"
             />
           </FormControl>
           <Button className="signup-button" variant="contained" type="submit">
@@ -200,14 +207,16 @@ function Signup() {
           </Button>
           <span className="signup-footer">
             Already a member of the tribe?{" "}
-            <a
-              href="#"
-              onClick={() => {
-                setShowLogin(true);
-              }}
+            <NavLink
+              onClick={loginLink}
+              className="login-link"
+              // href="#"
+              // onClick={() => {
+              //   setShowLogin(true);
+              // }}
             >
-              Login?
-            </a>
+              <Typography>Login?</Typography>
+            </NavLink>
           </span>
         </form>
       </Box>

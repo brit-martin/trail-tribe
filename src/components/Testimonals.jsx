@@ -9,8 +9,14 @@ import Icon from '@mui/material/Icon'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import '../styles/testimonials.css';
+import { useTheme } from "@mui/material/styles";
 
 function Testimonials() {
+  const theme = useTheme();
+  const testimonialCard = {
+    backgroundColor: theme.palette.quadratiary.light,
+  };
+
     useEffect(() => {
       // inits
       let carousel = document.querySelector('.carousel');
@@ -176,7 +182,7 @@ function Testimonials() {
           <div className='carousel__inner'>
           <div className='carousel__item'>
           {/* <div className="cardcontainer"> */}
-        <Card sx={{ maxWidth: 325 }} className="testimonal-card" style={{backgroundColor: '#4F6D7A'}}>
+        <Card sx={{ maxWidth: 325 }} className="testimonal-card" style={testimonialCard}>
             <CardActionArea>
             <CardMedia 
                 className="testimonal-image"
@@ -186,7 +192,7 @@ function Testimonials() {
             />
             <CardContent>
                 <Typography className="testimonal-name" variant="h4">
-                Evan M.
+                Evan
                 </Typography>
                 <Typography variant="body2" className="testimonial-text">
                 "Joining this hiking community has been life-changing! I've met
@@ -198,7 +204,7 @@ function Testimonials() {
             </CardActionArea>
         </Card>
 
-        <Card sx={{ maxWidth: 325 }} className="testimonal-card" style={{backgroundColor: '#4F6D7A'}}>
+        <Card sx={{ maxWidth: 325 }} className="testimonal-card" style={testimonialCard}>
             <CardActionArea>
             <CardMedia 
                 className="testimonal-image"
@@ -209,9 +215,9 @@ function Testimonials() {
             />
             <CardContent>
                 <Typography className="testimonal-name" variant="h4">
-                Dan H.
+                Dan 
                 </Typography>
-                <Typography variant="body2" className="testimonial-text" style={{backgroundColor: '#4F6D7A'}}>
+                <Typography variant="body2" className="testimonial-text">
                 "As a solo hiker, I was hesitant to explore new trails alone. But
                 after joining this hiking group, I've found companionship and
                 support on every journey. It's not just about the destination;
@@ -221,7 +227,7 @@ function Testimonials() {
             </CardActionArea>
         </Card>
 
-        <Card sx={{ maxWidth: 325 }} className="testimonal-card" style={{backgroundColor: '#4F6D7A'}}>
+        <Card sx={{ maxWidth: 325 }} className="testimonal-card" style={testimonialCard}>
             <CardActionArea>
             <CardMedia
                 className="testimonal-image"
@@ -231,7 +237,7 @@ function Testimonials() {
             />
             <CardContent>
                 <Typography className="testimonal-name" variant="h4">
-                Danny G.
+                Danny 
                 </Typography>
                 <Typography variant="body2" className="testimonial-text" >
                 "Being part of this hiking community has reignited my love for
@@ -245,7 +251,7 @@ function Testimonials() {
         </div>
 
         <div className='carousel__item'>
-         <Card sx={{ maxWidth: 325 }} className="testimonal-card" style={{backgroundColor: '#4F6D7A'}}>
+         <Card sx={{ maxWidth: 325 }} className="testimonal-card" style={testimonialCard}>
             <CardActionArea>
             <CardMedia
                 className="testimonal-image"
@@ -255,7 +261,7 @@ function Testimonials() {
             />
             <CardContent>
                 <Typography className="testimonal-name" variant="h4">
-                Brittany M.
+                Brittany
                 </Typography>
                 <Typography variant="body2" className="testimonial-text">
                 "Joining this hiking community has opened up a whole new world of
@@ -263,12 +269,11 @@ function Testimonials() {
                 nature walks, there's always something exciting happening on the
                 trails."
                 </Typography>
-                "
             </CardContent>
             </CardActionArea>
         </Card> 
 
-         <Card sx={{ maxWidth: 325 }} className="testimonal-card" style={{backgroundColor: '#4F6D7A'}}>
+         <Card sx={{ maxWidth: 325 }} className="testimonal-card" style={testimonialCard}>
             <CardActionArea>
             <CardMedia
                 className="testimonal-image"
@@ -278,20 +283,20 @@ function Testimonials() {
             />
             <CardContent>
                 <Typography className="testimonal-name" variant="h4">
-                Jake N.
+                Jake 
                 </Typography>
                 <Typography variant="body2" className="testimonial-text">
                 "I've always been drawn to the tranquility of the wilderness, but
                 it wasn't until I joined this hiking group that I truly found my
                 tribe. Together, we've conquered challenging trails, shared
                 stories around campfires, and forged friendships that will last a
-                lifetime.""
+                lifetime."
                 </Typography>
             </CardContent>
             </CardActionArea>
         </Card> 
 
-         <Card sx={{ maxWidth: 325 }} className="testimonal-card" style={{backgroundColor: '#4F6D7A'}}>
+         <Card sx={{ maxWidth: 325 }} className="testimonal-card" style={testimonialCard}>
             <CardActionArea>
             <CardMedia
                 className="testimonal-image"
@@ -301,13 +306,13 @@ function Testimonials() {
             />
             <CardContent>
                 <Typography className="testimonal-name" variant="h4">
-                Cody F.
+                Cody 
                 </Typography>
                 <Typography variant="body2" className="testimonial-text">
                 "This hiking community isn't just about exploring nature; it's
                 about fostering a sense of belonging and camaraderie. Whether
                 you're a seasoned hiker or just starting out, you'll find
-                encouragement, support, and a whole lot of fun along the way.""
+                encouragement, support, and a whole lot of fun along the way."
                 </Typography>
             </CardContent>
             </CardActionArea>
@@ -321,10 +326,10 @@ function Testimonials() {
           {/* CONTROLS */}
           <div className='carousel__controls'>
             <span className='carousel__prev'>
-              <ArrowBackIosIcon />
+              <ArrowBackIosIcon className="arrow__left"/>
             </span>
             <span className='carousel__next'>
-              <ArrowForwardIosIcon/>
+              <ArrowForwardIosIcon className="arrow__right"/>
             </span>
           </div>
   
