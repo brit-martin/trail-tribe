@@ -30,12 +30,14 @@ function Mapbox(props) {
       });
     }
 
+    // Everything in this check requires some locationData to be present
     if (props.locationData.length > 0) {
       // Remove previous markers
-      if (map.current._markers.length > 0) {
-        map.current._markers.forEach((marker) => {
+      if (currentMarkers.current.length > 0) {
+        currentMarkers.current.forEach((marker) => {
           marker.remove();
         });
+        currentMarkers.current = [];
       }
 
       // Create the Markers
