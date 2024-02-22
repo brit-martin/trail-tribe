@@ -16,6 +16,7 @@ import axios from 'axios'
 import {useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '@mui/material'
+import Swal from 'sweetalert2'
 
 function Login() {
   const [emailInput, setEmailInput] = useState("");
@@ -45,8 +46,13 @@ function Login() {
     })
     .catch((error)=>{
       console.log('error')
-      //add alert to let user know that password is incorrect
-      //error.data.message
+      Swal.fire({
+        icon: "error",
+        iconColor: "#FF4b1f",
+        title: "Oops...",
+        text: "Password is incorrect!",
+        confirmButtonColor: "#FF4b1f"
+      });
     })
   }
 
@@ -103,25 +109,28 @@ function Login() {
                 className="login-input"
                 sx={{ m: 2, width: "40ch", style: "white" }}
                 variant="outlined"
+                style={{color: white}}
                 required
                 value={passwordInput}
                 onChange={(e) => setPasswordInput(e.target.value)}
               >
                 <InputLabel 
                   htmlFor="outlined-adornment-password"
-                  color="white"
+                  // color="white"
+                  style={{color: white}}
                   >
                   Password
                 </InputLabel>
                 <OutlinedInput
                   color="white"
+                  style={{color: white}}
                   id="outlined-adornment-password"
                   // type='password'
                   type={showPassword ? "text" : "password"}
                   endAdornment={
-                    <InputAdornment position="end" color='white'>
+                    <InputAdornment position="end" style={{color: white}}>
                       <IconButton
-                        color="white"
+                        style={{color: white}}
                         aria-label="toggle password visibility"
                         onClick={handleClickShowPassword}
                         // onMouseDown={handleMouseDownPassword}
