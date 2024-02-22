@@ -1,0 +1,51 @@
+.about-container {
+    /* border: 1px solid blue; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.about-heading {
+    /* border: 1px solid red; */
+    font-family: "Permanent Marker", cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.about-bio {
+    width: 250px;
+}
+.about-image {
+    /* border: 1px solid green; */
+    display: flex;
+    justify-content: center;
+    /* padding-right: 25px; */
+}
+
+.about-subheading {
+    /* border: 1px solid blue; */
+    height: 300px;
+    font-family: "Permanent Marker", cursive;
+    /* margin-left: 5px;
+    margin-right: 5px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    background-image: url('public/redrock-one.jpeg');
+    color: white
+
+}
+
+.about-description {
+    /* border: 1px solid red; */
+    height: 300px;
+    /* margin-left: 5px;
+    margin-right: 5px; */
+    font-family: sans-serif;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    padding: 35px;
+}
