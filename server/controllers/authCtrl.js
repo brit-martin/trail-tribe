@@ -75,6 +75,12 @@ export default {
       } else {
         res.status(200).send({
           message: "You are logged in and authorized to access this page.",
+          user: {
+            id: req.session.userId,
+            email: req.session.email,
+            fname: req.session.fname,
+            lname: req.session.lname,
+          },
         });
       }
     } catch (error) {
