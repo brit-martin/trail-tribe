@@ -48,6 +48,8 @@ function Mapbox(props) {
     }
     console.log(map);
 
+    map.current.on('load', () => {});
+
     // console.log('made it past the return statement');
 
     console.log('setting locationData');
@@ -77,35 +79,78 @@ function Mapbox(props) {
       }
 
       props.locationData.forEach((marker) => {
+        const trailName = marker.tags.name ? marker.tags.name : 'None Provided';
         // console.log(marker);
 
         // 1: Set the HTML to place inside the popup
-        //     const innerHtmlContent = `
-        //   <div>
-        //     <h2>Job Details</h2>
-        //     <container>
-        //       <p><span>Job Type:</span> you</p>
-        //       <p><span>Size:</span>are</p>
-        //       <p><span>Address:</span>lame</p>
-        //       <p>test</p>
-        //       <p>test</p>
-        //       <p><span>Rating:</span>*****</p>
-        //     </container>
-        //   </div>
-        // `;
+        const innerHtmlContent = `
+          <div>
+            <h2>Trail Details</h2>
+            <container>
+              <p><span>Name:</span> ${trailName}</p>
+            </container>
+          </div>
+        `;
 
         // 2: create the HTMl container and the button
-        // const divElement = document.createElement('div');
-        // const assignBtn = document.createElement('div');
-        // assignBtn.innerHTML = `<button>Request Job</button>`;
-        // divElement.innerHTML = innerHtmlContent;
-        // divElement.appendChild(assignBtn);
+        const divElement = document.createElement('div');
+        const assignBtn = document.createElement('div');
+        assignBtn.innerHTML = `<button>Display Trail</button>`;
+        divElement.innerHTML = innerHtmlContent;
+        divElement.appendChild(assignBtn);
 
         // 3: create the button event listener
-        // assignBtn.addEventListener('click', (e) => {
-        //   console.log('Send Request Job Alert');
-        //   console.log(marker);
-        // });
+        assignBtn.addEventListener('click', (e) => {
+          console.log('== Clicked Marker ==');
+          // console.log(e.target);
+          // console.log(marker);
+          const trailPath = marker.geometry.map((step, idx) => {
+            // if (idx !== 0 && idx !== marker.geometry[marker.geometry.length - 1]) {
+            console.log(step);
+            return [step.lon, step.lat];
+            // }
+          });
+          trailPath.shift();
+          trailPath.pop();
+
+          if (map.current.getLayer('line')) {
+            map.current.removeLayer('line');
+            map.current.removeSource('line');
+          }
+
+          map.current.addSource('line', {
+            type: 'geojson',
+            data: {
+              type: 'Feature',
+              properties: {},
+              geometry: {
+                type: 'LineString',
+                coordinates: [
+                  [marker.geometry[0].lon, marker.geometry[0].lat], // start coordinates [lng, lat]
+                  ...trailPath, // additional point
+                  [marker.geometry[marker.geometry.length - 1].lon, marker.geometry[marker.geometry.length - 1].lat], // end coordinates [lng, lat]
+                  // [-122.4293, 37.7699], // additional point
+                ],
+              },
+            },
+          });
+
+          console.log(map.current.getSource('line'));
+
+          map.current.addLayer({
+            id: 'line',
+            type: 'line',
+            source: 'line',
+            layout: {
+              'line-join': 'round',
+              'line-cap': 'round',
+            },
+            paint: {
+              'line-color': '#FF4b1f',
+              'line-width': 4,
+            },
+          });
+        });
 
         // console.log(marker.geometry[0].lon);
         // console.log(marker.geometry[0].lat);
@@ -116,7 +161,7 @@ function Mapbox(props) {
         console.log('creating new markers');
         const newMarker = new mapboxgl.Marker()
           .setLngLat([marker.geometry[0].lon, marker.geometry[0].lat])
-          // .setPopup(new mapboxgl.Popup().setDOMContent(divElement))
+          .setPopup(new mapboxgl.Popup().setDOMContent(divElement))
           .addTo(map.current);
         currentMarkers.current.push(newMarker);
         // dispatch({ type: 'ADD_MARKER', payload: newMarker });
