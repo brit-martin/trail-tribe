@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -26,6 +26,26 @@ import axios from "axios";
 function NavBar() {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    sessionCheck();
+  }, [])
+
+
+
+  function sessionCheck() {
+    axios.get('/checkLoginStatus')
+      .then((response) => {
+        console.log(response.data.user);
+        dispatch({ type: "SET_USER", payload: response.data.user });
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.data.reRoute) {
+          navigate(error.response.data.reRoute);
+        }
+      });
+  }
+
   const reduxUser = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
@@ -43,6 +63,7 @@ function NavBar() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -93,12 +114,6 @@ function NavBar() {
 
   function handleLogin() {
     navigate("/login");
-    setAnchorElUser(null);
-    setAnchorElNav(null);
-  }
-
-  function handleEditInfo() {
-    navigate("/edit-info");
     setAnchorElUser(null);
     setAnchorElNav(null);
   }
@@ -314,9 +329,12 @@ function NavBar() {
                 <Tooltip title="Open Settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/2.jpg"
-                    />
+                    sx={{bgcolor: "secondary.main", color: "secondary.contrastText"}}
+                      alt={reduxUser.fname}
+                      // profilepic here
+                    >
+                      {reduxUser.fname[0]}{reduxUser.lname[0]}
+                      </Avatar>
                   </IconButton>
                 </Tooltip>
                 <Menu
