@@ -7,6 +7,7 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 // components
 import Paper from '@mui/material/Paper';
@@ -36,11 +37,14 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function Explore() {
   // Initialize
+  const dispatch = useDispatch();
+  const [lng, setLng] = useState(-111.8746681);
+  const [lat, setLat] = useState(40.4194344);
   const [locationData, setLocationData] = useState([]);
-  console.log(locationData);
+  // console.log(locationData);
   const [searchRange, setSearchRange] = useState(15);
   const mapboxContainer = useRef(null);
-  console.log(searchRange);
+  // console.log(searchRange);
 
   // console.log(lng, lat);
   const [boundingBox, setBoundingBox] = useState({
@@ -80,18 +84,22 @@ function Explore() {
   }, []);
 
   const searchArea = () => {
-    console.log('searchArea');
-    // const bboxSouth = lat - searchRange * 0.0144;
-    // const bboxWest = lng + searchRange * 0.189;
-    // const bboxNorth = lat + searchRange * 0.0144;
-    // const bboxEast = lng - searchRange * 0.189;
+    // console.log('== searchArea ==');
+    // console.log('searchRange:');
+    // console.log(+searchRange);
+    // console.log('lng, lat:');
+    // console.log(+lng, +lat);
+    // const bboxSouth = +lat - searchRange * 0.0144;
+    // const bboxWest = +lng + searchRange * 0.189;
+    // const bboxNorth = +lat + searchRange * 0.0144;
+    // const bboxEast = +lng - searchRange * 0.189;
 
-    // console.log(lng, lat);
-    console.log(searchRange);
-    // const bboxSouth = +lat - searchRange * 0.0001;
-    // const bboxWest = +lng + searchRange * 0.0001;
-    // const bboxNorth = +lat + searchRange * 0.0001;
-    // const bboxEast = +lng - searchRange * 0.0001;
+    const bboxSouth = +lat - searchRange * 0.001;
+    const bboxWest = +lng + searchRange * 0.001;
+    const bboxNorth = +lat + searchRange * 0.001;
+    const bboxEast = +lng - searchRange * 0.001;
+
+    // console.log('bounding boxes:');
     // console.log(bboxSouth);
     // console.log(bboxWest);
     // console.log(bboxNorth);
@@ -102,22 +110,27 @@ function Explore() {
     //   way["highway"="path"](${bboxSouth},${bboxWest},${bboxNorth},${bboxEast});
     //   out geom;
     // `;
-
     const reqBody = `
       [out:json][timeout:25];
-      way["highway"="path"](40.500,-111.796,40.721,-111.534);
+      way["highway"="path"](${bboxSouth},${bboxEast},${bboxNorth},${bboxWest});
       out geom;
     `;
+
+    // const reqBody = `
+    //   [out:json][timeout:25];
+    //   way["highway"="path"](40.500,-111.796,40.721,-111.534);
+    //   out geom;
+    // `;
 
     axios
       .post('https://overpass-api.de/api/interpreter', reqBody)
 
       .then((response) => {
-        // console.log(response);
+        console.log(response);
         setLocationData(response.data.elements);
+        // dispatch({ type: 'SET_LOCATIONS', payload: response.data.elements });
       })
       .catch((error) => {
-        // TODO - add toast notification error message
         console.log(error);
       });
   };
@@ -130,13 +143,14 @@ function Explore() {
     <>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
+          {/* EXPLORE HEADER */}
           <Grid item xs={12} className='explore-header'>
             <Item>Explore</Item>
           </Grid>
 
           {/* SEARCH BY CITY */}
           <Grid item xs={7} className='explore-city'>
-            <Button onClick={() => props.searchArea()}>Search Area</Button>
+            <Button onClick={() => searchArea()}>Search Area</Button>
             <Item
               sx={{
                 width: 300,
@@ -215,14 +229,15 @@ function Explore() {
           {/* MAPBOX CONTAINER */}
           <Grid item xs={8} className='explore-map-container'>
             <Item className='explore-map'>
-              {/* {locationData.length > 0 ? ( */}
+              {/* {console.log('re-rendering???')} */}
+              {/* {console.log(locationData)} */}
               <Mapbox
                 locationData={locationData}
                 setBoundingBox={setBoundingBox}
-                // lng={lng}
-                // lat={lat}
-                // setLng={setLng}
-                // setLat={setLat}
+                lng={lng}
+                lat={lat}
+                setLng={setLng}
+                setLat={setLat}
                 searchArea={searchArea}
               />
               {/* ) : null} */}

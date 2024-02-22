@@ -1,43 +1,74 @@
+// IMPORTS
+// styling
+import '../styles/mapbox.css';
+// packages
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
-
-import '../styles/mapbox.css';
+import { useSelector, useDispatch } from 'react-redux';
 
 mapboxgl.accessToken = import.meta.env.VITE_REACT_APP_MAPBOXTOKEN;
 
 function Mapbox(props) {
+  const dispatch = useDispatch();
+  const reduxLocationData = useSelector((state) => state.locationData);
+  // const reduxMarkers = useSelector((state) => state.currentMarkersReducer.currentMarkers);
+  // console.log(reduxMarkers);
+  const [currentMarkers, setCurrentMarkers] = useState([]);
+
   // console.log(props.locationData);
   //stores the dom element in the useRef
   const [locationData, setLocationData] = useState(props.locationData);
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [lng, setLng] = useState(-111.8746681);
-  const [lat, setLat] = useState(40.4194344);
+  // const currentMarkers = [];
+  // const [lng, setLng] = useState(-111.8746681);
+  // const [lat, setLat] = useState(40.4194344);
   const [zoom, setZoom] = useState(12);
   // const { setBoundingBox } = props;
-  console.log('locationData:');
-  console.log(locationData);
+  // console.log('locationData:');
+  // console.log(props.locationData);
+  // console.log(locationData);
+  // console.log('currentMarkers:');
+  // console.log(currentMarkers);
 
   // UseEffect
   useEffect(() => {
-    console.log('made it to useEffect!');
-    if (map.current) return;
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: import.meta.env.VITE_REACT_APP_MAPBOX_STYLE,
-      center: [lng, lat],
-      zoom: zoom,
-    });
+    console.log('== Mapbox UseEffect ==');
+    // console.log('made it to useEffect!');
+    if (!map.current) {
+      map.current = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: import.meta.env.VITE_REACT_APP_MAPBOX_STYLE,
+        center: [props.lng, props.lat],
+        zoom: zoom,
+      });
+    }
 
-    console.log('made it past the return statement');
+    // console.log('made it past the return statement');
 
+    console.log('setting locationData');
     setLocationData(props.locationData);
 
     //step two: add markers to map---------------------------------------
     // TODO - create the popup stuff
 
-    if (locationData.length > 0) {
-      locationData.forEach((marker) => {
+    console.log('checking locationData.length');
+
+    if (props.locationData.length > 0) {
+      console.log('locationData greater than 0');
+
+      // remove all current markers
+      // console.log('checking currentMarkers.length');
+      // if (currentMarkers.length > 0) {
+      //   console.log('removing all currentMarkers');
+      //   currentMarkers.forEach((marker, idx) => {
+      //     console.log(marker);
+      //     marker.remove();
+      //     setCurrentMarkers(currentMarkers[idx].remove());
+      //   });
+      // }
+
+      props.locationData.forEach((marker) => {
         // console.log(marker);
 
         // 1: Set the HTML to place inside the popup
@@ -72,31 +103,40 @@ function Mapbox(props) {
         // console.log(marker.geometry[0].lat);
         // console.log(marker.lng);
         // console.log(marker.lat);
+
+        // add new markers
+        console.log('creating new markers');
         const newMarker = new mapboxgl.Marker()
           .setLngLat([marker.geometry[0].lon, marker.geometry[0].lat])
           // .setPopup(new mapboxgl.Popup().setDOMContent(divElement))
           .addTo(map.current);
+        // currentMarkers.push(newMarker);
+        // dispatch({ type: 'ADD_MARKER', payload: newMarker });
+        // setCurrentMarkers([...currentMarkers, newMarker]);
+        // console.log(currentMarkers);
       });
+      // console.log('currentMarkers:');
+      // console.log(currentMarkers);
     }
     //step three: updater for long and lat and zoom states
     // console.log('is there a map.current?');
     if (map.current) {
       // console.log('map.current exists!');
       map.current.on('move', () => {
-        setLng(map.current.getCenter().lng.toFixed(4));
-        setLat(map.current.getCenter().lat.toFixed(4));
+        props.setLng(map.current.getCenter().lng.toFixed(4));
+        props.setLat(map.current.getCenter().lat.toFixed(4));
         setZoom(map.current.getZoom().toFixed(2));
-        console.log('were fucking moving!!!!');
+        // console.log('were fucking moving!!!!');
       });
     }
-  }, [locationData]);
+  }, [props.locationData]);
 
   // Functions
 
   return (
     <>
       <div className='map__sidebar'>
-        longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+        longitude: {props.lng} | Latitude: {props.lat} | Zoom: {zoom}
       </div>
       <div ref={mapContainer} className='map' />
     </>
