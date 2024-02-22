@@ -41,94 +41,31 @@ function Explore() {
   const [lng, setLng] = useState(-111.8746681);
   const [lat, setLat] = useState(40.4194344);
   const [locationData, setLocationData] = useState([]);
-  // console.log(locationData);
   const [searchRange, setSearchRange] = useState(15);
-  const mapboxContainer = useRef(null);
-  // console.log(searchRange);
-
-  // console.log(lng, lat);
-  const [boundingBox, setBoundingBox] = useState({
-    bboxSouth: 0,
-    bboxWest: 0,
-    bboxNorth: 0,
-    bboxEast: 0,
-  });
+  // const mapboxContainer = useRef(null);
   const [filter, setFilter] = useState('');
 
-  const sliderMarks = [
-    {
-      value: 5,
-      label: '5',
-    },
-    {
-      value: 10,
-      label: '10',
-    },
-    {
-      value: 15,
-      label: '15',
-    },
-    {
-      value: 20,
-      label: '20',
-    },
-    {
-      value: 25,
-      label: '25',
-    },
-  ];
-
-  // console.log(locationData);
-  useEffect(() => {
-    // -111.8746681;
-  }, []);
-
   const searchArea = () => {
-    // console.log('== searchArea ==');
-    // console.log('searchRange:');
-    // console.log(+searchRange);
-    // console.log('lng, lat:');
-    // console.log(+lng, +lat);
-    // const bboxSouth = +lat - searchRange * 0.0144;
-    // const bboxWest = +lng + searchRange * 0.189;
-    // const bboxNorth = +lat + searchRange * 0.0144;
-    // const bboxEast = +lng - searchRange * 0.189;
+    // Set Bounding Boxes
+    const bboxSouth = +lat - searchRange * 0.002;
+    const bboxWest = +lng + searchRange * 0.002;
+    const bboxNorth = +lat + searchRange * 0.002;
+    const bboxEast = +lng - searchRange * 0.002;
 
-    const bboxSouth = +lat - searchRange * 0.001;
-    const bboxWest = +lng + searchRange * 0.001;
-    const bboxNorth = +lat + searchRange * 0.001;
-    const bboxEast = +lng - searchRange * 0.001;
-
-    // console.log('bounding boxes:');
-    // console.log(bboxSouth);
-    // console.log(bboxWest);
-    // console.log(bboxNorth);
-    // console.log(bboxEast);
-
-    // const reqBody = `
-    //   [out:json][timeout:25];
-    //   way["highway"="path"](${bboxSouth},${bboxWest},${bboxNorth},${bboxEast});
-    //   out geom;
-    // `;
+    // Build the request body
+    // TODO - add filter to remove paths without names
     const reqBody = `
       [out:json][timeout:25];
       way["highway"="path"](${bboxSouth},${bboxEast},${bboxNorth},${bboxWest});
       out geom;
     `;
 
-    // const reqBody = `
-    //   [out:json][timeout:25];
-    //   way["highway"="path"](40.500,-111.796,40.721,-111.534);
-    //   out geom;
-    // `;
-
+    // Send request
     axios
       .post('https://overpass-api.de/api/interpreter', reqBody)
-
       .then((response) => {
-        console.log(response);
+        // set the newly fetched location data that is passed down to the Mapbox component
         setLocationData(response.data.elements);
-        // dispatch({ type: 'SET_LOCATIONS', payload: response.data.elements });
       })
       .catch((error) => {
         console.log(error);
@@ -187,7 +124,28 @@ function Explore() {
                 defaultValue={70}
                 aria-label='Small'
                 // valueLabelDisplay='on'
-                marks={sliderMarks}
+                marks={[
+                  {
+                    value: 5,
+                    label: '5',
+                  },
+                  {
+                    value: 10,
+                    label: '10',
+                  },
+                  {
+                    value: 15,
+                    label: '15',
+                  },
+                  {
+                    value: 20,
+                    label: '20',
+                  },
+                  {
+                    value: 25,
+                    label: '25',
+                  },
+                ]}
                 min={5}
                 max={25}
                 step={null}
@@ -229,18 +187,14 @@ function Explore() {
           {/* MAPBOX CONTAINER */}
           <Grid item xs={8} className='explore-map-container'>
             <Item className='explore-map'>
-              {/* {console.log('re-rendering???')} */}
-              {/* {console.log(locationData)} */}
               <Mapbox
                 locationData={locationData}
-                setBoundingBox={setBoundingBox}
                 lng={lng}
                 lat={lat}
                 setLng={setLng}
                 setLat={setLat}
                 searchArea={searchArea}
               />
-              {/* ) : null} */}
             </Item>
           </Grid>
         </Grid>
