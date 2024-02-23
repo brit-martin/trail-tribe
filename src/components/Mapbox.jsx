@@ -4,6 +4,8 @@ import '../styles/mapbox.css';
 // packages
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
+// icons
+import AddIcon from '@mui/icons-material/Add';
 
 mapboxgl.accessToken = import.meta.env.VITE_REACT_APP_MAPBOXTOKEN;
 
@@ -43,25 +45,28 @@ function Mapbox(props) {
       // Create the Markers
       props.locationData.forEach((marker) => {
         // A: Set the HTML to place inside the popup
-        const trailName = marker.tags.name ? marker.tags.name : 'None Provided';
+        const trailName = marker.tags.name ? marker.tags.name : 'No Name Provided';
         const innerHtmlContent = `
           <div>
-            <h2>Trail Details</h2>
             <container>
-              <p><span>Name:</span> ${trailName}</p>
+              <p><span>${trailName}</span></p>
+              <p>${marker.id}</p>
             </container>
           </div>
         `;
 
-        // B: create the HTMl container and the button
+        // B: create the HTMl container and the buttons
         const divElement = document.createElement('div');
-        const assignBtn = document.createElement('div');
-        assignBtn.innerHTML = `<button>Display Trail</button>`;
+        const trailBtn = document.createElement('div');
+        const postsBtn = document.createElement('div');
+        trailBtn.innerHTML = `<button>Display Trail</button>`;
+        postsBtn.innerHTML = `<button>See Posts</button>`;
         divElement.innerHTML = innerHtmlContent;
-        divElement.appendChild(assignBtn);
+        divElement.appendChild(trailBtn);
+        divElement.appendChild(postsBtn);
 
-        // C: create the button to display the path
-        assignBtn.addEventListener('click', (e) => {
+        // C: create trailBtn action
+        trailBtn.addEventListener('click', (e) => {
           //  i: remove any existing path before making a new one
           if (map.current.getLayer('line')) {
             map.current.removeLayer('line');
@@ -102,6 +107,12 @@ function Mapbox(props) {
           });
         });
 
+        // D: create the postsBtn action
+        postsBtn.addEventListener('click', (e) => {
+          console.log(marker.id);
+          props.getPosts(marker.id);
+        });
+
         // D: add new markers
         const newMarker = new mapboxgl.Marker()
           .setLngLat([marker.geometry[0].lon, marker.geometry[0].lat])
@@ -127,6 +138,7 @@ function Mapbox(props) {
       <div className='map__sidebar'>
         longitude: {props.lng} | Latitude: {props.lat} | Zoom: {zoom}
       </div>
+      <AddIcon className='map__center' />
       <div ref={mapContainer} className='map' />
     </>
   );

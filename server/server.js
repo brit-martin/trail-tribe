@@ -25,15 +25,17 @@ function loginRequired(req, res, next) {
 // == ENDPOINTS ==
 
 // posts
-const { getPosts } = postCtrl;
+const { getPosts, getPostsByTrailId } = postCtrl;
 app.get('/posts', loginRequired, getPosts);
+app.get('/getPostsByTrailId/:trailId', loginRequired, getPostsByTrailId);
 
 // auth
-const { signUp, login, logout, editUserInfo, checkLoginStatus, deleteUser, verifyOldPassword, changePassword } = authCtrl;
+const { signUp, login, logout, editUserInfo, checkLoginStatus, deleteUser, verifyOldPassword, changePassword } =
+  authCtrl;
 app.post('/signup', signUp);
 app.post('/login', login);
 app.get('/checkLoginStatus', checkLoginStatus);
-app.delete('/logout',loginRequired, logout);
+app.delete('/logout', loginRequired, logout);
 app.put('/delete-user', loginRequired, deleteUser);
 app.post('/old-password', loginRequired, verifyOldPassword);
 app.put('/change-password', loginRequired, changePassword);

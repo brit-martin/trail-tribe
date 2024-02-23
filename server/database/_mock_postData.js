@@ -2,7 +2,7 @@ const postData = [
   {
     id: 1,
     hikeName: 'Fun in the sun',
-    trailId: 'trail_id',
+    trailId: '850607924',
     description: 'I went on this hike and had an absolute blast. I saw a nice waterfall halfway through the hike.',
     pictureArray: ['placeholder_blob', 'placeholder_blob', 'placeholder_blob'],
     userId: 1,

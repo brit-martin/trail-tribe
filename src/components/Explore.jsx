@@ -9,6 +9,8 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 
+// icons
+
 // components
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
@@ -25,6 +27,7 @@ import Slider from '@mui/material/Slider';
 import Typography from '@mui/material/Typography';
 import Mapbox from './Mapbox';
 import Button from '@mui/material/Button';
+import Post from './Post.jsx';
 // ------------------------------------
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -38,10 +41,11 @@ const Item = styled(Paper)(({ theme }) => ({
 function Explore() {
   // Initialize
   const dispatch = useDispatch();
-  const [lng, setLng] = useState(-111.8746681);
-  const [lat, setLat] = useState(40.4194344);
+  const [lng, setLng] = useState(-111.871);
+  const [lat, setLat] = useState(40.4612);
   const [locationData, setLocationData] = useState([]);
-  const [searchRange, setSearchRange] = useState(15);
+  const [searchRange, setSearchRange] = useState(5);
+  const [posts, setPosts] = useState([]);
   // const mapboxContainer = useRef(null);
   const [filter, setFilter] = useState('');
 
@@ -66,6 +70,18 @@ function Explore() {
       .then((response) => {
         // set the newly fetched location data that is passed down to the Mapbox component
         setLocationData(response.data.elements);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getPosts = (trailId) => {
+    axios
+      .get(`/getPostsByTrailId/${trailId}`)
+      .then((response) => {
+        console.log(response.data.posts);
+        setPosts(response.data.posts);
       })
       .catch((error) => {
         console.log(error);
@@ -121,7 +137,7 @@ function Explore() {
               </Typography>
               <Slider
                 size='small'
-                defaultValue={70}
+                defaultValue={searchRange}
                 aria-label='Small'
                 // valueLabelDisplay='on'
                 marks={[
@@ -181,7 +197,15 @@ function Explore() {
 
           {/* POSTS SIDE PANEL CONTAINER */}
           <Grid item xs={4} className='explore-post-container'>
-            <Item className='explore-post'>Post Container</Item>
+            {/* <Item className='explore-post'>Post Container</Item> */}
+            {/* map through posts render all posts */}
+            {posts.length > 0 ? (
+              posts.map((post, idx) => {
+                return <Post key={idx} post={post} />;
+              })
+            ) : (
+              <h1>No Posts to Display...</h1>
+            )}
           </Grid>
 
           {/* MAPBOX CONTAINER */}
@@ -194,6 +218,7 @@ function Explore() {
                 setLng={setLng}
                 setLat={setLat}
                 searchArea={searchArea}
+                getPosts={getPosts}
               />
             </Item>
           </Grid>
