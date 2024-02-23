@@ -21,6 +21,9 @@ import CelebrationIcon from "@mui/icons-material/Celebration";
 import ParkIcon from "@mui/icons-material/Park";
 import StarIcon from "@mui/icons-material/Star";
 import HikingIcon from "@mui/icons-material/Hiking";
+import Carousel from 'react-material-ui-carousel';
+
+
 
 function Post(props) {
   // inits
@@ -180,7 +183,7 @@ function Post(props) {
         {/* COMMENTS */}
       </Container>
       <Container className="post__comments" disableGutters={true}>
-        {/* <Comment /> */}
+        <Carousel>
         {props.post.comments.length > 0 ? (
           props.post.comments.map((comment, idx) => {
             return <Comment key={idx} comment={comment} />;
@@ -188,6 +191,7 @@ function Post(props) {
         ) : (
           <div>Add a comment!</div>
         )}
+        </Carousel>
       </Container>
     </Stack>
   );
