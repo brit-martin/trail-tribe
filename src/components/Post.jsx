@@ -12,15 +12,15 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Comment from './Comment.jsx';
 // Icons
-import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import PetsIcon from '@mui/icons-material/Pets';
-import CelebrationIcon from '@mui/icons-material/Celebration';
-import ParkIcon from '@mui/icons-material/Park';
-import StarIcon from '@mui/icons-material/Star';
-import HikingIcon from '@mui/icons-material/Hiking';
+import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import PetsIcon from "@mui/icons-material/Pets";
+import CelebrationIcon from "@mui/icons-material/Celebration";
+import ParkIcon from "@mui/icons-material/Park";
+import StarIcon from "@mui/icons-material/Star";
+import HikingIcon from "@mui/icons-material/Hiking";
 import Carousel from 'react-material-ui-carousel';
 
 function Post(props) {
@@ -167,15 +167,15 @@ function Post(props) {
 
         {/* COMMENTS */}
       </Container>
-      <Container className='post__comments' disableGutters={true}>
+      <Container className="post__comments" disableGutters={true}>
         <Carousel>
-          {props.post.comments.length > 0 ? (
-            props.post.comments.map((comment, idx) => {
-              return <Comment key={idx} comment={comment} />;
-            })
-          ) : (
-            <div>Add a comment!</div>
-          )}
+        {props.post.comments.length > 0 ? (
+          props.post.comments.map((comment, idx) => {
+            return <Comment key={idx} comment={comment} />;
+          })
+        ) : (
+          <div>Add a comment!</div>
+        )}
         </Carousel>
       </Container>
     </Stack>
