@@ -1,8 +1,8 @@
 .post {
-  border: 1px solid black;
-  margin: 4rem;
+  /* border: 1px solid black; */
+  /* margin: 4rem; */
   padding: 0.5rem;
-  max-width: 70rem;
+  /* max-width: 70rem; */
 }
 .post__top {
   display: flex !important;
@@ -15,18 +15,18 @@
 
 .post__pictures {
   width: 100%;
-  height: 50%;
+  /* height: 50%; */
   /* border: 1px solid green; */
   display: flex !important;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 .post__map {
   height: 50%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   /* border: 1px solid green; */
 }
 
@@ -101,13 +101,18 @@
 
 /* REACTIONS */
 .post__reactions {
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
   /* border: 1px solid green; */
 }
 .post__reaction {
   /* border: 1px solid orange; */
   display: flex !important;
   align-items: center;
+  padding: 0.5rem;
+}
+.post__btn {
+  /* border: 1px solid blue; */
+  min-width: 0 !important;
 }
 
 /* ACTIONS */

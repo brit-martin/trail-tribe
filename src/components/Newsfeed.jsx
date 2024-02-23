@@ -20,7 +20,10 @@ function Newsfeed() {
   const [posts, setPosts] = useState([]);
   const reduxUser = useSelector((state) => state.userReducer);
   const navigate = useNavigate();
+
   console.log(reduxUser);
+  console.log(posts);
+
   useEffect(() => {
     axios
       // Check login status
