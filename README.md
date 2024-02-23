@@ -39,3 +39,29 @@ https://stackoverflow.com/questions/54002792/in-general-is-it-better-to-use-one-
 <!-- adding a line to a map using geoJSON source -->
 
 https://docs.mapbox.com/mapbox-gl-js/example/geojson-line/
+
+<!-- git rename branch -->
+
+https://stackoverflow.com/questions/6591213/how-can-i-rename-a-local-git-branch
+git branch -m <newName>
+
+<!-- get geolocation data from user -->
+
+// request to get the users geolocation
+useEffect(() => {
+if (navigator.geolocation) {
+navigator.geolocation.getCurrentPosition(getGeolocation, defaultLocation);
+}
+}, []);
+
+// user accepted geolocation request -> set users coordinates
+const getGeolocation = (position) => {
+setLng(position.coords.longitude);
+setLat(position.coords.latitude);
+};
+
+// user rejected geolocation request -> set default coordinates
+const defaultLocation = (error) => {
+setLng(-111.8746681);
+setLat(40.4194344);
+};
