@@ -28,21 +28,9 @@ function Post(props) {
   // const postData = props.post;
   const [postData, setPostData] = useState(props.post);
   const [comments, setComments] = useState([]);
+  console.log(postData);
 
   const reduxUser = useSelector((state) => state.userReducer);
-  // console.log(reduxUser);
-  console.log(postData.reactions);
-  const reactions = {
-    likes: 0,
-    hearts: 0,
-    celebrates: 0,
-    animals: 0,
-    trees: 0,
-  };
-  console.log(props.post);
-  postData.reactions.forEach((react) => {
-    reactions[react.reactionType]++;
-  });
 
   const submitReaction = (reaction) => {
     console.log('submitReaction:');
@@ -65,9 +53,30 @@ function Post(props) {
       });
   };
 
+  const submitUnfollowUser = () => {
+    axios
+      .delete(`/unfollow/${postData.userId}`)
+      .then((response) => {
+        console.log(response);
+        props.unfollowUpdate();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <Stack className='post' disableGutters={true} spacing={2}>
       <Container className='post__top' disableGutters={true}>
+
+        {/* == GRAPHICS == */}
+        <Stack className='post__graphics' disableGutters={true} spacing={0.5}>
+          <Container className='post__pictures' maxWidth='false' disableGutters={true}>
+            <img src='https://picsum.photos/600/200'></img>
+          </Container>
+          <Container className='post__map'>Map</Container>
+        </Stack>
+
         {/* == CONTENT == */}
         <Container className='post__content' disableGutters={true}>
           {/* == TITLE == */}
@@ -84,7 +93,7 @@ function Post(props) {
             <Typography className='post__user-name' variant='h6'>
               {postData.user.fname} {postData.user.lname}
             </Typography>
-            <Button>Follow {postData.user.fname}</Button>
+            <Button onClick={() => submitUnfollowUser()}>Unfollow {postData.user.fname}</Button>
           </Container>
 
           {/* == DESCRIPTION == */}
@@ -108,45 +117,45 @@ function Post(props) {
           </Stack>
 
           {/* REACTIONS */}
-          <Stack className='post__reactions' direction='row' spacing={0}>
+          <Stack className='post__reactions' direction='row' spacing={2}>
             {/* likes */}
             <Stack className='post__reaction' direction='row' spacing={2}>
-              <Button className='post__btn' onClick={() => submitReaction('likes')}>
+              <Button onClick={() => submitReaction('likes')}>
                 <ThumbUpIcon sx={{ color: 'blue' }} />
               </Button>
-              <Typography variant='h6'>{reactions.likes}</Typography>
+              <Typography variant='h6'>{postData.likes}</Typography>
             </Stack>
 
             {/* Hearts */}
             <Stack className='post__reaction' direction='row' spacing={2}>
-              <Button className='post__btn' onClick={() => submitReaction('hearts')}>
+              <Button onClick={() => submitReaction('hearts')}>
                 <FavoriteIcon sx={{ color: 'red' }} />
               </Button>
-              <Typography variant='h6'>{reactions.hearts}</Typography>
+              <Typography variant='h6'>{postData.hearts}</Typography>
             </Stack>
 
             {/* animals */}
             <Stack className='post__reaction' direction='row' spacing={2}>
-              <Button className='post__btn' onClick={() => submitReaction('animals')}>
+              <Button onClick={() => submitReaction('animals')}>
                 <PetsIcon sx={{ color: 'brown' }} />
               </Button>
-              <Typography variant='h6'>{reactions.animals}</Typography>
+              <Typography variant='h6'>{postData.animals}</Typography>
             </Stack>
 
             {/* Celebrates */}
             <Stack className='post__reaction' direction='row' spacing={2}>
-              <Button className='post__btn' onClick={() => submitReaction('celebrates')}>
+              <Button onClick={() => submitReaction('celebrates')}>
                 <CelebrationIcon sx={{ color: 'purple' }} />
               </Button>
-              <Typography variant='h6'>{reactions.celebrates}</Typography>
+              <Typography variant='h6'>{postData.celebrates}</Typography>
             </Stack>
 
             {/* Trees */}
             <Stack className='post__reaction' direction='row' spacing={2}>
-              <Button className='post__btn' onClick={() => submitReaction('trees')}>
+              <Button onClick={() => submitReaction('trees')}>
                 <ParkIcon sx={{ color: 'green' }} />
               </Button>
-              <Typography variant='h6'>{reactions.trees}</Typography>
+              <Typography variant='h6'>{postData.trees}</Typography>
             </Stack>
           </Stack>
 
