@@ -41,13 +41,32 @@ const Item = styled(Paper)(({ theme }) => ({
 function Explore() {
   // Initialize
   const dispatch = useDispatch();
-  const [lng, setLng] = useState(-111.871);
-  const [lat, setLat] = useState(40.4612);
+  const [lng, setLng] = useState(null);
+  const [lat, setLat] = useState(null);
   const [locationData, setLocationData] = useState([]);
   const [searchRange, setSearchRange] = useState(5);
   const [posts, setPosts] = useState([]);
   // const mapboxContainer = useRef(null);
   const [filter, setFilter] = useState('');
+
+  // request to get the users geolocation
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(getGeolocation, defaultLocation);
+    }
+  }, []);
+
+  // user accepted geolocation request -> set users coordinates
+  const getGeolocation = (position) => {
+    setLng(position.coords.longitude);
+    setLat(position.coords.latitude);
+  };
+
+  // user rejected geolocation request -> set default coordinates
+  const defaultLocation = (error) => {
+    setLng(-111.8746681);
+    setLat(40.4194344);
+  };
 
   const searchArea = () => {
     // Set Bounding Boxes
@@ -94,123 +113,125 @@ function Explore() {
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          {/* EXPLORE HEADER */}
-          <Grid item xs={12} className='explore-header'>
-            <Item>Explore</Item>
-          </Grid>
+      {/* <Box sx={{ flexGrow: 1 }}> */}
+      <Grid container spacing={2}>
+        {/* EXPLORE HEADER */}
+        <Grid item xs={12} className='explore-header'>
+          <Item>Explore</Item>
+        </Grid>
 
-          {/* SEARCH BY CITY */}
-          <Grid item xs={7} className='explore-city'>
-            <Button onClick={() => searchArea()}>Search Area</Button>
-            <Item
-              sx={{
-                width: 300,
-                height: 60,
-              }}
-            >
-              <FormControl>
-                <InputLabel htmlFor='input-with-icon-adornment'>Enter City</InputLabel>
-                <Input
-                  id='input-with0-icon-adornment'
-                  startAdornment={
-                    <InputAdornment position='start'>
-                      <PlaceIcon />
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>
-            </Item>
-          </Grid>
-
-          {/* RANGE FILTER */}
-          <Grid item xs={3} className='explore-distance'>
-            <Item
-              sx={{
-                width: 300,
-                height: 60,
-              }}
-            >
-              <Typography id='track-inverted-slider' gutterBottom>
-                Distance (miles)
-              </Typography>
-              <Slider
-                size='small'
-                defaultValue={searchRange}
-                aria-label='Small'
-                // valueLabelDisplay='on'
-                marks={[
-                  {
-                    value: 5,
-                    label: '5',
-                  },
-                  {
-                    value: 10,
-                    label: '10',
-                  },
-                  {
-                    value: 15,
-                    label: '15',
-                  },
-                  {
-                    value: 20,
-                    label: '20',
-                  },
-                  {
-                    value: 25,
-                    label: '25',
-                  },
-                ]}
-                min={5}
-                max={25}
-                step={null}
-                sx={{
-                  width: 250,
-                }}
-                onChange={(e) => setSearchRange(e.target.value)}
+        {/* SEARCH BY CITY */}
+        <Grid item xs={7} className='explore-city'>
+          <Button onClick={() => searchArea()}>Search Area</Button>
+          <Item
+            sx={{
+              width: 300,
+              height: 60,
+            }}
+          >
+            <FormControl>
+              <InputLabel htmlFor='input-with-icon-adornment'>Enter City</InputLabel>
+              <Input
+                id='input-with0-icon-adornment'
+                startAdornment={
+                  <InputAdornment position='start'>
+                    <PlaceIcon />
+                  </InputAdornment>
+                }
               />
-            </Item>
-          </Grid>
+            </FormControl>
+          </Item>
+        </Grid>
 
-          {/* FILTER DROPDOWN */}
-          <Grid item xs={2} className='explore-filter'>
-            <Item>
-              <InputLabel id='demo-simple-select-label'>Filter</InputLabel>
-              <Select
-                labelId='demo-simple-select-label'
-                id='demo-simple-select'
-                value={filter}
-                label='filter'
-                sx={{
-                  height: 25,
-                  width: 200,
-                }}
-                onChange={handleChange}
-              >
-                <MenuItem>Test1</MenuItem>
-                <MenuItem>Test2</MenuItem>
-                <MenuItem>Test3</MenuItem>
-              </Select>
-            </Item>
-          </Grid>
+        {/* RANGE FILTER */}
+        <Grid item xs={3} className='explore-distance'>
+          <Item
+            sx={{
+              width: 300,
+              height: 60,
+            }}
+          >
+            <Typography id='track-inverted-slider' gutterBottom>
+              Distance (miles)
+            </Typography>
+            <Slider
+              size='small'
+              defaultValue={searchRange}
+              aria-label='Small'
+              // valueLabelDisplay='on'
+              marks={[
+                {
+                  value: 5,
+                  label: '5',
+                },
+                {
+                  value: 10,
+                  label: '10',
+                },
+                {
+                  value: 15,
+                  label: '15',
+                },
+                {
+                  value: 20,
+                  label: '20',
+                },
+                {
+                  value: 25,
+                  label: '25',
+                },
+              ]}
+              min={5}
+              max={25}
+              step={null}
+              sx={{
+                width: 250,
+              }}
+              onChange={(e) => setSearchRange(e.target.value)}
+            />
+          </Item>
+        </Grid>
 
-          {/* POSTS SIDE PANEL CONTAINER */}
-          <Grid item xs={4} className='explore-post-container'>
-            {/* <Item className='explore-post'>Post Container</Item> */}
-            {/* map through posts render all posts */}
-            {posts.length > 0 ? (
-              posts.map((post, idx) => {
-                return <Post key={idx} post={post} />;
-              })
-            ) : (
-              <h1>No Posts to Display...</h1>
-            )}
-          </Grid>
+        {/* FILTER DROPDOWN */}
+        <Grid item xs={2} className='explore-filter'>
+          <Item>
+            <InputLabel id='demo-simple-select-label'>Filter</InputLabel>
+            <Select
+              labelId='demo-simple-select-label'
+              id='demo-simple-select'
+              value={filter}
+              label='filter'
+              sx={{
+                height: 25,
+                width: 200,
+              }}
+              onChange={handleChange}
+            >
+              <MenuItem>Test1</MenuItem>
+              <MenuItem>Test2</MenuItem>
+              <MenuItem>Test3</MenuItem>
+            </Select>
+          </Item>
+        </Grid>
 
-          {/* MAPBOX CONTAINER */}
-          <Grid item xs={8} className='explore-map-container'>
-            <Item className='explore-map'>
+        {/* POSTS SIDE PANEL CONTAINER */}
+        <Grid item xs={4} className='explore-post-container'>
+          {/* <Item className='explore-post'>Post Container</Item> */}
+          {/* map through posts render all posts */}
+          {posts.length > 0 ? (
+            posts.map((post, idx) => {
+              return <Post key={idx} post={post} />;
+            })
+          ) : (
+            <h1>No Posts to Display...</h1>
+          )}
+        </Grid>
+
+        {/* MAPBOX CONTAINER */}
+        <Grid item xs={8} className='explore-map-container'>
+          <Item className='explore-map'>
+            {/* wait for latitude and longitude are retrieved from the browser */}
+            {lng && lat ? (
               <Mapbox
                 locationData={locationData}
                 lng={lng}
@@ -220,10 +241,11 @@ function Explore() {
                 searchArea={searchArea}
                 getPosts={getPosts}
               />
-            </Item>
-          </Grid>
+            ) : null}
+          </Item>
         </Grid>
-      </Box>
+      </Grid>
+      {/* </Box> */}
     </>
   );
 }
