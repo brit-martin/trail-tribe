@@ -6,7 +6,7 @@ export default {
     // console.log(req.body);
     const { post, reaction } = req.body;
     console.log(reaction);
-    console.log(post);
+    console.log(post[reaction]);
     console.log(req.session.userId);
 
     try {
@@ -60,6 +60,7 @@ export default {
       dbPost[reaction]++;
       post[reaction]++;
       await dbPost.save();
+      console.log(post[reaction]);
 
       // send the response
       res.status(200).send({

@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 
 // icons
+import CloseIcon from '@mui/icons-material/Close';
 
 // components
 import Paper from '@mui/material/Paper';
@@ -28,6 +29,8 @@ import Typography from '@mui/material/Typography';
 import Mapbox from './Mapbox';
 import Button from '@mui/material/Button';
 import Post from './Post.jsx';
+import Container from '@mui/material/Container';
+import Stack from '@mui/material/Stack';
 // ------------------------------------
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -41,6 +44,7 @@ const Item = styled(Paper)(({ theme }) => ({
 function Explore() {
   // Initialize
   const dispatch = useDispatch();
+  const explorePosts = useRef(null);
   const [lng, setLng] = useState(null);
   const [lat, setLat] = useState(null);
   const [locationData, setLocationData] = useState([]);
@@ -48,6 +52,21 @@ function Explore() {
   const [posts, setPosts] = useState([]);
   // const mapboxContainer = useRef(null);
   const [filter, setFilter] = useState('');
+  console.log(explorePosts);
+
+  if (explorePosts.current) {
+    if (posts.length > 0) {
+      console.log('adding show-posts');
+      explorePosts.current.classList.add('show-posts');
+    } else {
+      console.log('removing show-posts');
+      explorePosts.current.classList.remove('show-posts');
+    }
+  }
+
+  // const submitClearPosts = () => {
+  //   setPosts([]);
+  // }
 
   // request to get the users geolocation
   useEffect(() => {
@@ -112,141 +131,94 @@ function Explore() {
   };
 
   return (
-    <>
-      {/* <Box sx={{ flexGrow: 1 }}> */}
-      <Grid container spacing={2}>
-        {/* EXPLORE HEADER */}
-        <Grid item xs={12} className='explore-header'>
-          <Item>Explore</Item>
-        </Grid>
+    <Container className='explore' maxWidth={false} disableGutters={true}>
+      {/* MAPBOX CONTAINER */}
+      <Container className='mapbox' maxWidth={false} disableGutters={true}>
+        {/* wait for latitude and longitude are retrieved from the browser */}
+        {lng && lat ? (
+          <Mapbox
+            locationData={locationData}
+            lng={lng}
+            lat={lat}
+            setLng={setLng}
+            setLat={setLat}
+            searchArea={searchArea}
+            getPosts={getPosts}
+          />
+        ) : (
+          <Typography className='mapbox__loading'>Getting Map Ready...</Typography>
+        )}
+      </Container>
 
-        {/* SEARCH BY CITY */}
-        <Grid item xs={7} className='explore-city'>
-          <Button onClick={() => searchArea()}>Search Area</Button>
-          <Item
+      {/* MAP FUNCTIONS BAR */}
+      <Stack className='explore__bar' direction='row'>
+        {/* <Typography>Explore</Typography> */}
+        <Button onClick={() => searchArea()}>Search Area</Button>
+        <Container sx={{ width: 300, height: 60 }}>
+          <Typography className='explore__filter-header' id='track-inverted-slider' gutterBottom>
+            Distance (miles)
+          </Typography>
+          <Slider
+            size='small'
+            defaultValue={searchRange}
+            aria-label='Small'
+            // valueLabelDisplay='on'
+            marks={[
+              {
+                value: 5,
+                label: '5',
+              },
+              {
+                value: 10,
+                label: '10',
+              },
+              {
+                value: 15,
+                label: '15',
+              },
+              {
+                value: 20,
+                label: '20',
+              },
+              {
+                value: 25,
+                label: '25',
+              },
+            ]}
+            min={5}
+            max={25}
+            step={null}
             sx={{
-              width: 300,
-              height: 60,
+              width: 250,
             }}
-          >
-            <FormControl>
-              <InputLabel htmlFor='input-with-icon-adornment'>Enter City</InputLabel>
-              <Input
-                id='input-with0-icon-adornment'
-                startAdornment={
-                  <InputAdornment position='start'>
-                    <PlaceIcon />
-                  </InputAdornment>
-                }
-              />
-            </FormControl>
-          </Item>
-        </Grid>
+            onChange={(e) => setSearchRange(e.target.value)}
+          />
+        </Container>
+      </Stack>
 
-        {/* RANGE FILTER */}
-        <Grid item xs={3} className='explore-distance'>
-          <Item
-            sx={{
-              width: 300,
-              height: 60,
-            }}
-          >
-            <Typography id='track-inverted-slider' gutterBottom>
-              Distance (miles)
-            </Typography>
-            <Slider
-              size='small'
-              defaultValue={searchRange}
-              aria-label='Small'
-              // valueLabelDisplay='on'
-              marks={[
-                {
-                  value: 5,
-                  label: '5',
-                },
-                {
-                  value: 10,
-                  label: '10',
-                },
-                {
-                  value: 15,
-                  label: '15',
-                },
-                {
-                  value: 20,
-                  label: '20',
-                },
-                {
-                  value: 25,
-                  label: '25',
-                },
-              ]}
-              min={5}
-              max={25}
-              step={null}
-              sx={{
-                width: 250,
-              }}
-              onChange={(e) => setSearchRange(e.target.value)}
-            />
-          </Item>
-        </Grid>
-
-        {/* FILTER DROPDOWN */}
-        <Grid item xs={2} className='explore-filter'>
-          <Item>
-            <InputLabel id='demo-simple-select-label'>Filter</InputLabel>
-            <Select
-              labelId='demo-simple-select-label'
-              id='demo-simple-select'
-              value={filter}
-              label='filter'
-              sx={{
-                height: 25,
-                width: 200,
-              }}
-              onChange={handleChange}
-            >
-              <MenuItem>Test1</MenuItem>
-              <MenuItem>Test2</MenuItem>
-              <MenuItem>Test3</MenuItem>
-            </Select>
-          </Item>
-        </Grid>
-
-        {/* POSTS SIDE PANEL CONTAINER */}
-        <Grid item xs={4} className='explore-post-container'>
-          {/* <Item className='explore-post'>Post Container</Item> */}
-          {/* map through posts render all posts */}
-          {posts.length > 0 ? (
-            posts.map((post, idx) => {
+      {/* POSTS CONTAINER */}
+      <Container
+        ref={explorePosts}
+        className='explore__posts'
+        maxWidth={false}
+        disableGutters={true}
+        sx={{ width: '30rem' }}
+      >
+        {posts.length > 0
+          ? posts.map((post, idx) => {
               return <Post key={idx} post={post} />;
             })
-          ) : (
-            <h1>No Posts to Display...</h1>
-          )}
-        </Grid>
-
-        {/* MAPBOX CONTAINER */}
-        <Grid item xs={8} className='explore-map-container'>
-          <Item className='explore-map'>
-            {/* wait for latitude and longitude are retrieved from the browser */}
-            {lng && lat ? (
-              <Mapbox
-                locationData={locationData}
-                lng={lng}
-                lat={lat}
-                setLng={setLng}
-                setLat={setLat}
-                searchArea={searchArea}
-                getPosts={getPosts}
-              />
-            ) : null}
-          </Item>
-        </Grid>
-      </Grid>
-      {/* </Box> */}
-    </>
+          : null}
+        <Button
+          className='explore__clear-posts'
+          onClick={() => {
+            setPosts([]);
+          }}
+        >
+          <CloseIcon fontSize='large' sx={{ color: '#1877F2' }} />
+        </Button>
+      </Container>
+    </Container>
   );
 }
 
