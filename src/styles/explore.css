@@ -1,7 +1,7 @@
 .explore {
   /* border: 1px solid red; */
   width: 100vw;
-  height: 54.5rem;
+  height: calc(100vh - 4rem);
   position: relative;
 }
 .mapbox {
@@ -35,7 +35,7 @@
 .explore__posts {
   /* border: 1px solid blue; */
   position: absolute;
-  height: 52.5rem;
+  height: calc(100vh - 6rem);
   width: 10rem;
   top: 1rem;
   left: -30rem;
