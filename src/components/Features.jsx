@@ -15,6 +15,7 @@ export default function Features() {
     backgroundColor: "#0e3b43",
     color: "#fff",
     borderRadius: theme.shape.innerBorderRadius,
+    fontFamily: theme.fontStyle.secondaryFont,
   };
 
   return (
@@ -28,7 +29,7 @@ export default function Features() {
           <Grid md={5}>
             <Paper elevation={8} style={featuresStyles}>
               <h3>Step 1: </h3>
-              <h3> Simply Sign Up</h3>
+              <p> Simply Sign Up</p>
             
             </Paper>
           </Grid>
@@ -36,26 +37,23 @@ export default function Features() {
             <Paper elevation={8} style={featuresStyles}>
               {" "}
               <h3>Step 2: </h3>
-              <h3>Find Friends, Find Hikes</h3>
+              <p>Find Friends, Find Hikes</p>
             </Paper>
           </Grid>
           <Grid md={5}>
             <Paper elevation={8} style={featuresStyles}>
               {" "}
               <h3>Step 3: </h3>
-              <h3>Go Hike!</h3>
-              <h3>
-                
-              </h3>
+              <p>Go Hike!</p>
             </Paper>
           </Grid>
           <Grid md={5}>
             <Paper elevation={8} style={featuresStyles}>
               {" "}
               <h3>Step 4:</h3>
-              <h3>
+              <p>
                 Tell us and your friends about your adventure!
-              </h3>
+              </p>
             </Paper>
           </Grid>
         </Grid>
