@@ -1,43 +1,56 @@
-.explore-post-container {
-  height: 67vh;
+.explore {
   /* border: 1px solid red; */
+  width: 100vw;
+  height: 54.5rem;
+  position: relative;
 }
-.explore-post {
-  /* border: 1px solid purple; */
-  height: 25vw;
-}
-.explore-map-container {
-  height: 67vh;
-  /* height:70vw; */
+.mapbox {
   /* border: 1px solid blue; */
-}
-.explore-map {
   width: 100%;
   height: 100%;
   position: relative;
-  /* border: 1px solid green; */
+
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
 }
-.explore-header {
+
+.mapbox__loading {
+}
+
+.explore__bar {
+  /* border: 1px solid red; */
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: white;
+  height: 6rem;
+}
+
+.explore__filter-header {
+  text-align: center;
+  /* border: 1px solid red; */
+}
+
+.explore__posts {
   /* border: 1px solid blue; */
-}
-.explore-city {
-  border: 1px solid purple;
-  display: flex;
-  justify-content: right;
-  align-items: center;
-}
-.explore-distance {
-  border: 1px solid red;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: right;
-  align-items: center;
+  position: absolute;
+  height: 52.5rem;
+  width: 10rem;
+  top: 1rem;
+  left: -30rem;
+  background-color: white;
+  /* transform: translateX(-110%); */
+  transition: all 0.5s ease-out;
 }
 
-.explore-filter {
-  border: 1px solid green;
-  display: flex;
-  justify-content: right;
-  align-items: center;
+.show-posts {
+  transform: translateX(31rem);
+}
+
+.explore__clear-posts {
+  position: absolute !important;
+  top: 0rem;
+  left: 26.6rem;
+  z-index: 1;
 }
