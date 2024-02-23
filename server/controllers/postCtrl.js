@@ -4,11 +4,22 @@ export default {
   createPost: async (req, res) => {
     console.log('create post router');
   },
-  getPosts: async (req, res) => {
-    console.log('== GetPosts Route ==');
+  getFollowingPosts: async (req, res) => {
+    console.log('== Get Following Posts Route ==');
+    console.log(req.session.userId);
     try {
-      // Get all posts
-      const posts = await Post.findAll({
+      const user = await User.findByPk(req.session.userId);
+      const friends = await user.getFriends();
+      console.log(friends);
+      const friendIds = friends.map((friend) => {
+        console.log(friend);
+        return friend.friendId;
+      });
+      console.log(friendIds);
+      const friendPosts = await Post.findAll({
+        where: {
+          userId: [...friendIds],
+        },
         include: [
           {
             model: User,
@@ -26,13 +37,13 @@ export default {
             ],
           },
         ],
+        order: [['created_at', 'DESC']],
       });
-
-      console.log(posts);
+      console.log(friendPosts);
 
       //   Send response
       res.status(200).send({
-        posts: posts,
+        posts: friendPosts,
       });
     } catch (error) {
       console.log(error);
@@ -64,6 +75,7 @@ export default {
             ],
           },
         ],
+        order: [['created_at', 'DESC']],
       });
 
       // send the response containing all posts

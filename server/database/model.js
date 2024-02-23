@@ -208,6 +208,12 @@ Friends.init(
       autoIncrement: true,
       primaryKey: true,
     },
+    userId: {
+      type: DataTypes.INTEGER,
+    },
+    friendId: {
+      type: DataTypes.INTEGER,
+    },
   },
   {
     modelName: 'friends',
@@ -248,4 +254,4 @@ Comment.belongsTo(Post, { foreignKey: 'postId' });
 User.hasMany(Comment, { foreignKey: 'userId' });
 Comment.belongsTo(User, { foreignKey: 'userId' });
 
-export { db, User, Post, Notification, Reaction, Comment };
+export { db, User, Post, Notification, Reaction, Comment, Friends };
