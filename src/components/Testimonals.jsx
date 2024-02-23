@@ -11,11 +11,20 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import '../styles/testimonials.css';
 import { useTheme } from "@mui/material/styles";
 
+
 function Testimonials() {
   const theme = useTheme();
+
   const testimonialCard = {
     backgroundColor: theme.palette.quadratiary.light,
   };
+
+  const testimonialHeading = {
+    fontFamily: theme.fontStyle.primaryFont,
+  }
+  const testimonialText = {
+    fontFamily: theme.fontStyle.secondaryFont,
+  }
 
     useEffect(() => {
       // inits
@@ -173,8 +182,8 @@ function Testimonials() {
   
     return (
       <div className='testimonials'>
-        <h1 className='section__header'>
-          What Others Say About <span>TrailTribe</span>
+        <h1 className='section__header' style={testimonialHeading}>
+          What Others Say About TrailTribe
         </h1>
         <div className='carousel'>
           {/* SLIDES */}
@@ -191,10 +200,10 @@ function Testimonials() {
                 alt="pine trees"
             />
             <CardContent>
-                <Typography className="testimonal-name" variant="h4">
+                <Typography className="testimonal-name" variant="h4" style={testimonialText}>
                 Evan
                 </Typography>
-                <Typography variant="body2" className="testimonial-text">
+                <Typography variant="body2" className="testimonial-text" style={testimonialText}>
                 "Joining this hiking community has been life-changing! I've met
                 incredible people who share my passion for the great outdoors.
                 From breathtaking trails to unforgettable camping trips, every
@@ -205,7 +214,7 @@ function Testimonials() {
         </Card>
 
         <Card sx={{ maxWidth: 325 }} className="testimonal-card" style={testimonialCard}>
-            <CardActionArea>
+            <CardActionArea >
             <CardMedia 
                 className="testimonal-image"
                 component="img"
@@ -214,10 +223,10 @@ function Testimonials() {
                 alt="pine trees"
             />
             <CardContent>
-                <Typography className="testimonal-name" variant="h4">
+                <Typography className="testimonal-name" variant="h4" style={testimonialText}>
                 Dan 
                 </Typography>
-                <Typography variant="body2" className="testimonial-text">
+                <Typography variant="body2" className="testimonial-text" style={testimonialText}>
                 "As a solo hiker, I was hesitant to explore new trails alone. But
                 after joining this hiking group, I've found companionship and
                 support on every journey. It's not just about the destination;
@@ -228,18 +237,19 @@ function Testimonials() {
         </Card>
 
         <Card sx={{ maxWidth: 325 }} className="testimonal-card" style={testimonialCard}>
-            <CardActionArea>
+            <CardActionArea >
             <CardMedia
                 className="testimonal-image"
                 component="img"
                 image="public/testimonials-one.jpeg"
                 alt="pine trees"
+                
             />
             <CardContent>
-                <Typography className="testimonal-name" variant="h4">
+                <Typography className="testimonal-name" variant="h4" style={testimonialText}>
                 Danny 
                 </Typography>
-                <Typography variant="body2" className="testimonial-text" >
+                <Typography variant="body2" className="testimonial-text" style={testimonialText}>
                 "Being part of this hiking community has reignited my love for
                 nature. Whether it's summiting a mountain peak at sunrise or
                 discovering hidden waterfalls, every outing leaves me feeling
@@ -260,10 +270,10 @@ function Testimonials() {
                 alt="pine trees"
             />
             <CardContent>
-                <Typography className="testimonal-name" variant="h4">
+                <Typography className="testimonal-name" variant="h4" style={testimonialText}>
                 Brittany
                 </Typography>
-                <Typography variant="body2" className="testimonial-text">
+                <Typography variant="body2" className="testimonial-text" style={testimonialText}>
                 "Joining this hiking community has opened up a whole new world of
                 possibilities for me. From epic multi-day treks to leisurely
                 nature walks, there's always something exciting happening on the
@@ -282,10 +292,10 @@ function Testimonials() {
                 alt="pine trees"
             />
             <CardContent>
-                <Typography className="testimonal-name" variant="h4">
+                <Typography className="testimonal-name" variant="h4" style={testimonialText}>
                 Jake 
                 </Typography>
-                <Typography variant="body2" className="testimonial-text">
+                <Typography variant="body2" className="testimonial-text" style={testimonialText}>
                 "I've always been drawn to the tranquility of the wilderness, but
                 it wasn't until I joined this hiking group that I truly found my
                 tribe. Together, we've conquered challenging trails, shared
@@ -305,10 +315,10 @@ function Testimonials() {
                 alt="pine trees"
             />
             <CardContent>
-                <Typography className="testimonal-name" variant="h4">
+                <Typography className="testimonal-name" variant="h4" style={testimonialText}>
                 Cody 
                 </Typography>
-                <Typography variant="body2" className="testimonial-text">
+                <Typography variant="body2" className="testimonial-text" style={testimonialText}>
                 "This hiking community isn't just about exploring nature; it's
                 about fostering a sense of belonging and camaraderie. Whether
                 you're a seasoned hiker or just starting out, you'll find

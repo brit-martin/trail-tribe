@@ -48,6 +48,10 @@ const theme = createTheme({
         outerBorderRadius: '12px',
         innerBorderRadius: '4px'
     },
+    fontStyle: {
+        primaryFont: "Permanent Marker, cursive",
+        secondaryFont: "Montserrat, sans-serif",
+    }
 });
 
 const primHoverSX = {
