@@ -135,12 +135,12 @@ function Post(props) {
       <Container className='post__top' disableGutters={true}>
 
         {/* == GRAPHICS == */}
-        <Stack className='post__graphics' disableGutters={true} spacing={0.5}>
+        {/* <Stack className='post__graphics' disableGutters={true} spacing={0.5}>
           <Container className='post__pictures' maxWidth='false' disableGutters={true}>
             <img src='https://picsum.photos/600/200'></img>
           </Container>
           <Container className='post__map'>Map</Container>
-        </Stack>
+        </Stack> */}
 
         {/* == CONTENT == */}
         <Container className='post__content' disableGutters={true}>
@@ -238,11 +238,17 @@ function Post(props) {
         {/* COMMENTS */}
       </Container>
       <Container className='post__comments' disableGutters={true}>
-        <Carousel>
+      <Carousel navButtonsAlwaysVisible={true}>
           {props.post.comments.length > 0 ? (
-            props.post.comments.map((comment, idx) => {
-              return <Comment key={idx} comment={comment} />;
-            })
+            <>
+              {props.post.comments.map((comment, idx) => {
+                return (
+                  <div onClick={handleOpenModal}>
+                    <Comment key={idx} comment={comment} />
+                  </div>
+                );
+              })}
+            </>
           ) : (
             <div>
               <Paper onClick={handleOpenModal} elevation={12} sx={paperStyles}>
