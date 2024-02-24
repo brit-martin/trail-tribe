@@ -14,8 +14,12 @@ import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Post from './Post.jsx';
+import  Modal  from '@mui/material/Modal';
+import  Box  from '@mui/material/Box';
+import { useTheme } from '@mui/material';
 
 function Newsfeed() {
+  const theme = useTheme();
   // Inits
   const [posts, setPosts] = useState([]);
   const reduxUser = useSelector((state) => state.userReducer);

@@ -11,12 +11,12 @@
 }
 
 .newsfeed__main {
-  border: 1px solid blue;
+  border: 1px solid cyan;
   display: flex;
 }
 
 .newsfeed__posts {
-  border: 1px solid blue;
+  border: 1px solid orange;
   width: 100%;
   display: flex !important;
   flex-direction: column;

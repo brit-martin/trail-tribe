@@ -7,8 +7,11 @@ import axios from "axios";
 import { useTheme } from "@mui/material/styles";
 import { useSelector, useDispatch } from "react-redux";
 
+
 function Comment({ comment }) {
   const theme = useTheme();
+
+  
   const containerStyles = {
     border: "1px solid red",
     display: "flex",
@@ -26,12 +29,15 @@ function Comment({ comment }) {
     padding: "20px 10px",
     backgroundColor: theme.palette.tertiary.light,
     maxWidth: '700px',
-    minWidth: '450px',
+    minWidth: '250px',
   };
 
   const reduxUser = useSelector((state) => state.userReducer);
+  
+  
 
   console.log(comment);
+  
 
   return (
     <Container sx={containerStyles}>

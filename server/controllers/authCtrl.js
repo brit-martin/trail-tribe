@@ -64,7 +64,11 @@ export default {
     const user = await User.findByPk(userId);
     user.set({ fname, lname, email, bio });
     await user.save();
-    res.status(200).send('User info updated');
+    req.session.email = user.email;
+    req.session.fname = user.fname;
+    req.session.lname = user.lname;
+    req.session.userId = user.id;
+    res.status(200).send("User info updated");
   },
   checkLoginStatus: async (req, res) => {
     console.log('== check login status route ===');

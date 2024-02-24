@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import FormGroup from "@mui/material/FormGroup";
@@ -83,6 +83,25 @@ export default function EditInfo() {
   const theme = useTheme();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  function sessionCheck() {
+    axios.get('/checkLoginStatus')
+      .then((response) => {
+        console.log(response.data.user);
+        dispatch({ type: "SET_USER", payload: response.data.user });
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.data.reRoute) {
+          navigate(error.response.data.reRoute);
+        }
+      });
+  }
+
+  useEffect(() => {
+    sessionCheck();
+  },[])
+
 
   const modalStyle = {
     position: "absolute",
@@ -172,6 +191,7 @@ export default function EditInfo() {
     setOpenDeleteModal(true);
   }
 
+  const reduxUser = useSelector((state) => state.userReducer);
   function handleCloseDeleteModal() {
     setOpenDeleteModal(false);
   }
@@ -325,6 +345,7 @@ export default function EditInfo() {
       lname: editLName ?? reduxUser.lname,
       email: editEmail ?? reduxUser.email,
       bio: editBio ?? reduxUser.bio,
+      id: reduxUser.id,
     }
     try{
       axios.put('/edit-user', editMaBod);
@@ -346,7 +367,8 @@ export default function EditInfo() {
       setEditLName(null);
       setEditEmail(null);
       setEditBio(null);
-      setEditOn(false);
+      setEditOn(editOn ? false : true);
+      setVerified(false);
       dispatch({type: "SET_USER", payload: editMaBod});
 
     } catch (error) {
@@ -354,7 +376,6 @@ export default function EditInfo() {
     }
   }
 
-  const reduxUser = useSelector((state) => state.userReducer);
   console.log(reduxUser);
   return (
     <>

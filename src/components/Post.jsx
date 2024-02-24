@@ -6,29 +6,36 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 // components
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Comment from './Comment.jsx';
+
+// import Container from "@mui/material/Container";
+import { Typography, Container } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Comment from "./Comment.jsx";
+import Carousel from "react-material-ui-carousel";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import { useTheme } from "@mui/material/styles";
+import { Paper,TextField } from "@mui/material";
 // Icons
-import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import PetsIcon from '@mui/icons-material/Pets';
-import CelebrationIcon from '@mui/icons-material/Celebration';
-import ParkIcon from '@mui/icons-material/Park';
-import StarIcon from '@mui/icons-material/Star';
-import HikingIcon from '@mui/icons-material/Hiking';
-import Carousel from 'react-material-ui-carousel';
+import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import PetsIcon from "@mui/icons-material/Pets";
+import CelebrationIcon from "@mui/icons-material/Celebration";
+import ParkIcon from "@mui/icons-material/Park";
+import StarIcon from "@mui/icons-material/Star";
+import HikingIcon from "@mui/icons-material/Hiking";
+
 
 function Post(props) {
+  const theme = useTheme();
   // inits
   // const postData = props.post;
   const [postData, setPostData] = useState(props.post);
-  const [comments, setComments] = useState([]);
-  console.log(postData);
+  const [openModal, setOpenModal] = useState(false);
+
 
   const reduxUser = useSelector((state) => state.userReducer);
 
@@ -53,6 +60,63 @@ function Post(props) {
       });
   };
 
+  const paperStyles = {
+    borderRadius: theme.shape.innerBorderRadius,
+    padding: "20px 10px",
+    backgroundColor: theme.palette.tertiary.light,
+    maxWidth: "700px",
+    minWidth: "250px",
+  };
+
+  const modalStyle = {
+    position: "absolute !important",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "secondary.main",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+    borderRadius: theme.shape.outerBorderRadius,
+  };
+
+  const buttonStyle = {
+    position: "absolute !important",
+    top: 0,
+    right: "-10px",
+    color: `${theme.palette.primary.main} !important`,
+  };
+
+  const commentHeading = {
+    borderBottom: "1px solid black",
+    marginBottom: "10px",
+  }
+
+  const commentFooter = {
+    marginTop: "20px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  }
+
+  const commentBody = {
+    height: 200,
+    overflowY: "scroll",
+    scrollbars: "auto",
+    // change scrollbar style to match theme
+
+  }
+
+  function handleOpenModal() {
+    setOpenModal(true);
+  }
+
+  function handleCloseModal() {
+    setOpenModal(false);
+  }
+
+
   const submitUnfollowUser = () => {
     axios
       .delete(`/unfollow/${postData.userId}`)
@@ -64,6 +128,7 @@ function Post(props) {
         console.log(error);
       });
   };
+
 
   return (
     <Stack className='post' disableGutters={true} spacing={2}>
@@ -179,9 +244,58 @@ function Post(props) {
               return <Comment key={idx} comment={comment} />;
             })
           ) : (
-            <div>Add a comment!</div>
+            <div>
+              <Paper onClick={handleOpenModal} elevation={12} sx={paperStyles}>
+                Add a comment!
+              </Paper>
+            </div>
           )}
         </Carousel>
+        <Modal
+          open={openModal}
+          onClose={handleCloseModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={modalStyle}>
+            <Box>
+            <Button sx={buttonStyle} onClick={handleCloseModal}>
+              X
+            </Button>
+            </Box>
+            <Box sx={commentHeading}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Add a comment!
+            </Typography>
+            </Box>
+            <Box sx={commentBody}>
+              {props.post.comments.map((comment, idx) => {
+                return (
+                  <div>
+                    <Paper elevation={6} sx={paperStyles}>
+                      <h4>
+                        {comment.user.fname} {comment.user.lname}
+                      </h4>
+                      <Typography>{comment.text}</Typography>
+                    </Paper>
+                  </div>
+                );
+              })}
+            </Box>
+            <Box sx={commentFooter}>
+              <TextField
+              sx={{ width: "100%"}}
+              id="outlined-multiline-static"
+              label="Make a Comment!"
+              focused
+              multiline
+              rows={2}
+
+              />
+              <Button >Add Comment!</Button>
+            </Box>
+          </Box>
+        </Modal>
       </Container>
     </Stack>
   );
