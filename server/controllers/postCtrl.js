@@ -4,11 +4,22 @@ export default {
   createPost: async (req, res) => {
     console.log('create post router');
   },
-  getPosts: async (req, res) => {
-    console.log('== GetPosts Route ==');
+  getFollowingPosts: async (req, res) => {
+    console.log('== Get Following Posts Route ==');
+    console.log(req.session.userId);
     try {
-      // Get all posts
-      const posts = await Post.findAll({
+      const user = await User.findByPk(req.session.userId);
+      const friends = await user.getFriends();
+      console.log(friends);
+      const friendIds = friends.map((friend) => {
+        console.log(friend);
+        return friend.friendId;
+      });
+      console.log(friendIds);
+      const friendPosts = await Post.findAll({
+        where: {
+          userId: [...friendIds],
+        },
         include: [
           {
             model: User,
@@ -26,11 +37,48 @@ export default {
             ],
           },
         ],
+        order: [['created_at', 'DESC']],
+      });
+      console.log(friendPosts);
+
+      //   Send response
+      res.status(200).send({
+        posts: friendPosts,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  getPostsByTrailId: async (req, res) => {
+    console.log('=== get posts by trail ID ===');
+    console.log(req.params.trailId);
+    try {
+      // get all posts that match the trailId provided
+      const posts = await Post.findAll({
+        where: {
+          trailId: req.params.trailId,
+        },
+        include: [
+          {
+            model: User,
+            //   attributes: ['name', 'street', 'city', 'state', 'zipcode'],
+          },
+          {
+            model: Reaction,
+          },
+          {
+            model: Comment,
+            include: [
+              {
+                model: User,
+              },
+            ],
+          },
+        ],
+        order: [['created_at', 'DESC']],
       });
 
-      console.log(posts);
-      
-      //   Send response
+      // send the response containing all posts
       res.status(200).send({
         posts: posts,
       });

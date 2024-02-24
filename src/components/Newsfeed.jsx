@@ -24,14 +24,17 @@ function Newsfeed() {
   const [posts, setPosts] = useState([]);
   const reduxUser = useSelector((state) => state.userReducer);
   const navigate = useNavigate();
+
   console.log(reduxUser);
+  console.log(posts);
+
   useEffect(() => {
     axios
       // Check login status
       .get('/checkLoginStatus')
       .then((response) => {
         console.log(response.data);
-        return axios.get('/posts');
+        return axios.get('/getFollowingPosts');
       })
       // get all posts
       .then((response) => {
@@ -46,6 +49,11 @@ function Newsfeed() {
         }
       });
   }, []);
+
+  // reset posts to empty, forcing a new axios call after an unfollow
+  const unfollowUpdate = () => {
+    setPosts([]);
+  };
 
   return (
     <Stack className='newsfeed' maxWidth='false'>
@@ -62,8 +70,7 @@ function Newsfeed() {
           {/* map through posts render all posts */}
           {posts.length > 0 ? (
             posts.map((post, idx) => {
-              return <Post key={idx} post={post} />
-              
+              return <Post key={idx} post={post} unfollowUpdate={unfollowUpdate} />;
             })
           ) : (
             <h1>No Posts to Display...</h1>

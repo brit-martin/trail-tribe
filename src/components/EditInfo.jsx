@@ -23,6 +23,7 @@ import IconButton from "@mui/material/IconButton";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import Swal from 'sweetalert2'
 
 const EditSwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -100,6 +101,7 @@ export default function EditInfo() {
   useEffect(() => {
     sessionCheck();
   },[])
+
 
   const modalStyle = {
     position: "absolute",
@@ -202,15 +204,48 @@ export default function EditInfo() {
     try {
       const res = await axios.put("/delete-user", deleteMaBod);
       console.log(res);
-
+//--TODO--------------------------------
       if (res.status === 200) {
-        dispatch({ type: "RESET_USER" });
-        navigate("/");
-        alert("Account deleted");
+        Swal.fire({
+
+          title: "Are you sure you want to delete your account?",
+          icon: "question",
+          color: "white",
+          showCancelButton: true,
+          // confirmButtonColor: "#BACDCD",
+          // cancelButtonColor: "#cd5c5c",
+          confirmButtonText: "Delete",
+          iconColor: "#DCE0D9",
+          background: theme.palette.tertiary.main,
+          // borderRadius: theme.shape.outerBorderRadius,
+          color: white
+        })
+          .then((result) => {
+          if (result.isConfirmed) {
+            dispatch({ type: "RESET_USER" });
+            navigate("/");
+          }
+        });
+        // alert("Account deleted");
       }
+//----------------------------------
     } catch (err) {
       if (err.response.status === 400) {
-        alert("Incorrect password");
+       
+        Swal.fire({
+          customClass: {
+            container: 'my-swal',
+            popup: 'popup__class'
+          },
+          icon: "error",
+          iconColor: "#FF4b1f",
+          title: "Oops...",
+          text: "Incorrect password",
+          confirmButtonColor: "#FF4b1f",
+          background: theme.palette.tertiary.light,
+          // borderRadius: theme.shape.outerBorderRadius,
+          color: "white"
+        })
       } else {
         console.error("Error during delete request:", err.response.status);
       }
@@ -230,7 +265,23 @@ export default function EditInfo() {
       // setOldPassword("");
     } catch (error) {
       if (error.response.status === 400) {
-        alert("Incorrect password");
+
+        Swal.fire({
+          customClass: {
+                 container: 'my-swal',
+                 popup: 'popup__class'
+            },
+          icon: "error",
+          iconColor: "#FF4b1f",
+          title: "Oops...",
+          text: "Incorrect password",
+          confirmButtonColor: "#FF4b1f",
+          background: theme.palette.tertiary.light,
+          // borderRadius: theme.shape.outerBorderRadius,
+          color: "white"
+         
+        })
+
       } else {
         console.error(
           "Error during old password request:",
@@ -250,7 +301,21 @@ export default function EditInfo() {
       cPassword: confirmPassword,
     };
     if (newPassword !== confirmPassword) {
-      alert("Passwords do not match");
+      
+      Swal.fire({
+        customClass: {
+          container: 'my-swal',
+          popup: 'popup__class'
+        },
+        icon: "error",
+        iconColor: "#FF4b1f",
+        title: "Oops...",
+        text: "Passwords don't match",
+        confirmButtonColor: "#FF4b1f",
+        background: theme.palette.tertiary.light,
+        // borderRadius: theme.shape.outerBorderRadius,
+        color: "white",
+      })
     }
 
     try {
@@ -284,7 +349,20 @@ export default function EditInfo() {
     }
     try{
       axios.put('/edit-user', editMaBod);
-      alert("User info updated");
+     
+     Swal.fire({
+      customClass: {
+        container: 'my-swal',
+        popup: 'popup__class'
+      },
+      title: "User info updated!",
+      confirmButtonColor: "#FF4b1f",
+      background: theme.palette.tertiary.light,
+      // borderRadius: theme.shape.outerBorderRadius,
+      color: "white",
+
+     });
+
       setEditFName(null);
       setEditLName(null);
       setEditEmail(null);
