@@ -130,6 +130,14 @@ function Explore() {
     setFilter(event.target.value);
   };
 
+  const follow = () => {
+    console.log('follow function');
+  };
+
+  const createPost = (markerId) => {
+    console.log('createPost function');
+  };
+
   return (
     <Container className='explore' maxWidth={false} disableGutters={true}>
       {/* MAPBOX CONTAINER */}
@@ -144,6 +152,7 @@ function Explore() {
             setLat={setLat}
             searchArea={searchArea}
             getPosts={getPosts}
+            createPost={createPost}
           />
         ) : (
           <Typography className='mapbox__loading'>Getting Map Ready...</Typography>
@@ -206,7 +215,7 @@ function Explore() {
       >
         {posts.length > 0
           ? posts.map((post, idx) => {
-              return <Post key={idx} post={post} />;
+              return <Post key={idx} post={post} page='explore' friendBtn={follow} />;
             })
           : null}
         <Button

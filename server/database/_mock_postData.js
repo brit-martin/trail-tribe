@@ -12,7 +12,7 @@ const postData = [
   {
     id: 2,
     hikeName: 'Almost Died',
-    trailId: 'trail_id',
+    trailId: '850607924',
     description: "I was attacked by a wild mongoose. Scariest 18 seconds of my life. wouldn't recommend.",
     pictureArray: ['placeholder_blob', 'placeholder_blob', 'placeholder_blob'],
     userId: 2,
@@ -22,7 +22,7 @@ const postData = [
   {
     id: 3,
     hikeName: 'Snowy at the top',
-    trailId: 'trail_id',
+    trailId: '850607924',
     description:
       'There was still snow at the top, making the steep part 3/4 of the way up pretty difficult. bring spikes!',
     pictureArray: ['placeholder_blob', 'placeholder_blob', 'placeholder_blob'],

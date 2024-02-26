@@ -49,7 +49,7 @@ app.post('/createReaction', loginRequired, createReaction);
 
 // friends
 const { follow, unfollow } = friendsCtrl;
-app.post('/follow', loginRequired, follow);
+app.post('/follow/:friendId', loginRequired, follow);
 app.delete('/unfollow/:friendId', loginRequired, unfollow);
 
 // comments

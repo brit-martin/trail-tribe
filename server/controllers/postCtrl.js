@@ -37,7 +37,8 @@ export default {
             ],
           },
         ],
-        order: [['created_at', 'DESC']],
+        // order: [['created_at', 'DESC']],
+        order: [['created_at', 'ASC']],
       });
       console.log(friendPosts);
 
