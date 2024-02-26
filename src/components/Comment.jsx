@@ -8,46 +8,41 @@ import { useTheme } from "@mui/material/styles";
 import { useSelector, useDispatch } from "react-redux";
 
 
-function Comment({ comment }) {
+function Comment({ comment, onClick }) {
   const theme = useTheme();
 
   
-  const containerStyles = {
-    border: "1px solid red",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    padding: "20px 10px",
-    backgroundColor: theme.palette.white.main,
-    borderRadius: theme.shape.innerBorderRadius,
-    boxShadow:
-      "inset -5px 0 10px lightgray, inset 0 -5px 10px gray, inset 5px 0 10px lightgray",
-  };
+  
 
   const paperStyles = {
     borderRadius: theme.shape.innerBorderRadius,
     padding: "20px 10px",
     backgroundColor: theme.palette.tertiary.light,
-    maxWidth: '700px',
-    minWidth: '250px',
+    width: '320px',
+    overflow: 'hidden',
+    "&:hover": {
+      cursor: "pointer",
+    }
   };
 
   const reduxUser = useSelector((state) => state.userReducer);
   
-  
+  const commentHover = {
+    '&:hover': {
+      cursor: "pointer",
+    }
+  }
 
   console.log(comment);
   
 
   return (
-    <Container sx={containerStyles}>
-        <Paper elevation={12} sx={paperStyles}>
+        <Paper onClick={onClick}  elevation={12} sx={paperStyles}>
           <h4>
             {comment.user.fname} {comment.user.lname}
           </h4>
           <Typography>{comment.text}</Typography>
         </Paper>
-    </Container>
   );
 }
 

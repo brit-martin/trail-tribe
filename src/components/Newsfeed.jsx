@@ -34,6 +34,7 @@ function Newsfeed() {
   const theme = useTheme();
   // Inits
   const [posts, setPosts] = useState([]);
+  const [count, setCount] = useState(0);
   const reduxUser = useSelector((state) => state.userReducer);
   const reduxPosts = useSelector((state) => state.postsReducer);
   const navigate = useNavigate();
@@ -73,7 +74,8 @@ function Newsfeed() {
           navigate(error.response.data.reRoute);
         }
       });
-  }, [reduxPosts]);
+  }, [count, reduxPosts]);
+
 
   const seeInfo = (userId) => {
     console.log('== seeInfo ==');
@@ -158,16 +160,7 @@ function Newsfeed() {
           {/* map through posts render all posts */}
           {posts.length > 0 ? (
             posts.map((post, idx) => {
-              return (
-                <Post
-                  key={idx}
-                  post={post}
-                  page='newsfeed'
-                  friendBtn={unfollow}
-                  setPosts={setPosts}
-                  submitSeeInfo={seeInfo}
-                />
-              );
+              return <Post count={count} setCount={setCount} key={idx} post={post} page='newsfeed' friendBtn={unfollow} setPosts={setPosts} submitSeeInfo={seeInfo} />;
             })
           ) : (
             <h1>No Posts to Display...</h1>
