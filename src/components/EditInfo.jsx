@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+// redux
+import { useSelector, useDispatch } from "react-redux";
+// MUI components
 import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import "../styles/EditInfo.css";
 import { Button } from "@mui/material";
 import { primHoverSX, secHoverSX, terHoverSX } from "./Theme";
 import { TextField } from "@mui/material";
@@ -20,10 +20,13 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import Swal from 'sweetalert2'
+// create endpoints
+import axios from "axios";
+// Alerts
+import Swal from "sweetalert2";
+// CSS
+import "../styles/EditInfo.css";
 
 const EditSwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -83,9 +86,28 @@ export default function EditInfo() {
   const theme = useTheme();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const reduxUser = useSelector((state) => state.userReducer);
+
+  // state variables
+  const [editOn, setEditOn] = useState(false);
+  const [editFName, setEditFName] = useState(null);
+  const [editLName, setEditLName] = useState(null);
+  const [editEmail, setEditEmail] = useState(null);
+  const [editBio, setEditBio] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+  const [verified, setVerified] = useState(false);
+  const [oldPassword, setOldPassword] = useState("");
+  const [oldPasswordShow, setOldPasswordShow] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [newPasswordShow, setNewPasswordShow] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmPasswordShow, setConfirmPasswordShow] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [deletePassword, setDeletePassword] = useState("");
 
   function sessionCheck() {
-    axios.get('/checkLoginStatus')
+    axios
+      .get("/checkLoginStatus")
       .then((response) => {
         console.log(response.data.user);
         dispatch({ type: "SET_USER", payload: response.data.user });
@@ -100,9 +122,9 @@ export default function EditInfo() {
 
   useEffect(() => {
     sessionCheck();
-  },[])
+  }, []);
 
-
+  // MUI Styles
   const modalStyle = {
     position: "absolute",
     top: "50%",
@@ -121,7 +143,7 @@ export default function EditInfo() {
     flexDirection: "column",
     justifyContent: "space-between",
   };
-  
+
   const boxStyle = {
     border: "1px solid aqua",
     width: "100%",
@@ -152,22 +174,6 @@ export default function EditInfo() {
     fontWeight: 600,
   };
 
-  const [editOn, setEditOn] = useState(false);
-  const [editFName, setEditFName] = useState(null);
-  const [editLName, setEditLName] = useState(null);
-  const [editEmail, setEditEmail] = useState(null);
-  const [editBio, setEditBio] = useState(null);
-  const [openModal, setOpenModal] = useState(false);
-  const [verified, setVerified] = useState(false);
-  const [oldPassword, setOldPassword] = useState("");
-  const [oldPasswordShow, setOldPasswordShow] = useState(false);
-  const [newPassword, setNewPassword] = useState("");
-  const [newPasswordShow, setNewPasswordShow] = useState(false);
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [confirmPasswordShow, setConfirmPasswordShow] = useState(false);
-  const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const [deletePassword, setDeletePassword] = useState("");
-
   function handleClickShowOldPassword() {
     setOldPasswordShow(!oldPasswordShow);
   }
@@ -193,18 +199,15 @@ export default function EditInfo() {
     setOpenDeleteModal(true);
   }
 
-  const reduxUser = useSelector((state) => state.userReducer);
   function handleCloseDeleteModal() {
     setOpenDeleteModal(false);
   }
 
-  //--TODO--------------------------------it still deletes user from database!
   async function deleteUserHandler() {
-
     const { isConfirmed } = await Swal.fire({
       customClass: {
-        container: 'my-swal',
-        popup: 'popup__class'
+        container: "my-swal",
+        popup: "popup__class",
       },
       title: "Are you sure you want to delete your account?",
       icon: "question",
@@ -213,18 +216,18 @@ export default function EditInfo() {
       iconColor: "#FF4b1f",
       confirmButtonColor: "#FF4b1f",
       background: theme.palette.tertiary.main,
-      color: "white"
+      color: "white",
     });
-  
+
     if (isConfirmed) {
       let deleteMaBod = {
         password: deletePassword,
       };
-  
+
       try {
         const res = await axios.put("/delete-user", deleteMaBod);
         console.log(res);
-  
+
         Swal.fire({
           title: "Account Deleted!",
           background: theme.palette.tertiary.main,
@@ -235,31 +238,31 @@ export default function EditInfo() {
           showConfirmButton: false,
           color: "white",
         });
-  
+
         dispatch({ type: "RESET_USER" });
         navigate("/");
       } catch (err) {
-        if(err.response.status === 400){
+        if (err.response.status === 400) {
           Swal.fire({
-                    customClass: {
-                        container: 'my-swal',
-                        popup: 'popup__class'
-                    },
-                    icon: "error",
-                    iconColor: "#FF4b1f",
-                    title: "Oops...",
-                    text: "Passwords do not match",
-                    confirmButtonColor: "#FF4b1f",
-                    background: theme.palette.tertiary.light,
-                    color: "white"
-                });
+            customClass: {
+              container: "my-swal",
+              popup: "popup__class",
+            },
+            icon: "error",
+            iconColor: "#FF4b1f",
+            title: "Oops...",
+            text: "Passwords do not match",
+            confirmButtonColor: "#FF4b1f",
+            background: theme.palette.tertiary.light,
+            color: "white",
+          });
         } else {
           console.error("Error during edit request:", err);
         }
       }
     }
   }
-  
+
   async function oldPasswordHandler() {
     let oldMaBod = {
       password: oldPassword,
@@ -268,17 +271,13 @@ export default function EditInfo() {
     try {
       const res = await axios.post("/old-password", oldMaBod);
       setVerified(true);
-      // setNewPassword("");
-      // setConfirmPassword("");
-      // setOldPassword("");
     } catch (error) {
       if (error.response.status === 400) {
-
         Swal.fire({
           customClass: {
-                 container: 'my-swal',
-                 popup: 'popup__class'
-            },
+            container: "my-swal",
+            popup: "popup__class",
+          },
           icon: "error",
           iconColor: "#FF4b1f",
           title: "Oops...",
@@ -286,10 +285,8 @@ export default function EditInfo() {
           confirmButtonColor: "#FF4b1f",
           background: theme.palette.tertiary.light,
           // borderRadius: theme.shape.outerBorderRadius,
-          color: "white"
-         
-        })
-
+          color: "white",
+        });
       } else {
         console.error(
           "Error during old password request:",
@@ -300,7 +297,6 @@ export default function EditInfo() {
     setNewPassword("");
     setConfirmPassword("");
     setOldPassword("");
-
   }
 
   async function changePasswordHandler() {
@@ -309,11 +305,10 @@ export default function EditInfo() {
       cPassword: confirmPassword,
     };
     if (newPassword !== confirmPassword) {
-      
       Swal.fire({
         customClass: {
-          container: 'my-swal',
-          popup: 'popup__class'
+          container: "my-swal",
+          popup: "popup__class",
         },
         icon: "error",
         iconColor: "#FF4b1f",
@@ -321,24 +316,23 @@ export default function EditInfo() {
         text: "Passwords don't match",
         confirmButtonColor: "#FF4b1f",
         background: theme.palette.tertiary.light,
-        // borderRadius: theme.shape.outerBorderRadius,
         color: "white",
-      })
+      });
     }
 
     try {
       const res = await axios.put("/change-password", changeMaBod);
       Swal.fire({
         customClass: {
-          container: 'my-swal',
-          popup: 'popup__class'
+          container: "my-swal",
+          popup: "popup__class",
         },
         title: "Password changed!",
         confirmButtonColor: "#FF4b1f",
         background: theme.palette.tertiary.light,
         // borderRadius: theme.shape.outerBorderRadius,
         color: "white",
-       });
+      });
       setVerified(false);
       setOpenModal(false);
     } catch (error) {
@@ -354,10 +348,9 @@ export default function EditInfo() {
     //   setEditBio(reduxUser.bio);
 
     // }
-    if(editEmail !== reduxUser.email){
+    if (editEmail !== reduxUser.email) {
       // confirm("Are you sure you want to change your email?")
-
-      //------------ if we have enough time get this working where user has to input there password inorder to reset the email. 
+      //------------ if we have enough time get this working where user has to input there password inorder to reset the email.
       // Swal.fire({
       //   title: "Are you sure you want to change your email?",
       //   icon: "question",
@@ -369,7 +362,6 @@ export default function EditInfo() {
       //   iconColor: "#FF4b1f",
       //   background: theme.palette.tertiary.light,
       // })
-   
     }
 
     const editMaBod = {
@@ -378,22 +370,21 @@ export default function EditInfo() {
       email: editEmail ?? reduxUser.email,
       bio: editBio ?? reduxUser.bio,
       id: reduxUser.id,
-    }
-    try{
-      axios.put('/edit-user', editMaBod);
-     
-     Swal.fire({
-      customClass: {
-        container: 'my-swal',
-        popup: 'popup__class'
-      },
-      title: "User info updated!",
-      confirmButtonColor: "#FF4b1f",
-      background: theme.palette.tertiary.light,
-      // borderRadius: theme.shape.outerBorderRadius,
-      color: "white",
+    };
+    try {
+      axios.put("/edit-user", editMaBod);
 
-     });
+      Swal.fire({
+        customClass: {
+          container: "my-swal",
+          popup: "popup__class",
+        },
+        title: "User info updated!",
+        confirmButtonColor: "#FF4b1f",
+        background: theme.palette.tertiary.light,
+        // borderRadius: theme.shape.outerBorderRadius,
+        color: "white",
+      });
 
       setEditFName(null);
       setEditLName(null);
@@ -401,14 +392,12 @@ export default function EditInfo() {
       setEditBio(null);
       setEditOn(editOn ? false : true);
       setVerified(false);
-      dispatch({type: "SET_USER", payload: editMaBod});
-
+      dispatch({ type: "SET_USER", payload: editMaBod });
     } catch (error) {
       console.error("Error during edit info request:", error);
     }
   }
 
-  console.log(reduxUser);
   return (
     <>
       <div className="useless" style={boxStyle}>
@@ -474,7 +463,11 @@ export default function EditInfo() {
                       />
                     </div>
                     <div className="edit__field">
-                      <Button onClick={editInfoHandler} key="submit changes" sx={secHoverSX}>
+                      <Button
+                        onClick={editInfoHandler}
+                        key="submit changes"
+                        sx={secHoverSX}
+                      >
                         Submit Changes
                       </Button>
                     </div>
