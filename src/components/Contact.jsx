@@ -1,25 +1,23 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
+// MUI components
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import "../styles/contact.css";
 import TextField from "@mui/material/TextField";
 import { useTheme } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import { useState } from "react";
-import Swal from 'sweetalert2'
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+//CSS
+import "../styles/contact.css";
+//SweetAlert
+import Swal from "sweetalert2";
 
 function Contact() {
   const theme = useTheme();
+
+  const [nameInput, setNameInput] = useState();
+  const [emailInput, setEmailInput] = useState();
+  const [subjectInput, setSubjectInput] = useState();
+  const [commentInput, setCommentInput] = useState();
 
   const contactContainer = {
     backgroundColor: theme.palette.quadratiary.main,
@@ -37,20 +35,13 @@ function Contact() {
     fontFamily: theme.fontStyle.secondaryFont,
   };
 
-  const black = theme.palette.black.main;
-
-  const [nameInput, setNameInput] = useState();
-  const [emailInput, setEmailInput] = useState();
-  const [subjectInput, setSubjectInput] = useState();
-  const [commentInput, setCommentInput] = useState();
-
   function submitFormHandler(event) {
     event.preventDefault();
     setCommentInput(" ");
     setNameInput(" ");
     setEmailInput(" ");
     setSubjectInput(" ");
-   
+
     Swal.fire({
       title: "We will contact you as soon as possible.",
       // text: "We will contact you as soon as possible.",
@@ -63,9 +54,9 @@ function Contact() {
       confirmButtonColor: theme.palette.primary.main,
       background: theme.palette.tertiary.main,
       customClass: {
-        popup: 'popup__class'
+        popup: "popup__class",
       },
-});
+    });
   }
 
   return (
@@ -145,7 +136,9 @@ function Contact() {
             value={commentInput}
             onChange={(e) => setCommentInput(e.target.value)}
           />
-          <Button type="submit" style={contactButton}>Send Message</Button>
+          <Button type="submit" style={contactButton}>
+            Send Message
+          </Button>
         </form>
       </Box>
     </>
