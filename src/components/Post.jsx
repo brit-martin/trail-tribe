@@ -12,11 +12,13 @@ import { Typography, Container } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Comment from "./Comment.jsx";
-import Carousel from "react-material-ui-carousel";
+import Carousel, {PrevButton, NextButton } from "react-material-ui-carousel";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { useTheme } from "@mui/material/styles";
 import { Paper,TextField } from "@mui/material";
+import { primHoverSX } from './Theme.jsx';
+import CommentSlide from './CommentSlide.jsx';
 // Icons
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
@@ -35,9 +37,33 @@ function Post(props) {
   // const postData = props.post;
   const [postData, setPostData] = useState(props.post);
   const [openModal, setOpenModal] = useState(false);
+  const [comment, setComment] = useState('');
 
+  console.log('postData:', postData);
 
   const reduxUser = useSelector((state) => state.userReducer);
+
+  async function submitComment(){
+    const newComment = {
+      text: comment,
+      postId: postData.user.id,
+      userId: reduxUser.id,
+    }
+
+    try {
+      const res = await axios.post('/comment', newComment)
+      console.log('Comment submitted:', res.data)
+      // setPostData(res.data)
+      setComment('')
+      let asdf = props.count
+      props.setCount(asdf + 1)
+      // window.location.reload()
+
+    }
+    catch(err){
+      console.error('Error submitting comment:', err)
+    }
+  }
 
   const submitReaction = (reaction) => {
     console.log('submitReaction:');
@@ -64,8 +90,11 @@ function Post(props) {
     borderRadius: theme.shape.innerBorderRadius,
     padding: "20px 10px",
     backgroundColor: theme.palette.tertiary.light,
-    maxWidth: "700px",
-    minWidth: "250px",
+    width: "320px",
+    marginBottom: "10px",
+    "&:hover": {
+      cursor: "pointer",
+    }
   };
 
   const modalStyle = {
@@ -100,13 +129,63 @@ function Post(props) {
     alignItems: "center",
   }
 
+  
+
   const commentBody = {
     height: 200,
     overflowY: "scroll",
     scrollbars: "auto",
+    "&::-webkit-scrollbar": {
+      width: "12px", // width of the scrollbar
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: theme.palette.tertiary.main, // color of the thumb
+      borderRadius: "6px", // roundness of the thumb
+    },
+    "&::-webkit-scrollbar-track": {
+      backgroundColor: "transparent", // color of the track
+    },
     // change scrollbar style to match theme
 
   }
+
+  const containerStyles = {
+    border: "1px solid red",
+    display: "flex",
+    height: '10rem',
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "20px 10px",
+    backgroundColor: theme.palette.white.main,
+    borderRadius: theme.shape.innerBorderRadius,
+    boxShadow:
+      "inset -5px 0 10px lightgray, inset 0 -5px 10px gray, inset 5px 0 10px lightgray",
+  };
+
+  const carouselStyles = {
+    width: "500px",
+    overflow: "hidden",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    position: "relative",
+    margin: "0 auto",
+    next:  {
+      position: "absolute",
+      right: '-100px',
+      top: '50%',
+      transform: 'translateY(-50%)',
+    },
+    prev: {
+      position: "absolute",
+      left: '-100px',
+      top: '50%',
+      transform: 'translateY(-50%)',
+    }
+  }
+ 
+ 
+
 
   function handleOpenModal() {
     setOpenModal(true);
@@ -115,6 +194,8 @@ function Post(props) {
   function handleCloseModal() {
     setOpenModal(false);
   }
+
+  
 
 
   const submitUnfollowUser = () => {
@@ -238,17 +319,19 @@ function Post(props) {
         {/* COMMENTS */}
       </Container>
       <Container className='post__comments' disableGutters={true}>
-      <Carousel navButtonsAlwaysVisible={true}>
+      <Container sx={containerStyles}>
+      <Carousel  sx={carouselStyles}>
+
           {props.post.comments.length > 0 ? (
-            <>
-              {props.post.comments.map((comment, idx) => {
+          
+              props.post.comments.map((comment, idx) => {
                 return (
-                  <div onClick={handleOpenModal}>
-                    <Comment key={idx} comment={comment} />
-                  </div>
+                  <div key={idx}>
+                    <CommentSlide key={idx} comment={comment} onClick={handleOpenModal} />
+                    </div>
                 );
-              })}
-            </>
+              })
+            
           ) : (
             <div>
               <Paper onClick={handleOpenModal} elevation={12} sx={paperStyles}>
@@ -256,7 +339,9 @@ function Post(props) {
               </Paper>
             </div>
           )}
+        
         </Carousel>
+            </Container>
         <Modal
           open={openModal}
           onClose={handleCloseModal}
@@ -278,7 +363,7 @@ function Post(props) {
               {props.post.comments.map((comment, idx) => {
                 return (
                   <div>
-                    <Paper elevation={6} sx={paperStyles}>
+                    <Paper key={idx} elevation={6} sx={paperStyles}>
                       <h4>
                         {comment.user.fname} {comment.user.lname}
                       </h4>
@@ -293,12 +378,12 @@ function Post(props) {
               sx={{ width: "100%"}}
               id="outlined-multiline-static"
               label="Make a Comment!"
-              focused
               multiline
               rows={2}
-
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
               />
-              <Button >Add Comment!</Button>
+              <Button onClick={submitComment} sx={primHoverSX}>Add Comment!</Button>
             </Box>
           </Box>
         </Modal>
