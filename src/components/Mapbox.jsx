@@ -58,12 +58,15 @@ function Mapbox(props) {
         // B: create the HTMl container and the buttons
         const divElement = document.createElement('div');
         const trailBtn = document.createElement('div');
-        const postsBtn = document.createElement('div');
+        const getPostsBtn = document.createElement('div');
+        const createPostBtn = document.createElement('div');
         trailBtn.innerHTML = `<button>Display Trail</button>`;
-        postsBtn.innerHTML = `<button>See Posts</button>`;
+        getPostsBtn.innerHTML = `<button>See Posts</button>`;
+        createPostBtn.innerHTML = `<button>Create Posts</button>`;
         divElement.innerHTML = innerHtmlContent;
         divElement.appendChild(trailBtn);
-        divElement.appendChild(postsBtn);
+        divElement.appendChild(getPostsBtn);
+        divElement.appendChild(createPostBtn);
 
         // C: create trailBtn action
         trailBtn.addEventListener('click', (e) => {
@@ -107,13 +110,19 @@ function Mapbox(props) {
           });
         });
 
-        // D: create the postsBtn action
-        postsBtn.addEventListener('click', (e) => {
+        // D: create the getPostsBtn action
+        getPostsBtn.addEventListener('click', (e) => {
           console.log(marker.id);
           props.getPosts(marker.id);
         });
 
-        // D: add new markers
+        // E: create the createPostBtn action
+        createPostBtn.addEventListener('click', (e) => {
+          console.log(marker.id);
+          props.createPost(marker.id);
+        });
+
+        // F: add new markers
         const newMarker = new mapboxgl.Marker()
           .setLngLat([marker.geometry[0].lon, marker.geometry[0].lat])
           .setPopup(new mapboxgl.Popup().setDOMContent(divElement))
