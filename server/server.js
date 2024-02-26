@@ -6,6 +6,7 @@ import postCtrl from './controllers/postCtrl.js';
 import authCtrl from './controllers/authCtrl.js';
 import reactionCtrl from './controllers/reactionCtrl.js';
 import friendsCtrl from './controllers/friendsCtrl.js';
+import commentCtrl from './controllers/commentCtrl.js';
 
 dotenv.config();
 const { PORT } = process.env;
@@ -50,5 +51,9 @@ app.post('/createReaction', loginRequired, createReaction);
 const { follow, unfollow } = friendsCtrl;
 app.post('/follow/:friendId', loginRequired, follow);
 app.delete('/unfollow/:friendId', loginRequired, unfollow);
+
+// comments
+const { comment } = commentCtrl;
+app.post('/comment', loginRequired, comment);
 
 viteExpress.listen(app, PORT, () => console.log(`Server is listening on port ${PORT}`));

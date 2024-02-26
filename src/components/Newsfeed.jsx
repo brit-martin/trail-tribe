@@ -23,6 +23,7 @@ function Newsfeed() {
   const theme = useTheme();
   // Inits
   const [posts, setPosts] = useState([]);
+  const [count, setCount] = useState(0);
   const reduxUser = useSelector((state) => state.userReducer);
   const reduxPosts = useSelector((state) => state.postsReducer);
   const navigate = useNavigate();
@@ -52,7 +53,8 @@ function Newsfeed() {
           navigate(error.response.data.reRoute);
         }
       });
-  }, [reduxPosts]);
+  }, [count, reduxPosts]);
+
 
   // reset posts to empty, forcing a new axios call after an unfollow
   const unfollow = (userId) => {
@@ -76,7 +78,7 @@ function Newsfeed() {
           {/* map through posts render all posts */}
           {posts.length > 0 ? (
             posts.map((post, idx) => {
-              return <Post key={idx} post={post} page='newsfeed' friendBtn={unfollow} setPosts={setPosts} />;
+              return <Post count={count} setCount={setCount} key={idx} post={post} page='newsfeed' friendBtn={unfollow} setPosts={setPosts} />;
             })
           ) : (
             <h1>No Posts to Display...</h1>
