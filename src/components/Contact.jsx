@@ -20,19 +20,23 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function Contact() {
   const theme = useTheme();
-  // const contactMessageContainer = {
-  //   backgroundColor: rgb(255, 124, 92, 0.5)
-  // };
+
   const contactContainer = {
     backgroundColor: theme.palette.quadratiary.main,
+    fontFamily: theme.fontStyle.secondaryFont,
   };
+
   const contactContainerText = {
     color: theme.palette.white.main,
+    fontFamily: theme.fontStyle.secondaryFont,
   };
+
   const contactButton = {
     color: theme.palette.white.main,
     backgroundColor: theme.palette.quadratiary.light,
+    fontFamily: theme.fontStyle.secondaryFont,
   };
+
   const black = theme.palette.black.main;
 
   const [nameInput, setNameInput] = useState();
@@ -54,6 +58,7 @@ function Contact() {
       imageWidth: 300,
       imageHeight: 300,
       imageAlt: "Custom image",
+      // fontFamily: theme.fontStyle.secondaryFont,
       borderRadius: theme.shape.outerBorderRadius,
       confirmButtonColor: theme.palette.primary.main,
       background: theme.palette.tertiary.main,

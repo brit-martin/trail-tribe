@@ -36,8 +36,8 @@
     border-bottom: 1px solid white;
 }
 .contact-message-container {
-    border-radius: 5px;
     /* border: 1px solid red; */
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -47,10 +47,11 @@
     height: 475px;
     justify-content: center;
     align-items: center;
-    font-family: sans-serif;
+    font-family: "Montserrat", sans-serif;
     background-color: rgb(219, 119, 94, 0.9);
+
 }
 
 .popup__class {
-    font-family: sans-serif;
+    font-family: "Montserrat", sans-serif;
 }

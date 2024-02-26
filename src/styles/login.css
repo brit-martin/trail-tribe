@@ -12,26 +12,25 @@
 }
 
 .login-welcome {
+    /* border: 1px solid blue; */
     position: absolute;
     top: 15vw;
     left: 13vw;
     font-size: 50px;
     font-family: "Permanent Marker", cursive;
-    /* border: 1px solid blue; */
     color: white;
 }
 
 .login-image {
+    /* border: 1px solid green; */
     width: 100%;
-    border: 1px solid green;
     float: left;
     position: relative;
 
 }
 .login-right {
-    /* max-width: 50%; */
-    height: 700px;
     /* border: 2px solid pink; */
+    height: 700px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,7 +45,6 @@
     padding: 50px 25px;
     margin: 30px;
     border-radius: 5px;
-   
     color: whitesmoke;
     background-color: #3e3e3e;
 }
@@ -55,12 +53,17 @@
     width: 100px;
     color: white !important;
     background-color: #7286a0 !important;
- 
 }
+
 .login-input{
     padding: 8px;
 }
+
 .login-header {
     padding: 8px;
     margin: 5px;
+}
+
+.my-swal{
+    font-family: "Montserrat", sans-serif;
 }
