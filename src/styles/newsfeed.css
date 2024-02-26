@@ -1,13 +1,38 @@
 .newsfeed {
   border: 1px solid red;
-  /* height: 75vh; */
+  height: calc(100vh - 4rem);
   display: flex;
   flex-direction: row !important;
+  overflow: hidden scroll;
+  position: relative;
   /* overflow: hidden; */
 }
 
-.newsfeed__side-panel {
-  border: 1px solid blue;
+.newsfeed__user-info {
+  position: fixed;
+  height: calc(100vh - 6rem);
+  width: 20rem;
+  top: 5rem;
+  left: -20rem;
+  z-index: 1;
+  border: 1px solid black;
+  background-color: white;
+  transition: all 0.5s ease-out;
+  overflow: hidden scroll;
+}
+
+.show-user-info {
+  transform: translateX(21rem);
+}
+
+.user-info__row {
+}
+
+.newsfeed__clear-user-posts {
+  position: absolute !important;
+  top: 0rem;
+  left: 16.5rem;
+  z-index: 2;
 }
 
 .newsfeed__main {
@@ -20,12 +45,16 @@
   width: 100%;
   display: flex !important;
   flex-direction: column;
+  align-items: center;
+  gap: 4rem;
 }
 .newsfeed__posts > .post:nth-child(odd) {
-  align-self: flex-start;
+  /* align-self: flex-start; */
   /* border: 1px solid red; */
+  transform: translateX(-10rem);
 }
 .newsfeed__posts > .post:nth-child(even) {
-  align-self: flex-end;
+  /* align-self: flex-end; */
   /* border: 1px solid red; */
+  transform: translateX(10rem);
 }

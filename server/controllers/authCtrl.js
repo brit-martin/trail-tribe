@@ -68,7 +68,7 @@ export default {
     req.session.fname = user.fname;
     req.session.lname = user.lname;
     req.session.userId = user.id;
-    res.status(200).send("User info updated");
+    res.status(200).send('User info updated');
   },
   checkLoginStatus: async (req, res) => {
     console.log('== check login status route ===');
@@ -133,6 +133,47 @@ export default {
       res.status(200).send('Password changed');
     } else {
       res.status(400).send('Passwords do not match');
+    }
+  },
+  getNewsfeedUserInfo: async (req, res) => {
+    console.log('== getNewsfeedUserInfo ==');
+    try {
+      // get the user
+      const user = await User.findByPk(req.params.userId);
+
+      // find all their posts
+      const posts = await user.getPosts();
+
+      const avgReview =
+        posts
+          .map((post) => {
+            return post.review;
+          })
+          .reduce((acc, curVal) => {
+            return +acc + +curVal;
+          }) / posts.length;
+
+      // find all their comments
+      const comments = await user.getComments();
+
+      // find all their reactions
+      const reactions = await user.getReactions();
+
+      //find all their friends
+      const friends = await user.getFriends();
+
+      res.status(200).send({
+        userInfo: {
+          user: user,
+          posts: posts.length,
+          comments: comments.length,
+          reactions: reactions.length,
+          friends: friends.length,
+          avgReview: avgReview,
+        },
+      });
+    } catch (error) {
+      console.log(error);
     }
   },
 };

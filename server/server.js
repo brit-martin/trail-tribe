@@ -32,8 +32,17 @@ app.get('/getFollowingPosts', loginRequired, getFollowingPosts);
 app.get('/getPostsByTrailId/:trailId', loginRequired, getPostsByTrailId);
 
 // auth
-const { signUp, login, logout, editUserInfo, checkLoginStatus, deleteUser, verifyOldPassword, changePassword } =
-  authCtrl;
+const {
+  signUp,
+  login,
+  logout,
+  editUserInfo,
+  checkLoginStatus,
+  deleteUser,
+  verifyOldPassword,
+  changePassword,
+  getNewsfeedUserInfo,
+} = authCtrl;
 app.post('/signup', signUp);
 app.post('/login', login);
 app.get('/checkLoginStatus', checkLoginStatus);
@@ -42,6 +51,7 @@ app.put('/delete-user', loginRequired, deleteUser);
 app.post('/old-password', loginRequired, verifyOldPassword);
 app.put('/change-password', loginRequired, changePassword);
 app.put('/edit-user', loginRequired, editUserInfo);
+app.get('/getNewsfeedUserInfo/:userId', loginRequired, getNewsfeedUserInfo);
 
 // reactions
 const { createReaction } = reactionCtrl;
