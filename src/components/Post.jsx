@@ -159,7 +159,12 @@ function Post(props) {
   if (postData.userId === reduxUser.id) {
     followButton = null;
   } else if (props.page === 'newsfeed') {
-    followButton = <Button onClick={() => submitFriendBtn()}>Unfollow {postData.user.fname}</Button>;
+    followButton = (
+      <>
+        <Button onClick={() => props.submitSeeInfo(postData.userId)}>See {postData.user.fname}'s Info</Button>
+        <Button onClick={() => submitFriendBtn()}>Unfollow {postData.user.fname}</Button>
+      </>
+    );
   } else if (props.page === 'explore') {
     followButton = <Button onClick={() => submitFriendBtn()}>follow {postData.user.fname}</Button>;
   }

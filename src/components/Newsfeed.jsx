@@ -4,7 +4,7 @@
 import '../styles/newsfeed.css';
 
 // import packages
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -17,8 +17,19 @@ import Post from './Post.jsx';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material';
+import Button from '@mui/material/Button';
+
+// icons
+import PeopleIcon from '@mui/icons-material/People';
+import CommentIcon from '@mui/icons-material/Comment';
+import RecommendIcon from '@mui/icons-material/Recommend';
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import StarIcon from '@mui/icons-material/Star';
+import CloseIcon from '@mui/icons-material/Close';
 
 function Newsfeed() {
+  const newsfeedUserInfo = useRef(null);
+  const [userInfo, setUserInfo] = useState(null);
   const dispatch = useDispatch();
   const theme = useTheme();
   // Inits
@@ -29,6 +40,16 @@ function Newsfeed() {
 
   console.log(reduxUser);
   console.log(posts);
+
+  if (newsfeedUserInfo.current) {
+    if (userInfo) {
+      console.log('adding show-user-info');
+      newsfeedUserInfo.current.classList.add('show-user-info');
+    } else {
+      console.log('removing show-user-info');
+      newsfeedUserInfo.current.classList.remove('show-user-info');
+    }
+  }
 
   useEffect(() => {
     console.log('newsfeed useEffect:');
@@ -54,6 +75,19 @@ function Newsfeed() {
       });
   }, [reduxPosts]);
 
+  const seeInfo = (userId) => {
+    console.log('== seeInfo ==');
+    axios
+      .get(`getNewsfeedUserInfo/${userId}`)
+      .then((response) => {
+        console.log(response.data.userInfo);
+        setUserInfo(response.data.userInfo);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   // reset posts to empty, forcing a new axios call after an unfollow
   const unfollow = (userId) => {
     console.log('unfollow user:');
@@ -63,11 +97,59 @@ function Newsfeed() {
 
   return (
     <Stack className='newsfeed' maxWidth='false'>
-      {/* SIDE PANEL */}
-      <Stack className='newsfeed__side-panel' maxWidth='false'>
+      {/* User Info Panel */}
+      <Stack ref={newsfeedUserInfo} className='newsfeed__user-info' maxWidth='false' spacing={4}>
+        <Button
+          className='newsfeed__clear-user-posts'
+          onClick={() => {
+            setUserInfo(null);
+          }}
+        >
+          <CloseIcon fontSize='large' sx={{ color: '#1877F2' }} />
+        </Button>
         <Typography align='center' variant='h4'>
-          Side Panel
+          User Info Panel
         </Typography>
+
+        {/* User Profile Pic & Name */}
+        <Stack direction='row'>
+          <img className='post__user-pic' src='https://picsum.photos/200/300' />
+          <Typography>
+            {userInfo && userInfo.user.fname} {userInfo && userInfo.user.lname}
+          </Typography>
+        </Stack>
+
+        {/* User Bio */}
+        <Stack direction='row'>
+          <Typography>{userInfo && userInfo.user.bio}</Typography>
+        </Stack>
+
+        {/* Friends Count */}
+        <Stack direction='row' className='user-info__row'>
+          <PeopleIcon fontSize='large' sx={{ color: '#1877F2' }} />
+          <Typography>Friends: {userInfo && userInfo.friends}</Typography>
+        </Stack>
+        {/* Comments Count */}
+        <Stack direction='row' className='user-info__row'>
+          <CommentIcon fontSize='large' sx={{ color: '#1877F2' }} />
+          <Typography>Comments: {userInfo && userInfo.comments}</Typography>
+        </Stack>
+        {/* Reactions Count */}
+        <Stack direction='row' className='user-info__row'>
+          <RecommendIcon fontSize='large' sx={{ color: '#1877F2' }} />
+          <Typography> Reactions: {userInfo && userInfo.reactions}</Typography>
+        </Stack>
+        {/* Posts Count */}
+        <Stack direction='row' className='user-info__row'>
+          <PostAddIcon fontSize='large' sx={{ color: '#1877F2' }} />
+          <Typography>Posts: {userInfo && userInfo.posts}</Typography>
+        </Stack>
+
+        {/* Average Review */}
+        <Stack direction='row' className='user-info__row'>
+          <StarIcon fontSize='large' sx={{ color: '#1877F2' }} />
+          <Typography>Average Review: {userInfo && userInfo.avgReview}</Typography>
+        </Stack>
       </Stack>
 
       {/* NEWSFEED MAIN CONTAINER */}
@@ -76,7 +158,16 @@ function Newsfeed() {
           {/* map through posts render all posts */}
           {posts.length > 0 ? (
             posts.map((post, idx) => {
-              return <Post key={idx} post={post} page='newsfeed' friendBtn={unfollow} setPosts={setPosts} />;
+              return (
+                <Post
+                  key={idx}
+                  post={post}
+                  page='newsfeed'
+                  friendBtn={unfollow}
+                  setPosts={setPosts}
+                  submitSeeInfo={seeInfo}
+                />
+              );
             })
           ) : (
             <h1>No Posts to Display...</h1>

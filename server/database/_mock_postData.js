@@ -51,5 +51,16 @@ const postData = [
     difficulty: '5',
     review: '5',
   },
+  {
+    id: 6,
+    hikeName: 'Almost Died again!',
+    trailId: '850607924',
+    description:
+      'I went on the same hike and came face to face with that same mongoose! we battled to the death and I was victorious!',
+    pictureArray: ['placeholder_blob', 'placeholder_blob', 'placeholder_blob'],
+    userId: 2,
+    difficulty: '4',
+    review: '5',
+  },
 ];
 export default postData;
