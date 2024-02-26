@@ -52,30 +52,14 @@ function Newsfeed() {
           navigate(error.response.data.reRoute);
         }
       });
-  }, []);
+  }, [reduxPosts]);
 
   // reset posts to empty, forcing a new axios call after an unfollow
   const unfollow = (userId) => {
     console.log('unfollow user:');
-    // fetchFollowedUserPosts();
-    // console.log(userId);
-    // console.log(posts);
-    // const updatedPosts = posts.filter((post) => {
-    // return post.userId !== userId;
-    // });
-    // console.log(updatedPosts);
-    // setPosts(updatedPosts);
-    setPosts(
-      posts.filter((post) => {
-        return post.userId !== userId;
-      })
-    );
-    // console.log(posts);
-    // dispatch({ type: 'RESET_POSTS' });
-    // setPosts([]);
+    setPosts([]);
+    dispatch({ type: 'RESET_POSTS' });
   };
-
-  // const fetchFollowedUserPosts = () => {};
 
   return (
     <Stack className='newsfeed' maxWidth='false'>
