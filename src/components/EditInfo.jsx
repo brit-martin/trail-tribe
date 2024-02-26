@@ -102,16 +102,18 @@ export default function EditInfo() {
     flexDirection: "column",
     justifyContent: "space-between",
   };
-
+  
   const boxStyle = {
     border: "1px solid aqua",
+    width: "100%",
+    // height: "600px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: "20px",
     marginBottom: "20px",
-    fontFamily: "sans-serif",
+    fontFamily: theme.fontStyle.secondaryFont,
+    // borderRadius: theme.shape.outerBorderRadius,
   };
 
   const buttonStyle = {
@@ -176,62 +178,68 @@ export default function EditInfo() {
     setOpenDeleteModal(false);
   }
 
+  //--TODO--------------------------------it still deletes user from database!
   async function deleteUserHandler() {
-    let deleteMaBod = {
-      password: deletePassword,
-    };
 
-    try {
-      const res = await axios.put("/delete-user", deleteMaBod);
-      console.log(res);
-//--TODO--------------------------------
-      if (res.status === 200) {
+    const { isConfirmed } = await Swal.fire({
+      customClass: {
+        container: 'my-swal',
+        popup: 'popup__class'
+      },
+      title: "Are you sure you want to delete your account?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Delete",
+      iconColor: "#FF4b1f",
+      confirmButtonColor: "#FF4b1f",
+      background: theme.palette.tertiary.main,
+      color: "white"
+    });
+  
+    if (isConfirmed) {
+      let deleteMaBod = {
+        password: deletePassword,
+      };
+  
+      try {
+        const res = await axios.put("/delete-user", deleteMaBod);
+        console.log(res);
+  
         Swal.fire({
-
-          title: "Are you sure you want to delete your account?",
-          icon: "question",
-          color: "white",
-          showCancelButton: true,
-          // confirmButtonColor: "#BACDCD",
-          // cancelButtonColor: "#cd5c5c",
-          confirmButtonText: "Delete",
-          iconColor: "#DCE0D9",
+          title: "Account Deleted!",
           background: theme.palette.tertiary.main,
-          // borderRadius: theme.shape.outerBorderRadius,
-          color: white
-        })
-          .then((result) => {
-          if (result.isConfirmed) {
-            dispatch({ type: "RESET_USER" });
-            navigate("/");
-          }
-        });
-        // alert("Account deleted");
-      }
-//----------------------------------
-    } catch (err) {
-      if (err.response.status === 400) {
-       
-        Swal.fire({
-          customClass: {
-            container: 'my-swal',
-            popup: 'popup__class'
-          },
-          icon: "error",
+          text: "Your account has been deleted.",
+          icon: "success",
           iconColor: "#FF4b1f",
-          title: "Oops...",
-          text: "Incorrect password",
-          confirmButtonColor: "#FF4b1f",
-          background: theme.palette.tertiary.light,
-          // borderRadius: theme.shape.outerBorderRadius,
-          color: "white"
-        })
-      } else {
-        console.error("Error during delete request:", err.response.status);
+          timer: 2000,
+          showConfirmButton: false,
+          color: "white",
+        });
+  
+        dispatch({ type: "RESET_USER" });
+        navigate("/");
+      } catch (err) {
+        if(err.response.status === 400){
+          Swal.fire({
+                    customClass: {
+                        container: 'my-swal',
+                        popup: 'popup__class'
+                    },
+                    icon: "error",
+                    iconColor: "#FF4b1f",
+                    title: "Oops...",
+                    text: "Passwords do not match",
+                    confirmButtonColor: "#FF4b1f",
+                    background: theme.palette.tertiary.light,
+                    color: "white"
+                });
+        } else {
+          console.error("Error during edit request:", err);
+        }
       }
     }
   }
-
+  
   async function oldPasswordHandler() {
     let oldMaBod = {
       password: oldPassword,
@@ -300,7 +308,17 @@ export default function EditInfo() {
 
     try {
       const res = await axios.put("/change-password", changeMaBod);
-      alert("Password changed");
+      Swal.fire({
+        customClass: {
+          container: 'my-swal',
+          popup: 'popup__class'
+        },
+        title: "Password changed!",
+        confirmButtonColor: "#FF4b1f",
+        background: theme.palette.tertiary.light,
+        // borderRadius: theme.shape.outerBorderRadius,
+        color: "white",
+       });
       setVerified(false);
       setOpenModal(false);
     } catch (error) {
@@ -317,7 +335,21 @@ export default function EditInfo() {
 
     // }
     if(editEmail !== reduxUser.email){
-      confirm("Are you sure you want to change your email?")
+      // confirm("Are you sure you want to change your email?")
+
+      //------------ if we have enough time get this working where user has to input there password inorder to reset the email. 
+      // Swal.fire({
+      //   title: "Are you sure you want to change your email?",
+      //   icon: "question",
+      //   color: "white",
+      //   showCancelButton: true,
+      //   confirmButtonColor: "#BACDCD",
+      //   cancelButtonColor: "#cd5c5c",
+      //   confirmButtonText: "Change",
+      //   iconColor: "#FF4b1f",
+      //   background: theme.palette.tertiary.light,
+      // })
+   
     }
 
     const editMaBod = {
@@ -415,7 +447,7 @@ export default function EditInfo() {
                         placeholder={reduxUser.bio}
                         focused
                         multiline
-                        rows={4}
+                        rows={1}
                         value={editBio}
                         onChange={(e) => setEditBio(e.target.value)}
                       />

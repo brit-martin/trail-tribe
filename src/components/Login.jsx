@@ -50,7 +50,7 @@ function Login() {
         icon: "error",
         iconColor: "#FF4b1f",
         title: "Oops...",
-        text: "Password is incorrect!",
+        text: "Incorrect email or password",
         confirmButtonColor: "#FF4b1f"
       });
     })
