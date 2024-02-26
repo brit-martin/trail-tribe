@@ -5,9 +5,10 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import "../styles/Hero.css";
 import { useNavigate } from "react-router-dom";
 import { primHoverSX } from "./Theme.jsx";
+
+import "../styles/Hero.css";
 
 function SingleCard() {
   const navigate = useNavigate();

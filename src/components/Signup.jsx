@@ -1,4 +1,6 @@
 import * as React from "react";
+import { NavLink } from "react-router-dom";
+// MUI components
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
@@ -8,71 +10,73 @@ import InputLabel from "@mui/material/InputLabel";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
-import Alert from '@mui/material/Alert';
 import Button from "@mui/material/Button";
-import "../styles/signup.css";
 import { useState } from "react";
-import axios from "axios";
-import {useDispatch} from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { useTheme } from '@mui/material'
-import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useTheme } from "@mui/material";
 import Typography from "@mui/material/Typography";
+// CSS
+import "../styles/signup.css";
+// create endpoinst
+import axios from "axios";
 
 function Signup() {
-  const theme = useTheme()
-  // console.log(theme)
+  const theme = useTheme();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // state variables
   const [fnameInput, setFnameInput] = useState("");
   const [lnameInput, setLnameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [confirmPasswordInput, setConfirmPasswordInput] = useState("");
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-
-  const white = theme.palette.quadratiary.contrastText
-
-  function onSignUp(event){
-    event.preventDefault()
-    // check that password and password confirm are the same
-    if(passwordInput === confirmPasswordInput){
-    // build the request body
-    let userBody = {
-      fname: fnameInput,
-      lname: lnameInput,
-      email: emailInput,
-      password: passwordInput,
-    }
-    // send the request
-    console.log(userBody);
-    axios.post("/signup", userBody)
-      .then((response) => {
-      console.log(response.data);
-      dispatch({type: 'SET_USER', payload: response.data.newUser});
-      navigate('/newsfeed')
-    });
-  } else (
-    console.log('password do not match')
-    // <Alert variant="outlined" severity="warning">
-    //   Passwords don't match. 
-    // </Alert>
-  ).catch((error) => {
-    console.log(error)
-  })
-
-  }
-
   const [showPassword, setShowPassword] = React.useState(false);
   const [showConfirmPassword, setConfirmShowPassword] = React.useState(false);
+
+  // functionality
+
+  function onSignUp(event) {
+    event.preventDefault();
+    // check that password and password confirm are the same
+    if (passwordInput === confirmPasswordInput) {
+      // build the request body
+      let userBody = {
+        fname: fnameInput,
+        lname: lnameInput,
+        email: emailInput,
+        password: passwordInput,
+      };
+      // send the request
+      console.log(userBody);
+      axios.post("/signup", userBody).then((response) => {
+        console.log(response.data);
+        dispatch({ type: "SET_USER", payload: response.data.newUser });
+        navigate("/newsfeed");
+      });
+    } else
+      console
+        .log("password do not match")
+        // <Alert variant="outlined" severity="warning">
+        //   Passwords don't match.
+        // </Alert>
+        .catch((error) => {
+          console.log(error);
+        });
+  }
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleClickShowConfirmPassword = () =>
     setConfirmShowPassword((show) => !show);
 
-  function loginLink(){
-    navigate('/login')
-    
+  function loginLink() {
+    navigate("/login");
   }
+
+  // Custom Material UI styles
+
+  const white = theme.palette.quadratiary.contrastText;
 
   return (
     <div className="signup-page">
@@ -99,7 +103,6 @@ function Signup() {
             InputProps={{
               style: { color: white },
             }}
-            
           />
           <TextField
             focused
@@ -131,25 +134,24 @@ function Signup() {
           />
           <FormControl
             focused
-            style={{color: white}}
+            style={{ color: white }}
             variant="outlined"
             className="singup-input"
             sx={{ m: 1, width: "30ch" }}
             required
             value={passwordInput}
             onChange={(e) => setPasswordInput(e.target.value)}
-
-            >
-            <InputLabel 
+          >
+            <InputLabel
               htmlFor="outlined-adornment-password"
-              style={{color: white}}
+              style={{ color: white }}
             >
               Password
             </InputLabel>
             <OutlinedInput
               id="outlined-adornment-password"
               color="white"
-              style={{color: white}}
+              style={{ color: white }}
               type={showPassword ? "text" : "password"}
               endAdornment={
                 <InputAdornment position="end">
@@ -177,16 +179,13 @@ function Signup() {
             value={confirmPasswordInput}
             onChange={(e) => setConfirmPasswordInput(e.target.value)}
           >
-            <InputLabel 
-              htmlFor="outlined-adornment-password"
-              color="white"
-              >
+            <InputLabel htmlFor="outlined-adornment-password" color="white">
               Confirm Password
             </InputLabel>
             <OutlinedInput
               id="outlined-adornment-password"
               color="white"
-              style={{color: white}}
+              style={{ color: white }}
               type={showConfirmPassword ? "text" : "password"}
               endAdornment={
                 <InputAdornment position="end">

@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+// redux
+import { useSelector, useDispatch } from "react-redux";
+// MUI components
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,30 +13,33 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import { useSelector,useDispatch } from "react-redux";
-import { primHoverSX, secHoverSX } from "./Theme";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import MenuItem from "@mui/material/MenuItem";
+// custom theme
+import { primHoverSX, secHoverSX } from "./Theme";
+// CSS
 import "../styles/Navbar.css";
+// create endpoints
 import axios from "axios";
-
-// const unAuthPages = ["About", "FAQ", "Contact"];
-// const AuthPages = ["About", "FAQ", "Contact", "News Feed", "Explore"];
-// const authSettings = ["Profile", "Account", "Dashboard", "Logout"];
-// const unAuthSettings = ["Login", "Signup"];
 
 function NavBar() {
   const navigate = useNavigate();
+  const reduxUser = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
+
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   useEffect(() => {
     sessionCheck();
-  }, [])
-
-
+  }, []);
+  
+  // functionality
 
   function sessionCheck() {
-    axios.get('/checkLoginStatus')
+    axios
+      .get("/checkLoginStatus")
       .then((response) => {
         console.log(response.data.user);
         dispatch({ type: "SET_USER", payload: response.data.user });
@@ -44,20 +50,6 @@ function NavBar() {
           navigate(error.response.data.reRoute);
         }
       });
-  }
-
-  const reduxUser = useSelector((state) => state.userReducer);
-  const dispatch = useDispatch();
-
-  const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
-
-  const navButtonStyle = {
-    textDecoration: "none",
-    color: "white",
-    my: 2,
-    display: "block",
-
   }
 
   const handleOpenNavMenu = (event) => {
@@ -131,13 +123,19 @@ function NavBar() {
       // Handle the error as needed
     }
   }
-  
-  
+
+  // Custom Material UI styles
+  const navButtonStyle = {
+    textDecoration: "none",
+    color: "white",
+    my: 2,
+    display: "block",
+  };
 
   return (
     <AppBar position="static" color="tertiary">
       <Container maxWidth="xl">
-        <Toolbar disablegutters='true'>
+        <Toolbar disablegutters="true">
           <Typography
             variant="h6"
             noWrap
@@ -267,11 +265,7 @@ function NavBar() {
                 >
                   About
                 </Button>
-                <Button
-                  key="FAQ"
-                  onClick={handleFAQ}
-                  style={navButtonStyle}
-                >
+                <Button key="FAQ" onClick={handleFAQ} style={navButtonStyle}>
                   FAQ
                 </Button>
                 <Button
@@ -305,11 +299,7 @@ function NavBar() {
                 >
                   About
                 </Button>
-                <Button
-                  key="FAQ"
-                  onClick={handleFAQ}
-                  style={navButtonStyle}
-                >
+                <Button key="FAQ" onClick={handleFAQ} style={navButtonStyle}>
                   FAQ
                 </Button>
                 <Button
@@ -329,12 +319,16 @@ function NavBar() {
                 <Tooltip title="Open Settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
-                    sx={{bgcolor: "secondary.main", color: "secondary.contrastText"}}
+                      sx={{
+                        bgcolor: "secondary.main",
+                        color: "secondary.contrastText",
+                      }}
                       alt={reduxUser.fname}
                       // profilepic here
                     >
-                      {reduxUser.fname[0]}{reduxUser.lname[0]}
-                      </Avatar>
+                      {reduxUser.fname[0]}
+                      {reduxUser.lname[0]}
+                    </Avatar>
                   </IconButton>
                 </Tooltip>
                 <Menu

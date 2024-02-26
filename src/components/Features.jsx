@@ -1,9 +1,11 @@
 import React from "react";
+// MUI components
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import Box from "@mui/material/Box";
 import { Paper } from "@mui/material";
-import "../styles/Features.css";
 import { useTheme } from "@mui/material/styles";
+// CSS
+import "../styles/Features.css";
 
 export default function Features() {
   const theme = useTheme();
@@ -25,12 +27,17 @@ export default function Features() {
     >
       <h1>Features</h1>
       <Box>
-        <Grid container rowSpacing={4} columnSpacing={8} justifyContent="center" alignItems="center">
+        <Grid
+          container
+          rowSpacing={4}
+          columnSpacing={8}
+          justifyContent="center"
+          alignItems="center"
+        >
           <Grid md={5}>
             <Paper elevation={8} style={featuresStyles}>
               <h3>Step 1: </h3>
               <p> Simply Sign Up</p>
-            
             </Paper>
           </Grid>
           <Grid md={5}>
@@ -51,9 +58,7 @@ export default function Features() {
             <Paper elevation={8} style={featuresStyles}>
               {" "}
               <h3>Step 4:</h3>
-              <p>
-                Tell us and your friends about your adventure!
-              </p>
+              <p>Tell us and your friends about your adventure!</p>
             </Paper>
           </Grid>
         </Grid>
