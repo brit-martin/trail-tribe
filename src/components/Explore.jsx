@@ -255,6 +255,21 @@ function Explore() {
       .then((response) => {
         // TODO - create sweet alert
         console.log(response.data);
+        handleCloseModal(false);
+        Swal.fire({
+          customClass: {
+            container: "my-swal",
+          },
+          position: "top",
+          icon: "success",
+          iconColor: "#FF4b1f",
+          title: "Post successfully created",
+          showConfirmButton: false,
+          background: theme.palette.tertiary.light,
+          color: "white",
+          timer: 1500
+
+        })
       })
       .catch((error) => {
         console.log(error);

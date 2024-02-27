@@ -7,11 +7,17 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import { primHoverSX } from "./Theme.jsx";
+import { useTheme } from "@mui/material";
 
 import "../styles/Hero.css";
 
 function SingleCard() {
   const navigate = useNavigate();
+  const theme = useTheme();
+
+  const subheadingFont = {
+    fontFamily: theme.fontStyle.secondaryFont
+  }
 
   function handleFindTribe() {
     navigate("/signup");
@@ -21,10 +27,10 @@ function SingleCard() {
     <>
       <Card className="hero__card">
         <CardContent>
-          <Typography variant="h5" component="h2" gutterBottom>
+          <Typography variant="h5" component="h2" gutterBottom style={subheadingFont}>
             Step by Step, Friend by Friend
           </Typography>
-          <Typography variant="h4" component="h3">
+          <Typography variant="h4" component="h3" style={subheadingFont}>
             Step Into Adventure Together
           </Typography>
         </CardContent>
@@ -35,6 +41,7 @@ function SingleCard() {
           color='primary'
           sx={primHoverSX}
           onClick={handleFindTribe}
+          style={subheadingFont}
           >
             Find your Tribe
           </Button>
