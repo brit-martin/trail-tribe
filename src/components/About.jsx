@@ -18,6 +18,7 @@ function About() {
   const subheading = {
     // backgroundColor: theme.palette.primary.light,
     borderRadius: theme.shape.innerBorderRadius,
+    fontFamily: theme.fontStyle.primaryFont,
   };
 
   const image = {
@@ -27,6 +28,7 @@ function About() {
   const description = {
     backgroundColor: theme.palette.tertiary.light,
     borderRadius: theme.shape.innerBorderRadius,
+    fontFamily: theme.fontStyle.secondaryFont,
   };
 
   return (
@@ -34,6 +36,12 @@ function About() {
       {/* <h1 className='about-heading' style={heading}>Discover Your Trail Community: Exploring Nature, Connecting Adventurers</h1> */}
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
+          <Grid item xs={1.5} className="about-bio">
+            <div> Jakes info: I like basketball, coding, and hiking.</div>
+          </Grid>
+          <Grid item xs={1.5} className="about-bio">
+            <div> Cody info: </div>
+          </Grid>
           <Grid item xs={6} className="about-image">
             <img
               src="public/Mountrushmore-example.jpeg"
@@ -41,17 +49,11 @@ function About() {
               alt="mt rushmore"
             />
           </Grid>
-          <Grid item xs={3} className="about-bio">
-            <div> Jakes info </div>
+          <Grid item xs={1.5} className="about-bio">
+            <div> Brittany info: A sun-loving explorer always seeking new adventures in the great outdoors.</div>
           </Grid>
-          <Grid item xs={3} className="about-bio">
-            <div> Cody info </div>
-          </Grid>
-          <Grid item xs={3} className="about-bio">
-            <div> Brittany info </div>
-          </Grid>
-          <Grid item xs={3} className="about-bio">
-            <div> Jared info </div>
+          <Grid item xs={1.5} className="about-bio">
+            <div> Jared info: Avid pickelball player who enjoys coding on the weekends.</div>
           </Grid>
           <Grid item xs={6.5}>
             <div className="about-description" style={description}>
