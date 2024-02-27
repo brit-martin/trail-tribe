@@ -16,6 +16,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material";
 import Typography from "@mui/material/Typography";
+import Swal from "sweetalert2";
+
 // CSS
 import "../styles/signup.css";
 // create endpoinst
@@ -54,6 +56,19 @@ function Signup() {
         console.log(response.data);
         dispatch({ type: "SET_USER", payload: response.data.newUser });
         navigate("/newsfeed");
+        Swal.fire({
+          customClass: {
+            container: "my-swal",
+          },
+          position: "top",
+          icon: "info",
+          iconColor: "#FF4b1f",
+          title: "Head to your profile to add your bio.",
+          background: theme.palette.tertiary.light,
+          color: "white",
+          confirmButtonColor: "#FF4b1f",
+        
+        });
       });
     } else
       console
