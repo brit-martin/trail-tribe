@@ -2,7 +2,26 @@ import { Post, User, Reaction, Comment } from '../database/model.js';
 
 export default {
   createPost: async (req, res) => {
-    console.log('create post router');
+    console.log('== create post router ==');
+    console.log(req.body);
+    // createPost.userId = req.session.userId;
+    try {
+      const newPost = await Post.create({
+        userId: req.session.userId,
+        trailId: req.body.trailId,
+        hikeName: req.body.hikeName,
+        description: req.body.description,
+        pictureArray: req.body.pictureArray,
+        review: req.body.review,
+        difficulty: req.body.difficulty,
+      });
+      console.log(newPost);
+      res.status(200).send({
+        message: 'You have successfully created your post!',
+      });
+    } catch (error) {
+      console.log(error);
+    }
   },
   getFollowingPosts: async (req, res) => {
     console.log('== Get Following Posts Route ==');

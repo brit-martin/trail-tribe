@@ -75,7 +75,7 @@ Post.init(
       allowNull: false,
     },
     description: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
     },
     pictureArray: {
       type: DataTypes.STRING,

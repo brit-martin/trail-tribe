@@ -119,7 +119,7 @@ function Mapbox(props) {
         // E: create the createPostBtn action
         createPostBtn.addEventListener('click', (e) => {
           console.log(marker.id);
-          props.createPost(marker.id);
+          props.handleOpenModal(marker.id);
         });
 
         // F: add new markers
