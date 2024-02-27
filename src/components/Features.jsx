@@ -19,13 +19,18 @@ export default function Features() {
     borderRadius: theme.shape.innerBorderRadius,
     fontFamily: theme.fontStyle.secondaryFont,
   };
+  const featuresHeading = {
+    fontFamily: theme.fontStyle.primaryFont,
+    marginBottom: "20px",
+    fontSize: "40px",
+  }
 
   return (
     <div
       className="features__box"
       style={{ margin: "5rem", borderRadius: theme.shape.outerBorderRadius }}
     >
-      <h1>Features</h1>
+      <h1 style={featuresHeading}>Features</h1>
       <Box>
         <Grid
           container

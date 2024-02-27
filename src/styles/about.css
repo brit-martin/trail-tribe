@@ -20,6 +20,7 @@
     display: flex;
     justify-content: center;
     background-image: cover;
+    background-repeat: no-repeat;
 }
 
 .about-subheading {
@@ -30,6 +31,8 @@
     align-items: center;
     font-size: 3rem;
     background-image: url('public/redrock-one.jpeg');
+    background-image: cover;
+    background-repeat: no-repeat;
     color: white
 
 }

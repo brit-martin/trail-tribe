@@ -44,17 +44,17 @@ function Contact() {
 
     Swal.fire({
       title: "We will contact you as soon as possible.",
-      // text: "We will contact you as soon as possible.",
       imageUrl: "public/thankyou-one.png",
       imageWidth: 300,
       imageHeight: 300,
       imageAlt: "Custom image",
-      // fontFamily: theme.fontStyle.secondaryFont,
+      fontFamily: theme.fontStyle.secondaryFont,
       borderRadius: theme.shape.outerBorderRadius,
       confirmButtonColor: theme.palette.primary.main,
       background: theme.palette.tertiary.main,
       customClass: {
         popup: "popup__class",
+        container: "my-swal",
       },
     });
   }
