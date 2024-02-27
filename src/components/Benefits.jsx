@@ -7,254 +7,308 @@ import CardContent from "@mui/material/CardContent";
 import Icon from "@mui/material/Icon";
 import LandscapeRoundedIcon from "@mui/icons-material/LandscapeRounded";
 import CircleIcon from "@mui/icons-material/Circle";
+import { useTheme } from "@mui/material/styles";
 // CSS
 import "../styles/benefits.css";
 
 function Benefits() {
+  const theme = useTheme();
+
+  const headingStyle = {
+    fontFamily: theme.fontStyle.primaryFont,
+    color: theme.palette.white.main,
+    fontSize: "60px",
+  };
+  const subheadingStyle = {
+    fontFamily: theme.fontStyle.secondaryFont,
+  };
+  const mapStyle = {
+    color: theme.palette.secondary.main,
+  };
   return (
     <>
-      <Container className="test" maxWidth="false">
-        <Container className="benefits test" maxWidth="lg">
-          <Typography align="left" variant="h1" gutterBottom>
+      {/* <Container className="test" maxWidth="false"> */}
+        <Container className="benefits" maxWidth="false">
+          <Typography
+            align="left"
+            // variant="h1"
+            gutterBottom
+            style={headingStyle}
+            className="heading"
+          >
             Benefits
           </Typography>
           <Card className="benefit__card card--1">
-            <Typography align="center" variant="h5" gutterBottom>
-              Benefit 1
+            <Typography
+              align="center"
+              variant="h5"
+              gutterBottom
+              style={subheadingStyle}
+            >
+              Trail Recommendations:
             </Typography>
-            <Typography align="center" variant="p" gutterBottom>
-              in massa tempor nec feugiat nisl pretium fusce id velit
+            <Typography
+              align="center"
+              variant="p"
+              gutterBottom
+              style={subheadingStyle}
+            >
+              Access to diverse hiking trails, including difficulty levels,
+              scenic views, and trail conditions.
             </Typography>
           </Card>
           <Card className="benefit__card card--2">
-            <Typography align="center" variant="h5" gutterBottom>
-              Benefit 2
+            <Typography
+              align="center"
+              variant="h5"
+              gutterBottom
+              style={subheadingStyle}
+            >
+              Community Engagment:
             </Typography>
-            <Typography align="center" variant="p" gutterBottom>
-              in massa tempor nec feugiat nisl pretium fusce id velit
+            <Typography
+              align="center"
+              variant="p"
+              gutterBottom
+              style={subheadingStyle}
+            >
+              Interacting with fellow hikers, sharing experiences, and gaining
+              insights into popular routes and hidden gems.
             </Typography>
           </Card>
           <Card className="benefit__card card--3">
-            <Typography align="center" variant="h5" gutterBottom>
-              Benefit 3
+            <Typography
+              align="center"
+              variant="h5"
+              gutterBottom
+              style={subheadingStyle}
+            >
+              Personal Growth:
             </Typography>
-            <Typography align="center" variant="p" gutterBottom>
-              in massa tempor nec feugiat nisl pretium fusce id velit
+            <Typography
+              align="center"
+              variant="p"
+              gutterBottom
+              style={subheadingStyle}
+            >
+              Opportunities for physical activity, mental rejuvenation, and
+              exploration of nature's wonders, fostering a sense of fulfillment
+              and well-being.
             </Typography>
           </Card>
           <LandscapeRoundedIcon
             className="benefit__node node--1"
-            color="success"
+            style={mapStyle}
             fontSize="xl"
           />
           <LandscapeRoundedIcon
             className="benefit__node node--2"
-            color="success"
+            style={mapStyle}
             fontSize="xl"
           />
           <LandscapeRoundedIcon
             className="benefit__node node--3"
-            color="success"
+            style={mapStyle}
             fontSize="xl"
           />
           <CircleIcon
             className="benefit__dot dot--1"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--2"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--3"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--4"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--5"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--6"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--7"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--8"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--9"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--10"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--11"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--12"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--13"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--14"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--15"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--16"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--17"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--18"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--19"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--20"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--21"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--22"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--23"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--24"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--25"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--26"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--27"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--28"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--29"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--30"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--31"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--32"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--33"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--34"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--35"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--36"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--37"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--38"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           <CircleIcon
             className="benefit__dot dot--39"
-            color="success"
+            style={mapStyle}
             fontSize="xs"
           />
           {/* <CircleIcon className='benefit__dot dot--40' color='success' fontSize='xs' /> */}
         </Container>
-      </Container>
+      {/* </Container> */}
     </>
   );
 }

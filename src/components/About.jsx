@@ -55,7 +55,7 @@ function About() {
           <Grid item xs={1.5} className="about-bio">
             <div> Jared info: Avid pickelball player who enjoys coding on the weekends.</div>
           </Grid>
-          <Grid item xs={6.5}>
+          <Grid item xs={7}>
             <div className="about-description" style={description}>
               {/* Here at TrailTribe our goal is to help you connect with friends, find hikes unique to you, and share adventures together. 
               We realized that people need a place to remember the adventures they went on, 
@@ -67,33 +67,32 @@ function About() {
               way to make those memories last.
             </div>
           </Grid>
-          <Grid item xs={5.5}>
+          <Grid item xs={5}>
             <div className="about-subheading" style={subheading}>
               OUR GOAL
             </div>
           </Grid>
-          <Grid item xs={5.5}>
+          <Grid item xs={5}>
             <div className="about-subheading" style={subheading}>
-              TECHNOLOGY
+            Our Story
             </div>
           </Grid>
-          <Grid item xs={6.5}>
-            <div className="about-description" style={description}>
-              Description of Technology
-            </div>
-          </Grid>
-          <Grid item xs={6.5}>
+          <Grid item xs={7}>
             <div className="about-description" style={description}>
               As friends who share a deep love for the great outdoors, we set
               out on a journey to build a platform that reflects our passion for
               hiking and brings people closer to nature. Our story is one of
               friendship, inspiration, and the belief that every step taken on a
-              trail has the potential to create unforgettable memories.
+              trail has the potential to create unforgettable memories.            </div>                 
+          </Grid>
+          <Grid item xs={7}>
+            <div className="about-description" style={description}>
+              Start on your next adventure and don't forget to share with your fellow hikers your experience.
             </div>
           </Grid>
-          <Grid item xs={5.5}>
+          <Grid item xs={5}>
             <div className="about-subheading" style={subheading}>
-              Our Story
+              Whats Next
             </div>
           </Grid>
         </Grid>
