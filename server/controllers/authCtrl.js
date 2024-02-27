@@ -2,15 +2,15 @@ import { User } from '../database/model.js';
 
 export default {
   signUp: async (req, res) => {
-    console.log('signup router');
-    console.log(req.body);
+    // console.log('signup router');
+    // console.log(req.body);
     const { fname, lname, email, password } = req.body;
     if (!fname || !lname || !email || !password) {
       res.send('All fields are required to sign up');
       return;
     }
     const alreadyUser = await User.findOne({ where: { email: email } });
-    console.log(alreadyUser);
+    // console.log(alreadyUser);
     if (!alreadyUser) {
       let newUser = await User.create({
         fname: fname,
@@ -18,7 +18,7 @@ export default {
         email: email,
         password: password,
       });
-      console.log(newUser);
+      // console.log(newUser);
       req.session.userId = newUser.id;
       req.session.email = newUser.email;
       req.session.fname = newUser.fname;
@@ -33,16 +33,16 @@ export default {
   },
 
   login: async (req, res) => {
-    console.log('login router');
+    // console.log('login router');
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email: email } });
-    console.log(req.body);
+    // console.log(req.body);
     if (user && user.password === password) {
       req.session.email = user.email;
       req.session.fname = user.fname;
       req.session.lname = user.lname;
       req.session.userId = user.id;
-      console.log(req.session);
+      // console.log(req.session);
       res.send({
         // success: true,
         user: user,
