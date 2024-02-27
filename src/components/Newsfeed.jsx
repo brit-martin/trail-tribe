@@ -8,6 +8,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Swal from "sweetalert2";
 
 // import components
 import Container from '@mui/material/Container';
@@ -91,11 +92,25 @@ function Newsfeed() {
   };
 
   // reset posts to empty, forcing a new axios call after an unfollow
-  const unfollow = (userId) => {
-    console.log('unfollow user:');
+  const unfollow = (userId, userFName) => {
+    console.log('unfollow user:')
+    Swal.fire({
+      customClass: {
+        container: "my-swal",
+      },
+      position: "top",
+      icon: "success",
+      iconColor: "#FF4b1f",
+      title: `Unfollowed ${userFName}!`,
+      showConfirmButton: false,
+      background: theme.palette.tertiary.light,
+      color: "white",
+      timer: 1500
+    });
     setPosts([]);
     dispatch({ type: 'RESET_POSTS' });
-  };
+  }
+ 
 
   return (
     <Stack className='newsfeed' maxWidth='false'>

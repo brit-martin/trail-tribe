@@ -8,6 +8,7 @@ import { styled } from '@mui/material/styles';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
+import Swal from "sweetalert2";
 
 // icons
 import CloseIcon from '@mui/icons-material/Close';
@@ -31,6 +32,7 @@ import Button from '@mui/material/Button';
 import Post from './Post.jsx';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
+import { useTheme } from "@mui/material";
 // ------------------------------------
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -43,6 +45,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function Explore() {
   // Initialize
+  const theme = useTheme()
   const dispatch = useDispatch();
   const explorePosts = useRef(null);
   const [lng, setLng] = useState(null);
@@ -118,8 +121,24 @@ function Explore() {
     axios
       .get(`/getPostsByTrailId/${trailId}`)
       .then((response) => {
-        console.log(response.data.posts);
-        setPosts(response.data.posts);
+        const posts = response.data.posts;
+        if (posts.length === 0) {
+          Swal.fire({
+            customClass: {
+              container: "my-swal",
+            },
+            position: "top",
+            icon: "info",
+            iconColor: "#FF4b1f",
+            title: "No posts to display",
+            showConfirmButton: false,
+            background: theme.palette.tertiary.light,
+            color: "white",
+            timer: 1500
+          });
+        } else {
+          setPosts(posts);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -130,8 +149,23 @@ function Explore() {
     setFilter(event.target.value);
   };
 
-  const follow = () => {
+  const follow = (userFName) => {
     console.log('follow function');
+    Swal.fire({
+      customClass: {
+        container: "my-swal",
+      },
+      position: "top",
+      icon: "success",
+      iconColor: "#FF4b1f",
+      title: `You are now following ${userFName}!`,
+      showConfirmButton: false,
+      background: theme.palette.tertiary.light,
+      color: "white",
+      timer: 1500
+    });
+    
+
   };
 
   const createPost = (markerId) => {

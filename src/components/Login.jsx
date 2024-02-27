@@ -7,6 +7,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 //material UI
 import * as React from "react";
@@ -21,7 +22,6 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { useTheme } from "@mui/material";
-import Swal from "sweetalert2";
 //Icons
 import IconButton from "@mui/material/IconButton";
 
@@ -68,6 +68,7 @@ function Login() {
           confirmButtonColor: "#FF4b1f",
           background: theme.palette.tertiary.light,
           fontFamily: "Montserrat, sans-serif",
+          
         });
       });
   }

@@ -216,7 +216,7 @@ function Post(props) {
         .delete(`/unfollow/${postData.userId}`)
         .then((response) => {
           console.log(response);
-          props.friendBtn(postData.userId);
+          props.friendBtn(postData.userId, postData.user.fname);
           // props.setPosts([]);
         })
         .catch((error) => {
@@ -230,7 +230,7 @@ function Post(props) {
         .post(`/follow/${postData.userId}`)
         .then((response) => {
           console.log(response);
-          props.friendBtn();
+          props.friendBtn(postData.user.fname);
         })
         .catch((error) => {
           console.log(error);
