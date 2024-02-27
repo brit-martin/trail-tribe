@@ -21,13 +21,18 @@ function Contact() {
 
   const contactContainer = {
     backgroundColor: theme.palette.quadratiary.main,
+    fontFamily: theme.fontStyle.secondaryFont,
   };
+
   const contactContainerText = {
     color: theme.palette.white.main,
+    fontFamily: theme.fontStyle.secondaryFont,
   };
+
   const contactButton = {
     color: theme.palette.white.main,
     backgroundColor: theme.palette.quadratiary.light,
+    fontFamily: theme.fontStyle.secondaryFont,
   };
 
   function submitFormHandler(event) {
@@ -44,6 +49,7 @@ function Contact() {
       imageWidth: 300,
       imageHeight: 300,
       imageAlt: "Custom image",
+      // fontFamily: theme.fontStyle.secondaryFont,
       borderRadius: theme.shape.outerBorderRadius,
       confirmButtonColor: theme.palette.primary.main,
       background: theme.palette.tertiary.main,

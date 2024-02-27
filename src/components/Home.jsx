@@ -1,6 +1,6 @@
 import Benefits from './Benefits.jsx';
 import Hero from './Hero.jsx';
-import Testtwo from './Testtwo.jsx';
+import Testimonials from './Testimonials.jsx';
 import Features from './Features.jsx';
 
 
@@ -11,7 +11,7 @@ function Home() {
       <Hero />
       <Features />
       <Benefits />
-      <Testtwo/>
+      <Testimonials/>
     </>
   );
 }
