@@ -27,9 +27,10 @@ function loginRequired(req, res, next) {
 // == ENDPOINTS ==
 
 // posts
-const { getFollowingPosts, getPostsByTrailId } = postCtrl;
+const { getFollowingPosts, getPostsByTrailId, createPost } = postCtrl;
 app.get('/getFollowingPosts', loginRequired, getFollowingPosts);
 app.get('/getPostsByTrailId/:trailId', loginRequired, getPostsByTrailId);
+app.post('/createPost', loginRequired, createPost);
 
 // auth
 const {

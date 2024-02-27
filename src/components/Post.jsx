@@ -254,12 +254,12 @@ function Post(props) {
 
   return (
     <Stack ref={post} className='post'>
-      {/* <Container className='post__top' disableGutters={true}> */}
+      {/* <Container className='post__top' disablegutters='true'> */}
 
       {/* == CONTENT == */}
-      {/* <Container className='post__content' disableGutters={true}> */}
+      {/* <Container className='post__content' disablegutters='true'> */}
       {/* == TITLE == */}
-      <Container className='post__title' disableGutters={true}>
+      <Container className='post__title' disablegutters='true'>
         <Typography variant='h4' className='post__name'>
           {postData.hikeName}
         </Typography>
@@ -267,7 +267,7 @@ function Post(props) {
       </Container>
 
       {/* == USER == */}
-      <Container className='post__user' disableGutters={true}>
+      <Container className='post__user' disablegutters='true'>
         <img className='post__user-pic' src='https://picsum.photos/200/300' />
         <Typography className='post__user-name' variant='h6'>
           {postData.user.fname} {postData.user.lname}
@@ -281,7 +281,7 @@ function Post(props) {
       </Container>
 
       {/* == DESCRIPTION == */}
-      <Container className='post__description' align='left' disableGutters={true}>
+      <Container className='post__description' align='left' disablegutters='true'>
         <Typography variant='h6'>{postData.description}</Typography>
       </Container>
 
@@ -345,14 +345,14 @@ function Post(props) {
 
       {/* post pictures */}
       {/* TODO - turn this into a carousel */}
-      <Container className='post__pictures' maxWidth='false' disableGutters={true}>
+      <Container className='post__pictures' maxWidth='false' disablegutters='true'>
         <img src='https://picsum.photos/600/200'></img>
       </Container>
       {/* </Container> */}
       {/* </Container> */}
 
       {/* COMMENTS CAROUSEL */}
-      <Container className='post__comments' disableGutters={true}>
+      <Container className='post__comments' disablegutters='true'>
       <Container sx={containerStyles}>
       <Carousel  sx={carouselStyles}>
           {props.post.comments.length > 0 ? (
@@ -402,7 +402,7 @@ function Post(props) {
             <Box sx={commentBody}>
               {props.post.comments.map((comment, idx) => {
                 return (
-                  <div>
+                  <div key={idx}>
                     <Paper key={idx} elevation={6} sx={paperStyles}>
                       <h4>
                         {comment.user.fname} {comment.user.lname}

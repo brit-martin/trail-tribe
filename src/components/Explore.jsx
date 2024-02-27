@@ -14,6 +14,7 @@ import Swal from "sweetalert2";
 import CloseIcon from '@mui/icons-material/Close';
 
 // components
+import Modal from '@mui/material/Modal';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -33,6 +34,8 @@ import Post from './Post.jsx';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import { useTheme } from "@mui/material";
+import { primHoverSX } from './Theme.jsx';
+
 // ------------------------------------
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -45,7 +48,15 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function Explore() {
   // Initialize
-  const theme = useTheme()
+  const [createPost, setCreatePost] = useState({
+    trailId: '',
+    hikeName: '',
+    description: '',
+    pictureArray: '',
+    review: '',
+    difficulty: '',
+  });
+  const theme = useTheme();
   const dispatch = useDispatch();
   const explorePosts = useRef(null);
   const [lng, setLng] = useState(null);
@@ -55,7 +66,58 @@ function Explore() {
   const [posts, setPosts] = useState([]);
   // const mapboxContainer = useRef(null);
   const [filter, setFilter] = useState('');
+  const [openModal, setOpenModal] = useState(false);
   console.log(explorePosts);
+
+  // MATERIAL UI STYLING
+  const modalStyle = {
+    position: 'absolute !important',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'secondary.main',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+    borderRadius: theme.shape.outerBorderRadius,
+  };
+
+  const buttonStyle = {
+    position: 'absolute !important',
+    top: 0,
+    right: '-10px',
+    color: `${theme.palette.primary.main} !important`,
+  };
+
+  const commentHeading = {
+    borderBottom: '1px solid black',
+    marginBottom: '10px',
+  };
+
+  const createPostRow = {
+    marginTop: '20px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  };
+
+  const commentBody = {
+    height: 200,
+    overflowY: 'scroll',
+    scrollbars: 'auto',
+    '&::-webkit-scrollbar': {
+      width: '12px', // width of the scrollbar
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: theme.palette.tertiary.main, // color of the thumb
+      borderRadius: '6px', // roundness of the thumb
+    },
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: 'transparent', // color of the track
+    },
+    // change scrollbar style to match theme
+  };
 
   if (explorePosts.current) {
     if (posts.length > 0) {
@@ -66,10 +128,6 @@ function Explore() {
       explorePosts.current.classList.remove('show-posts');
     }
   }
-
-  // const submitClearPosts = () => {
-  //   setPosts([]);
-  // }
 
   // request to get the users geolocation
   useEffect(() => {
@@ -168,14 +226,45 @@ function Explore() {
 
   };
 
-  const createPost = (markerId) => {
-    console.log('createPost function');
+  function handleCloseModal() {
+    setOpenModal(false);
+  }
+
+  function handleOpenModal(trailId) {
+    setCreatePost({
+      userId: '',
+      trailId: trailId,
+      hikeName: '',
+      description: '',
+      pictureArray: '',
+      review: '',
+      difficulty: '',
+    });
+    setOpenModal(true);
+  }
+
+  const submitCreatePost = (markerId) => {
+    console.log('== submit create post ==');
+    // remove the picture for now...
+    console.log(createPost);
+    createPost.pictureArray = 'picture';
+
+    // Send Axios Call
+    axios
+      .post('/createPost', createPost)
+      .then((response) => {
+        // TODO - create sweet alert
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
-    <Container className='explore' maxWidth={false} disableGutters={true}>
+    <Container className='explore' maxWidth={false} disablegutters='true'>
       {/* MAPBOX CONTAINER */}
-      <Container className='mapbox' maxWidth={false} disableGutters={true}>
+      <Container className='mapbox' maxWidth={false} disablegutters='true'>
         {/* wait for latitude and longitude are retrieved from the browser */}
         {lng && lat ? (
           <Mapbox
@@ -186,7 +275,7 @@ function Explore() {
             setLat={setLat}
             searchArea={searchArea}
             getPosts={getPosts}
-            createPost={createPost}
+            handleOpenModal={handleOpenModal}
           />
         ) : (
           <Typography className='mapbox__loading'>Getting Map Ready...</Typography>
@@ -203,7 +292,7 @@ function Explore() {
           </Typography>
           <Slider
             size='small'
-            defaultValue={searchRange}
+            value={searchRange}
             aria-label='Small'
             // valueLabelDisplay='on'
             marks={[
@@ -244,7 +333,7 @@ function Explore() {
         ref={explorePosts}
         className='explore__posts'
         maxWidth={false}
-        disableGutters={true}
+        disablegutters='true'
         sx={{ width: '30rem' }}
       >
         {posts.length > 0
@@ -261,6 +350,144 @@ function Explore() {
           <CloseIcon fontSize='large' sx={{ color: '#1877F2' }} />
         </Button>
       </Container>
+
+      {/* CREATE POST MODAL */}
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+      >
+        {/* container for modal styling */}
+        <Box sx={modalStyle}>
+          {/* close button */}
+          <Box>
+            <Button sx={buttonStyle} onClick={handleCloseModal}>
+              X
+            </Button>
+          </Box>
+
+          {/* modal header */}
+          <Box sx={commentHeading}>
+            <Typography id='modal-modal-title' variant='h6' component='h2'>
+              Create Your Post!
+            </Typography>
+          </Box>
+
+          {/* Trail Name */}
+          <FormControl sx={{ width: '100%' }} style={createPostRow}>
+            <TextField
+              sx={{ width: '100%' }}
+              id='outlined-input'
+              label='Trail Name'
+              name='hikeName'
+              value={createPost.hikeName}
+              onChange={(e) =>
+                setCreatePost({
+                  ...createPost,
+                  [e.target.name]: e.target.value,
+                })
+              }
+            />
+          </FormControl>
+
+          {/* Description */}
+          <FormControl sx={{ width: '100%' }} style={createPostRow}>
+            <TextField
+              sx={{ width: '100%' }}
+              id='outlined-multiline-static'
+              label='Description'
+              name='description'
+              multiline
+              rows={2}
+              value={createPost.description}
+              inputProps={{
+                maxLength: 255,
+              }}
+              onChange={(e) =>
+                setCreatePost({
+                  ...createPost,
+                  [e.target.name]: e.target.value,
+                })
+              }
+            />
+          </FormControl>
+
+          {/* Pictures */}
+          {/* <FormControl sx={{ width: '100%' }} style={createPostRow}>
+            <Input
+              sx={{ width: '100%' }}
+              type='file'
+              id='image-upload-input'
+              label='Upload Image'
+              name='pictureArray'
+              value={createPost.pictureArray}
+              onChange={(e) =>
+                setCreatePost({
+                  ...createPost,
+                  [e.target.name]: e.target.value,
+                })
+              }
+            />
+          </FormControl> */}
+
+          {/* Difficulty */}
+          <FormControl sx={{ width: '100%' }} style={createPostRow}>
+            <InputLabel id='demo-simple-select-label'>Difficulty</InputLabel>
+            <Select
+              sx={{ width: '100%' }}
+              labelId='demo-simple-select-label'
+              id='demo-simple-select'
+              value={createPost.difficulty}
+              label='Difficulty'
+              name='difficulty'
+              onChange={(e) =>
+                setCreatePost({
+                  ...createPost,
+                  [e.target.name]: e.target.value,
+                })
+              }
+            >
+              <MenuItem value={1}>1</MenuItem>
+              <MenuItem value={2}>2</MenuItem>
+              <MenuItem value={3}>3</MenuItem>
+              <MenuItem value={4}>4</MenuItem>
+              <MenuItem value={5}>5</MenuItem>
+            </Select>
+          </FormControl>
+
+          {/* Review */}
+          <FormControl sx={{ width: '100%' }} style={createPostRow}>
+            <InputLabel id='demo-simple-select-label'>Review</InputLabel>
+            <Select
+              sx={{ width: '100%' }}
+              labelId='demo-simple-select-label'
+              id='demo-simple-select'
+              value={createPost.review}
+              label='Review'
+              name='review'
+              onChange={(e) =>
+                setCreatePost({
+                  ...createPost,
+                  [e.target.name]: e.target.value,
+                })
+              }
+            >
+              <MenuItem value={1}>1</MenuItem>
+              <MenuItem value={2}>2</MenuItem>
+              <MenuItem value={3}>3</MenuItem>
+              <MenuItem value={4}>4</MenuItem>
+              <MenuItem value={5}>5</MenuItem>
+            </Select>
+          </FormControl>
+
+          <Box sx={createPostRow}>
+            <Button onClick={submitCreatePost} sx={primHoverSX}>
+              Create Posts!
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
     </Container>
   );
 }

@@ -1,6 +1,6 @@
 const postData = [
   {
-    id: 1,
+    // id: 1,
     hikeName: 'Fun in the sun',
     trailId: '850607924',
     description: 'I went on this hike and had an absolute blast. I saw a nice waterfall halfway through the hike.',
@@ -10,7 +10,7 @@ const postData = [
     review: '5',
   },
   {
-    id: 2,
+    // id: 2,
     hikeName: 'Almost Died',
     trailId: '850607924',
     description: "I was attacked by a wild mongoose. Scariest 18 seconds of my life. wouldn't recommend.",
@@ -20,7 +20,7 @@ const postData = [
     review: '1',
   },
   {
-    id: 3,
+    // id: 3,
     hikeName: 'Snowy at the top',
     trailId: '850607924',
     description:
@@ -31,7 +31,7 @@ const postData = [
     review: '4',
   },
   {
-    id: 4,
+    // id: 4,
     hikeName: 'Birds everywhere',
     trailId: 'trail_id',
     description: 'There are many birds along this trail that you can feed',
@@ -41,7 +41,7 @@ const postData = [
     review: '5',
   },
   {
-    id: 5,
+    // id: 5,
     hikeName: 'Cliff Climb!',
     trailId: 'trail_id',
     description:
@@ -52,7 +52,7 @@ const postData = [
     review: '5',
   },
   {
-    id: 6,
+    // id: 6,
     hikeName: 'Almost Died again!',
     trailId: '850607924',
     description:
