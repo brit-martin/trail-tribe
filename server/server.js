@@ -64,7 +64,8 @@ app.post('/follow/:friendId', loginRequired, follow);
 app.delete('/unfollow/:friendId', loginRequired, unfollow);
 
 // comments
-const { comment } = commentCtrl;
+const { comment, getCommentsByPostId } = commentCtrl;
+app.get('/getCommentsByPostId/:postId', loginRequired, getCommentsByPostId);
 app.post('/comment', loginRequired, comment);
 
 viteExpress.listen(app, PORT, () => console.log(`Server is listening on port ${PORT}`));

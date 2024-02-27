@@ -8,15 +8,15 @@ import axios from 'axios';
 // components
 
 // import Container from "@mui/material/Container";
-import { Typography, Container } from "@mui/material";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import Comment from "./Comment.jsx";
-import Carousel, {PrevButton, NextButton } from "react-material-ui-carousel";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import { useTheme } from "@mui/material/styles";
-import { Paper,TextField } from "@mui/material";
+import { Typography, Container } from '@mui/material';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Comment from './Comment.jsx';
+import Carousel, { PrevButton, NextButton } from 'react-material-ui-carousel';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import { useTheme } from '@mui/material/styles';
+import { Paper, TextField } from '@mui/material';
 import { primHoverSX } from './Theme.jsx';
 import CommentSlide from './CommentSlide.jsx';
 // Icons
@@ -31,7 +31,7 @@ import StarIcon from '@mui/icons-material/Star';
 import HikingIcon from '@mui/icons-material/Hiking';
 
 function Post(props) {
-  console.log('re-rendering post!!!');
+  // console.log('re-rendering post!!!');
   const theme = useTheme();
   const post = useRef(null);
   // inits
@@ -39,48 +39,52 @@ function Post(props) {
   const [postData, setPostData] = useState(props.post);
   const [openModal, setOpenModal] = useState(false);
   const [comment, setComment] = useState('');
+  const [comments, setComments] = useState([]);
 
-
-  console.log('postData:', postData);
-
-  const reduxUser = useSelector((state) => state.userReducer);
-
-  async function submitComment(){
-    const newComment = {
-      text: comment,
-      postId: postData.user.id,
-      userId: reduxUser.id,
-    }
-
-    try {
-      const res = await axios.post('/comment', newComment)
-      console.log('Comment submitted:', res.data)
-      // setPostData(res.data)
-      setComment('')
-      let asdf = props.count
-      props.setCount(asdf + 1)
-      // window.location.reload()
-
-    }
-    catch(err){
-      console.error('Error submitting comment:', err)
-    }
-  }
-
-
-  // Set either newsfeed class or explore class for specific styling depending on the page we are on
   useEffect(() => {
-    console.log(post.current);
+    // set the newsfeed class or explore class on the post container
     if (props.page === 'newsfeed') {
       post.current.classList.add('post--newsfeed');
     } else if (props.page === 'explore') {
       post.current.classList.add('post--explore');
     }
+
+    // fetch all the comments for this post
+    axios
+      .get(`/getCommentsByPostId/${postData.id}`)
+      .then((response) => {
+        // console.log(response.data);
+        setComments(response.data.comments);
+      })
+      .catch((error) => {
+        // console.log(error);
+      });
   }, []);
 
+  const reduxUser = useSelector((state) => state.userReducer);
+
+  async function submitComment() {
+    const newComment = {
+      text: comment,
+      postId: postData.id,
+      userId: reduxUser.id,
+    };
+
+    try {
+      const res = await axios.post('/comment', newComment);
+      // console.log('Comment submitted:', res.data);
+      setComment('');
+      const updatedComments = await axios.get(`/getCommentsByPostId/${postData.id}`);
+      // console.log(updatedComments.data.comments);
+      setComments(updatedComments.data.comments);
+      handleCloseModal();
+    } catch (err) {
+      console.error('Error submitting comment:', err);
+    }
+  }
 
   const submitReaction = (reaction) => {
-    console.log('submitReaction:');
+    // console.log('submitReaction:');
     const createReaction = {
       post: {
         ...postData,
@@ -90,13 +94,13 @@ function Post(props) {
     axios
       .post('/createReaction', createReaction)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setPostData(response.data.post);
         // TODO - dispatchs, toasts
       })
       .then((error) => {
         // TODO toasts
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -104,11 +108,11 @@ function Post(props) {
     borderRadius: theme.shape.innerBorderRadius,
     padding: '20px 10px',
     backgroundColor: theme.palette.tertiary.light,
-    width: "320px",
-    marginBottom: "10px",
-    "&:hover": {
-      cursor: "pointer",
-    }
+    width: '320px',
+    marginBottom: '10px',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   };
 
   const modalStyle = {
@@ -143,62 +147,56 @@ function Post(props) {
     alignItems: 'center',
   };
 
-  
-
   const commentBody = {
     height: 200,
-    overflowY: "scroll",
-    scrollbars: "auto",
-    "&::-webkit-scrollbar": {
-      width: "12px", // width of the scrollbar
+    overflowY: 'scroll',
+    scrollbars: 'auto',
+    '&::-webkit-scrollbar': {
+      width: '12px', // width of the scrollbar
     },
-    "&::-webkit-scrollbar-thumb": {
+    '&::-webkit-scrollbar-thumb': {
       backgroundColor: theme.palette.tertiary.main, // color of the thumb
-      borderRadius: "6px", // roundness of the thumb
+      borderRadius: '6px', // roundness of the thumb
     },
-    "&::-webkit-scrollbar-track": {
-      backgroundColor: "transparent", // color of the track
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: 'transparent', // color of the track
     },
     // change scrollbar style to match theme
   };
 
   const containerStyles = {
-    border: "1px solid red",
-    display: "flex",
+    border: '1px solid red',
+    display: 'flex',
     height: '10rem',
-    flexDirection: "column",
-    alignItems: "center",
-    padding: "20px 10px",
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: '20px 10px',
     backgroundColor: theme.palette.white.main,
     borderRadius: theme.shape.innerBorderRadius,
-    boxShadow:
-      "inset -5px 0 10px lightgray, inset 0 -5px 10px gray, inset 5px 0 10px lightgray",
+    boxShadow: 'inset -5px 0 10px lightgray, inset 0 -5px 10px gray, inset 5px 0 10px lightgray',
   };
 
   const carouselStyles = {
-    width: "500px",
-    overflow: "hidden",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    position: "relative",
-    margin: "0 auto",
-    next:  {
-      position: "absolute",
+    width: '500px',
+    overflow: 'hidden',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    position: 'relative',
+    margin: '0 auto',
+    next: {
+      position: 'absolute',
       right: '-100px',
       top: '50%',
       transform: 'translateY(-50%)',
     },
     prev: {
-      position: "absolute",
+      position: 'absolute',
       left: '-100px',
       top: '50%',
       transform: 'translateY(-50%)',
-    }
-  }
- 
- 
-
+    },
+  };
 
   function handleOpenModal() {
     setOpenModal(true);
@@ -211,29 +209,28 @@ function Post(props) {
   const submitFriendBtn = () => {
     // if on newsfeed, unfollow user
     if (props.page === 'newsfeed') {
-      console.log('== newsfeed! ==');
+      // console.log('== newsfeed! ==');
       axios
         .delete(`/unfollow/${postData.userId}`)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           props.friendBtn(postData.userId, postData.user.fname);
-          // props.setPosts([]);
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
         });
 
       // if on explore page, follow user
     } else if (props.page === 'explore') {
-      console.log('== explore! ==');
+      // console.log('== explore! ==');
       axios
         .post(`/follow/${postData.userId}`)
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           props.friendBtn(postData.user.fname);
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
         });
     }
   };
@@ -254,10 +251,7 @@ function Post(props) {
 
   return (
     <Stack ref={post} className='post'>
-      {/* <Container className='post__top' disablegutters='true'> */}
-
       {/* == CONTENT == */}
-      {/* <Container className='post__content' disablegutters='true'> */}
       {/* == TITLE == */}
       <Container className='post__title' disablegutters='true'>
         <Typography variant='h4' className='post__name'>
@@ -273,11 +267,6 @@ function Post(props) {
           {postData.user.fname} {postData.user.lname}
         </Typography>
         {followButton}
-        {/* {props.page === 'newsfeed' ? (
-          <Button onClick={() => submitFriendBtn()}>Unfollow {postData.user.fname}</Button>
-        ) : (
-          <Button onClick={() => submitFriendBtn()}>follow {postData.user.fname}</Button>
-        )} */}
       </Container>
 
       {/* == DESCRIPTION == */}
@@ -348,33 +337,34 @@ function Post(props) {
       <Container className='post__pictures' maxWidth='false' disablegutters='true'>
         <img src='https://picsum.photos/600/200'></img>
       </Container>
-      {/* </Container> */}
-      {/* </Container> */}
 
       {/* COMMENTS CAROUSEL */}
       <Container className='post__comments' disablegutters='true'>
-      <Container sx={containerStyles}>
-      <Carousel  sx={carouselStyles}>
-          {props.post.comments.length > 0 ? (
-          
-              props.post.comments.map((comment, idx) => {
+        <Container sx={containerStyles}>
+          <Carousel sx={carouselStyles}>
+            {comments.length > 0 ? (
+              comments.map((comment, idx) => {
                 return (
                   <div key={idx}>
-                    <CommentSlide key={idx} comment={comment} onClick={handleOpenModal} />
-                    </div>
+                    <CommentSlide
+                      key={idx}
+                      fname={postData.user.fname}
+                      lname={postData.user.lname}
+                      comment={comment}
+                      onClick={handleOpenModal}
+                    />
+                  </div>
                 );
               })
-            
-          ) : (
-            <div>
-              <Paper onClick={handleOpenModal} elevation={12} sx={paperStyles}>
-                Add a comment!
-              </Paper>
-            </div>
-          )}
-        
-        </Carousel>
-            </Container>
+            ) : (
+              <div>
+                <Paper onClick={handleOpenModal} elevation={12} sx={paperStyles}>
+                  Add a comment!
+                </Paper>
+              </div>
+            )}
+          </Carousel>
+        </Container>
 
         <Modal
           open={openModal}
@@ -400,12 +390,12 @@ function Post(props) {
 
             {/* all comments */}
             <Box sx={commentBody}>
-              {props.post.comments.map((comment, idx) => {
+              {comments.map((comment, idx) => {
                 return (
                   <div key={idx}>
                     <Paper key={idx} elevation={6} sx={paperStyles}>
                       <h4>
-                        {comment.user.fname} {comment.user.lname}
+                        {postData.user.fname} {postData.user.lname}
                       </h4>
                       <Typography>{comment.text}</Typography>
                     </Paper>
@@ -417,15 +407,17 @@ function Post(props) {
             {/* add your own comment */}
             <Box sx={commentFooter}>
               <TextField
-              sx={{ width: "100%"}}
-              id="outlined-multiline-static"
-              label="Make a Comment!"
-              multiline
-              rows={2}
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
+                sx={{ width: '100%' }}
+                id='outlined-multiline-static'
+                label='Make a Comment!'
+                multiline
+                rows={2}
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
               />
-              <Button onClick={submitComment} sx={primHoverSX}>Add Comment!</Button>
+              <Button onClick={submitComment} sx={primHoverSX}>
+                Add Comment!
+              </Button>
             </Box>
           </Box>
         </Modal>
