@@ -229,9 +229,9 @@ function Explore() {
   };
 
   return (
-    <Container className='explore' maxWidth={false} disableGutters={true}>
+    <Container className='explore' maxWidth={false} disablegutters='true'>
       {/* MAPBOX CONTAINER */}
-      <Container className='mapbox' maxWidth={false} disableGutters={true}>
+      <Container className='mapbox' maxWidth={false} disablegutters='true'>
         {/* wait for latitude and longitude are retrieved from the browser */}
         {lng && lat ? (
           <Mapbox
@@ -259,7 +259,7 @@ function Explore() {
           </Typography>
           <Slider
             size='small'
-            defaultValue={searchRange}
+            value={searchRange}
             aria-label='Small'
             // valueLabelDisplay='on'
             marks={[
@@ -300,7 +300,7 @@ function Explore() {
         ref={explorePosts}
         className='explore__posts'
         maxWidth={false}
-        disableGutters={true}
+        disablegutters='true'
         sx={{ width: '30rem' }}
       >
         {posts.length > 0
