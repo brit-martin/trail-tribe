@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 // MUI components
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -10,6 +10,48 @@ import "../styles/about.css";
 
 function About() {
   const theme = useTheme();
+
+  const seen = {
+    opacity: 1,
+  }
+
+  const notSeen = {
+    opacity: 0,
+  }
+
+
+  const [isJaredHovered, setIsJaredHovered] = useState(false);
+  const [isCodyHovered, setIsCodyHovered] = useState(false);
+  const [isBrittanyHovered, setIsBrittanyHovered] = useState(false);
+  const [isJakeHovered, setIsJakeHovered] = useState(false);
+
+  function handleJaredHover() {
+    setIsJaredHovered(true);
+    console.log("hovered");
+  }
+
+  function handleCodyHover() {
+    setIsCodyHovered(true);
+    console.log("hovered");
+  }
+
+  function handleBrittanyHover() {
+    setIsBrittanyHovered(true);
+    console.log("hovered");
+  }
+
+  function handleJakeHover() {
+    setIsJakeHovered(true);
+    console.log("hovered");
+  }
+
+  function handleLeave() {
+    setIsJaredHovered(false);
+    setIsCodyHovered(false);
+    setIsBrittanyHovered(false);
+    setIsJakeHovered(false);
+    console.log("left");
+  }
 
   const heading = {
     backgroundColor: theme.palette.secondary.light,
@@ -23,6 +65,9 @@ function About() {
 
   const image = {
     borderRadius: theme.shape.innerBorderRadius,
+    width: "750px",
+    height: "450px",
+    padding: "0",
   };
 
   const description = {
@@ -37,23 +82,58 @@ function About() {
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={1.5} className="about-bio">
-            <div> Jakes info: I like basketball, coding, and hiking.</div>
+            <div style={isJakeHovered ? seen : notSeen }>
+              {" "}
+              Jakes info: I like basketball, coding, and hiking.
+            </div>
           </Grid>
           <Grid item xs={1.5} className="about-bio">
-            <div> Cody info: </div>
+            <div style={isCodyHovered ? seen : notSeen }>
+              {" "}
+              Cody info: Fun-loving guy that tries to approach life uniquely.
+            </div>
           </Grid>
           <Grid item xs={6} className="about-image">
+            <div className="image__description">Hover Over our Faces to Learn!</div>
+            <div
+              onMouseEnter={handleJaredHover}
+              onMouseLeave={handleLeave}
+              className="Jared__face"
+            ></div>
+            <div
+              onMouseEnter={handleCodyHover}
+              onMouseLeave={handleLeave}
+              className="Cody__face"
+            ></div>
+            <div
+              onMouseEnter={handleBrittanyHover}
+              onMouseLeave={handleLeave}
+              className="Brittany__face"
+            ></div>
+            <div
+              onMouseEnter={handleJakeHover}
+              onMouseLeave={handleLeave}
+              className="Jake__face"
+            ></div>
             <img
-              src="public/Mountrushmore-example.jpeg"
+              src="public\ourMountRushmore.png"
               style={image}
               alt="mt rushmore"
             />
           </Grid>
           <Grid item xs={1.5} className="about-bio">
-            <div> Brittany info: A sun-loving explorer always seeking new adventures in the great outdoors.</div>
+            <div style={isBrittanyHovered ? seen : notSeen }>
+              {" "}
+              Brittany info: A sun-loving explorer always seeking new adventures
+              in the great outdoors.
+            </div>
           </Grid>
           <Grid item xs={1.5} className="about-bio">
-            <div> Jared info: Avid pickelball player who enjoys coding on the weekends.</div>
+            <div style={isJaredHovered ? seen : notSeen }>
+              {" "}
+              Jared info: Avid pickelball player who enjoys coding on the
+              weekends.
+            </div>
           </Grid>
           <Grid item xs={6.5}>
             <div className="about-description" style={description}>

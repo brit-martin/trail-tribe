@@ -20,7 +20,12 @@
     display: flex;
     justify-content: center;
     background-image: cover;
+    position: relative;
+    margin: 0;
+    padding: 0;
 }
+
+
 
 .about-subheading {
     /* border: 1px solid blue; */
@@ -42,4 +47,66 @@
     display: flex;
     align-items: center;
     padding: 35px;
+}
+
+.Jared__face {
+    width: 115px;
+    height: 130px;
+    position: absolute;
+    top: 35%;
+    left: 23%;
+}
+
+.Jared__face:hover{
+    transform: scale(1.1);
+
+}
+
+
+.Cody__face {
+    width: 100px;
+    height: 135px;
+    position: absolute;
+    top: 40%;
+    left: 41%;
+}
+
+.Cody__face:hover{
+    transform: scale(1.1);
+
+}
+
+.Brittany__face {
+    width: 110px;
+    height: 122px;
+    position: absolute;
+    top: 60%;
+    right: 27%;
+}
+
+.Brittany__face:hover{
+    transform: scale(1.1);
+
+}
+
+.Jake__face {
+    width: 105px;
+    height: 135px;
+    position: absolute;
+    top: 60%;
+    left: 77%;
+}
+
+.Jake__face:hover{
+    transform: scale(1.1);
+
+}
+
+.image__description {
+    position: absolute;
+    top: 10%;
+    left: 40%;
+    color: white;
+    font-size: 1.5rem;
+    font-family: sans-serif;
 }
