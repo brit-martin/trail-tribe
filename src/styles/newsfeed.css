@@ -1,11 +1,12 @@
 .newsfeed {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   height: calc(100vh - 4rem);
   display: flex;
   flex-direction: row !important;
   overflow: hidden scroll;
   position: relative;
   /* overflow: hidden; */
+  background-color: #c7faf9;
 }
 
 .newsfeed__user-info {
@@ -15,7 +16,7 @@
   top: 5rem;
   left: -20rem;
   z-index: 1;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   background-color: white;
   transition: all 0.5s ease-out;
   overflow: hidden scroll;
@@ -36,12 +37,12 @@
 }
 
 .newsfeed__main {
-  border: 1px solid cyan;
+  /* border: 1px solid cyan; */
   display: flex;
 }
 
 .newsfeed__posts {
-  border: 1px solid orange;
+  /* border: 1px solid orange; */
   width: 100%;
   display: flex !important;
   flex-direction: column;

@@ -3,13 +3,14 @@
   /* margin: 4rem; */
   padding: 0.5rem;
   /* max-width: 70rem; */
+  background-color: #fff;
+  border: 1px solid black;
 }
 .post--newsfeed {
   width: 40rem;
-  background-color: lightcoral;
 }
 .post--explore {
-  background-color: lightgreen;
+  background-color: #fff;
 }
 .post__top {
   display: flex !important;
