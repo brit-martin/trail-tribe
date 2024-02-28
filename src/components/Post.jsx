@@ -165,12 +165,13 @@ function Post(props) {
   };
 
   const containerStyles = {
-    border: '1px solid red',
+    // border: '1px solid red',
     display: 'flex',
     height: '10rem',
     flexDirection: 'column',
     alignItems: 'center',
     padding: '20px 10px',
+    // width: '100rem',
     backgroundColor: theme.palette.white.main,
     borderRadius: theme.shape.innerBorderRadius,
     boxShadow: 'inset -5px 0 10px lightgray, inset 0 -5px 10px gray, inset 5px 0 10px lightgray',
@@ -253,7 +254,7 @@ function Post(props) {
     <Stack ref={post} className='post'>
       {/* == CONTENT == */}
       {/* == TITLE == */}
-      <Container className='post__title' disablegutters='true'>
+      <Container className='post__title' disableGutters={true}>
         <Typography variant='h4' className='post__name'>
           {postData.hikeName}
         </Typography>
@@ -261,7 +262,7 @@ function Post(props) {
       </Container>
 
       {/* == USER == */}
-      <Container className='post__user' disablegutters='true'>
+      <Container className='post__user' disableGutters={true}>
         <img className='post__user-pic' src='https://picsum.photos/200/300' />
         <Typography className='post__user-name' variant='h6'>
           {postData.user.fname} {postData.user.lname}
@@ -270,7 +271,7 @@ function Post(props) {
       </Container>
 
       {/* == DESCRIPTION == */}
-      <Container className='post__description' align='left' disablegutters='true'>
+      <Container className='post__description' align='left' disableGutters={true}>
         <Typography variant='h6'>{postData.description}</Typography>
       </Container>
 
@@ -334,12 +335,12 @@ function Post(props) {
 
       {/* post pictures */}
       {/* TODO - turn this into a carousel */}
-      <Container className='post__pictures' maxWidth='false' disablegutters='true'>
+      <Container className='post__pictures' maxWidth='false' disableGutters={true}>
         <img src='https://picsum.photos/600/200'></img>
       </Container>
 
       {/* COMMENTS CAROUSEL */}
-      <Container className='post__comments' disablegutters='true'>
+      <Container className='post__comments' disableGutters={true}>
         <Container sx={containerStyles}>
           <Carousel sx={carouselStyles}>
             {comments.length > 0 ? (

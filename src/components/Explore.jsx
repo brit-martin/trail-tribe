@@ -255,17 +255,17 @@ function Explore() {
         handleCloseModal(false);
         Swal.fire({
           customClass: {
-            container: "my-swal",
+            container: 'my-swal',
           },
-          position: "top",
-          icon: "success",
-          iconColor: "#FF4b1f",
-          title: "Post successfully created",
+          position: 'top',
+          icon: 'success',
+          iconColor: '#FF4b1f',
+          title: 'Post successfully created',
           showConfirmButton: false,
           background: theme.palette.tertiary.light,
-          color: "white",
-          timer: 1500
-        })
+          color: 'white',
+          timer: 1500,
+        });
       })
       .catch((error) => {
         // console.log(error);
@@ -273,9 +273,9 @@ function Explore() {
   };
 
   return (
-    <Container className='explore' maxWidth={false} disablegutters='true'>
+    <Container className='explore' maxWidth={false} disableGutters={true}>
       {/* MAPBOX CONTAINER */}
-      <Container className='mapbox' maxWidth={false} disablegutters='true'>
+      <Container className='mapbox' maxWidth={false} disableGutters={true}>
         {/* wait for latitude and longitude are retrieved from the browser */}
         {lng && lat ? (
           <Mapbox
@@ -344,7 +344,7 @@ function Explore() {
         ref={explorePosts}
         className='explore__posts'
         maxWidth={false}
-        disablegutters='true'
+        disableGutters={true}
         sx={{ width: '30rem' }}
       >
         {posts.length > 0
