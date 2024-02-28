@@ -30,11 +30,11 @@
 }
 
 .hero__logo {
-  position: absolute;
-  border: 1px solid aqua;
-  top: 15%;
-  left: 60%;
-  object-fit: cover;
+    position: absolute;
+    top: 15%;
+    left: 60%;
+    object-fit: cover;
+
 }
 
 #word__1 {
