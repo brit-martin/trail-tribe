@@ -6,6 +6,8 @@
 }
 .mapbox {
   /* border: 1px solid blue; */
+  padding: 0;
+  margin: 0;
   width: 100%;
   height: 100%;
   position: relative;
@@ -23,8 +25,9 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
+  /* height: 6rem; */
+  padding: 2rem;
   background-color: white;
-  height: 6rem;
 }
 
 .explore__filter-header {

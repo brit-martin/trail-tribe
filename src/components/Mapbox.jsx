@@ -50,7 +50,6 @@ function Mapbox(props) {
           <div>
             <container>
               <p><span>${trailName}</span></p>
-              <p>${marker.id}</p>
             </container>
           </div>
         `;
@@ -144,9 +143,9 @@ function Mapbox(props) {
 
   return (
     <>
-      <div className='map__sidebar'>
+      {/* <div className='map__sidebar'>
         longitude: {props.lng} | Latitude: {props.lat} | Zoom: {zoom}
-      </div>
+      </div> */}
       <AddIcon className='map__center' />
       <div ref={mapContainer} className='map' />
     </>
