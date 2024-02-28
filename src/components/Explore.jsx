@@ -34,7 +34,7 @@ import Post from './Post.jsx';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import { useTheme } from '@mui/material';
-import { primHoverSX } from './Theme.jsx';
+import { primHoverSX, secHoverSX } from './Theme.jsx';
 
 // ------------------------------------
 
@@ -101,6 +101,11 @@ function Explore() {
     flexDirection: 'column',
     alignItems: 'center',
   };
+
+  const buttonStyling = {
+    backgroundColor: theme.palette.primary.light,
+    color: "white",
+  }
 
   const commentBody = {
     height: 200,
@@ -296,7 +301,7 @@ function Explore() {
       {/* MAP FUNCTIONS BAR */}
       <Stack className='explore__bar' direction='row'>
         {/* <Typography>Explore</Typography> */}
-        <Button onClick={() => searchArea()}>Search Area</Button>
+        <Button style={buttonStyling} onClick={() => searchArea()}>Search Area</Button>
         <Container sx={{ width: 300, height: 60 }}>
           <Typography className='explore__filter-header' id='track-inverted-slider' gutterBottom>
             Distance (miles)
