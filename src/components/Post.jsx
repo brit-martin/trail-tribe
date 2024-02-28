@@ -168,10 +168,13 @@ function Post(props) {
     // border: '1px solid red',
     display: 'flex',
     height: '10rem',
+    width: '600px',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: '20px 10px',
-    // width: '100rem',
+    paddingTop: '20px',
+    paddingBottom: 0,
+    marginTop: '10px',
+    marginBottom: '10px',
     backgroundColor: theme.palette.white.main,
     borderRadius: theme.shape.innerBorderRadius,
     boxShadow: 'inset -5px 0 10px lightgray, inset 0 -5px 10px gray, inset 5px 0 10px lightgray',
@@ -342,7 +345,7 @@ function Post(props) {
       {/* COMMENTS CAROUSEL */}
       <Container className='post__comments' disableGutters={true}>
         <Container sx={containerStyles}>
-          <Carousel sx={carouselStyles}>
+          <Carousel navButtonsAlwaysVisible={true} sx={carouselStyles}>
             {comments.length > 0 ? (
               comments.map((comment, idx) => {
                 return (

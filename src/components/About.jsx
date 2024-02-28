@@ -84,13 +84,13 @@ function About() {
           <Grid item xs={1.5} className="about-bio">
             <div style={isJakeHovered ? seen : notSeen }>
               {" "}
-              Jakes info: I like basketball, coding, and hiking.
+              Jakes info: I like basketball, coding, and hiking. People seem to like me because I am polite and I am rarely late. I like to eat ice cream and I really enjoy a nice pair of slacks.
             </div>
           </Grid>
           <Grid item xs={1.5} className="about-bio">
             <div style={isCodyHovered ? seen : notSeen }>
               {" "}
-              Cody info: Fun-loving guy that tries to approach life uniquely.
+              Cody info: Fun-loving guy that tries to approach life uniquely. I enjoy pointing out how big my head is, but how that doesn't always correlate to making great decisions. Also, I bring the snacks.  
             </div>
           </Grid>
           <Grid item xs={6} className="about-image">
@@ -124,15 +124,13 @@ function About() {
           <Grid item xs={1.5} className="about-bio">
             <div style={isBrittanyHovered ? seen : notSeen }>
               {" "}
-              Brittany info: A sun-loving explorer always seeking new adventures
-              in the great outdoors.
+              Brittany info: A sun-loving explorer always seeking new adventures in the great outdoors.I hate slurping, like mimicking Shannon Sharpe, and I'll only listen when I tell people I'm ready to listen. 
             </div>
           </Grid>
           <Grid item xs={1.5} className="about-bio">
             <div style={isJaredHovered ? seen : notSeen }>
               {" "}
-              Jared info: Avid pickelball player who enjoys coding on the
-              weekends.
+              Jared info: Avid pickelball player who enjoys coding on the weekends. I decided to share my life's story to the class and then decided our cohort nickname would be TMI. 
             </div>
           </Grid>
           <Grid item xs={7}>
