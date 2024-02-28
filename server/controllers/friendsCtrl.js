@@ -2,8 +2,8 @@ import { Friends } from '../database/model.js';
 
 export default {
   follow: async (req, res) => {
-    console.log('=== follow user route ===');
-    console.log(req.params.friendId);
+    // console.log('=== follow user route ===');
+    // console.log(req.params.friendId);
     try {
       // check if you are already following this person
       if (
@@ -37,9 +37,9 @@ export default {
     }
   },
   unfollow: async (req, res) => {
-    console.log('=== unfollow user route ===');
-    console.log(req.session.userId);
-    console.log(req.params.friendId);
+    // console.log('=== unfollow user route ===');
+    // console.log(req.session.userId);
+    // console.log(req.params.friendId);
     try {
       const myConnection = await Friends.findOne({
         where: {
@@ -53,8 +53,8 @@ export default {
           friendId: req.session.userId,
         },
       });
-      console.log(myConnection);
-      console.log(friendsConnection);
+      // console.log(myConnection);
+      // console.log(friendsConnection);
       await myConnection.destroy();
       await friendsConnection.destroy();
 

@@ -52,6 +52,18 @@ function Signup() {
       };
       // send the request
       console.log(userBody);
+      Swal.fire({
+        customClass: {
+          container: "my-swal",
+        },
+        position: "top",
+        icon: "info",
+        iconColor: "#FF4b1f",
+        title: "You already have an account with this email, please Login.",
+        background: theme.palette.tertiary.light,
+        color: "white",
+        confirmButtonColor: "#FF4b1f",
+      });
       axios.post("/signup", userBody).then((response) => {
         console.log(response.data);
         dispatch({ type: "SET_USER", payload: response.data.newUser });
@@ -67,18 +79,24 @@ function Signup() {
           background: theme.palette.tertiary.light,
           color: "white",
           confirmButtonColor: "#FF4b1f",
-        
         });
       });
-    } else
-      console
-        .log("password do not match")
-        // <Alert variant="outlined" severity="warning">
-        //   Passwords don't match.
-        // </Alert>
-        .catch((error) => {
-          console.log(error);
-        });
+    } else if (passwordInput !== confirmPasswordInput) {
+      Swal.fire({
+        customClass: {
+          container: "my-swal",
+        },
+        position: "top",
+        icon: "info",
+        iconColor: "#FF4b1f",
+        title: "Your passwords don't match.",
+        background: theme.palette.tertiary.light,
+        color: "white",
+        confirmButtonColor: "#FF4b1f",
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
   }
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);

@@ -2,12 +2,12 @@ import { Post, Reaction } from '../database/model.js';
 
 export default {
   createReaction: async (req, res) => {
-    console.log('== create reaction route ==');
+    // console.log('== create reaction route ==');
     // console.log(req.body);
     const { post, reaction } = req.body;
-    console.log(reaction);
-    console.log(post[reaction]);
-    console.log(req.session.userId);
+    // console.log(reaction);
+    // console.log(post[reaction]);
+    // console.log(req.session.userId);
 
     try {
       // get the post that was reacted to
@@ -19,16 +19,16 @@ export default {
           postId: post.id,
         },
       });
-      console.log(existingReaction);
+      // console.log(existingReaction);
 
       // if an existing reaction exists...
       if (existingReaction) {
-        console.log('-- found existing reaction --');
-        console.log(existingReaction.reactionType);
-        console.log(reaction);
+        // console.log('-- found existing reaction --');
+        // console.log(existingReaction.reactionType);
+        // console.log(reaction);
         // check if the existing reaction is the same as the one you just clicked
         if (existingReaction.reactionType === reaction) {
-          console.log('existing reaction is the same... delete it and end');
+          // console.log('existing reaction is the same... delete it and end');
           // throw 'reaction already exists';
           dbPost[existingReaction.reactionType]--;
           post[existingReaction.reactionType]--;
@@ -60,7 +60,7 @@ export default {
       dbPost[reaction]++;
       post[reaction]++;
       await dbPost.save();
-      console.log(post[reaction]);
+      // console.log(post[reaction]);
 
       // send the response
       res.status(200).send({

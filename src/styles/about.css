@@ -23,6 +23,7 @@
     position: relative;
     margin: 0;
     padding: 0;
+    background-repeat: no-repeat;
 }
 
 
@@ -35,6 +36,8 @@
     align-items: center;
     font-size: 3rem;
     background-image: url('public/redrock-one.jpeg');
+    background-image: cover;
+    background-repeat: no-repeat;
     color: white
 
 }

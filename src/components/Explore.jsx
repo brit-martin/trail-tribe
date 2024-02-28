@@ -8,7 +8,7 @@ import { styled } from '@mui/material/styles';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 // icons
 import CloseIcon from '@mui/icons-material/Close';
@@ -33,7 +33,7 @@ import Button from '@mui/material/Button';
 import Post from './Post.jsx';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
-import { useTheme } from "@mui/material";
+import { useTheme } from '@mui/material';
 import { primHoverSX } from './Theme.jsx';
 
 // ------------------------------------
@@ -67,7 +67,7 @@ function Explore() {
   // const mapboxContainer = useRef(null);
   const [filter, setFilter] = useState('');
   const [openModal, setOpenModal] = useState(false);
-  console.log(explorePosts);
+  // console.log(explorePosts);
 
   // MATERIAL UI STYLING
   const modalStyle = {
@@ -121,10 +121,10 @@ function Explore() {
 
   if (explorePosts.current) {
     if (posts.length > 0) {
-      console.log('adding show-posts');
+      // console.log('adding show-posts');
       explorePosts.current.classList.add('show-posts');
     } else {
-      console.log('removing show-posts');
+      // console.log('removing show-posts');
       explorePosts.current.classList.remove('show-posts');
     }
   }
@@ -171,7 +171,7 @@ function Explore() {
         setLocationData(response.data.elements);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -183,23 +183,23 @@ function Explore() {
         if (posts.length === 0) {
           Swal.fire({
             customClass: {
-              container: "my-swal",
+              container: 'my-swal',
             },
-            position: "top",
-            icon: "info",
-            iconColor: "#FF4b1f",
-            title: "No posts to display",
+            position: 'top',
+            icon: 'info',
+            iconColor: '#FF4b1f',
+            title: 'No posts to display',
             showConfirmButton: false,
             background: theme.palette.tertiary.light,
-            color: "white",
-            timer: 1500
+            color: 'white',
+            timer: 1500,
           });
         } else {
           setPosts(posts);
         }
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -208,22 +208,20 @@ function Explore() {
   };
 
   const follow = (userFName) => {
-    console.log('follow function');
+    // console.log('follow function');
     Swal.fire({
       customClass: {
-        container: "my-swal",
+        container: 'my-swal',
       },
-      position: "top",
-      icon: "success",
-      iconColor: "#FF4b1f",
+      position: 'top',
+      icon: 'success',
+      iconColor: '#FF4b1f',
       title: `You are now following ${userFName}!`,
       showConfirmButton: false,
       background: theme.palette.tertiary.light,
-      color: "white",
-      timer: 1500
+      color: 'white',
+      timer: 1500,
     });
-    
-
   };
 
   function handleCloseModal() {
@@ -244,20 +242,33 @@ function Explore() {
   }
 
   const submitCreatePost = (markerId) => {
-    console.log('== submit create post ==');
+    // console.log('== submit create post ==');
     // remove the picture for now...
-    console.log(createPost);
+    // console.log(createPost);
     createPost.pictureArray = 'picture';
 
     // Send Axios Call
     axios
       .post('/createPost', createPost)
       .then((response) => {
-        // TODO - create sweet alert
-        console.log(response.data);
+        //console.log(response.data);
+        handleCloseModal(false);
+        Swal.fire({
+          customClass: {
+            container: "my-swal",
+          },
+          position: "top",
+          icon: "success",
+          iconColor: "#FF4b1f",
+          title: "Post successfully created",
+          showConfirmButton: false,
+          background: theme.palette.tertiary.light,
+          color: "white",
+          timer: 1500
+        })
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 

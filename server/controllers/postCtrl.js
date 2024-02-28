@@ -24,17 +24,17 @@ export default {
     }
   },
   getFollowingPosts: async (req, res) => {
-    console.log('== Get Following Posts Route ==');
-    console.log(req.session.userId);
+    // console.log('== Get Following Posts Route ==');
+    // console.log(req.session.userId);
     try {
       const user = await User.findByPk(req.session.userId);
       const friends = await user.getFriends();
-      console.log(friends);
+      // console.log(friends);
       const friendIds = friends.map((friend) => {
         console.log(friend);
         return friend.friendId;
       });
-      console.log(friendIds);
+      // console.log(friendIds);
       const friendPosts = await Post.findAll({
         where: {
           userId: [...friendIds],
@@ -47,19 +47,19 @@ export default {
           {
             model: Reaction,
           },
-          {
-            model: Comment,
-            include: [
-              {
-                model: User,
-              },
-            ],
-          },
+          // {
+          //   model: Comment,
+          //   include: [
+          //     {
+          //       model: User,
+          //     },
+          //   ],
+          // },
         ],
         // order: [['created_at', 'DESC']],
         order: [['created_at', 'ASC']],
       });
-      console.log(friendPosts);
+      // console.log(friendPosts);
 
       //   Send response
       res.status(200).send({
@@ -70,8 +70,8 @@ export default {
     }
   },
   getPostsByTrailId: async (req, res) => {
-    console.log('=== get posts by trail ID ===');
-    console.log(req.params.trailId);
+    // console.log('=== get posts by trail ID ===');
+    // console.log(req.params.trailId);
     try {
       // get all posts that match the trailId provided
       const posts = await Post.findAll({
