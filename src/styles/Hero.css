@@ -1,50 +1,50 @@
 .hero__container {
-    /* background: url('./random-mountain.jpg');
+  /* background: url('./random-mountain.jpg');
     background-repeat: no-repeat; */
-    height: 900px;
-    position: relative;
-    /* transform: scaleX(-1); */
+  height: 900px;
+  position: relative;
+  /* transform: scaleX(-1); */
 }
 
 .hero__card {
-    min-width: 800px;
-    background-color: rgb(255, 255, 255, 0.5)!important;
-    border: 1px solid #7286a0;
-    position: absolute;
-    text-align: center;
-    transform: translate(-50%, 0);
-    bottom: 15%;
-    left: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  min-width: 800px;
+  background-color: rgb(255, 255, 255, 0.5) !important;
+  border: 1px solid #7286a0;
+  position: absolute;
+  text-align: center;
+  transform: translate(-50%, 0);
+  bottom: 15%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .hero__img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .hero__logo {
-    position: absolute;
-    border: 1px solid aqua;
-    top: 15%;
-    left: 60%;
-    object-fit: cover;
+  position: absolute;
+  border: 1px solid aqua;
+  top: 15%;
+  left: 60%;
+  object-fit: cover;
 }
 
 #word__1 {
-    color: #ff4b1f;
-    font-size: 5rem;
-    font-family: "Permanent Marker", cursive;
+  color: #ff4b1f;
+  font-size: 5rem;
+  font-family: 'Permanent Marker', cursive;
 }
 
 #word__2 {
-    color: #A1f7f5;
-    font-size: 5rem;
-    font-family: "Permanent Marker", cursive;
+  color: #a1f7f5;
+  font-size: 5rem;
+  font-family: 'Permanent Marker', cursive;
 }

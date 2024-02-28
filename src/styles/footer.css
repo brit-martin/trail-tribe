@@ -1,8 +1,10 @@
 .section {
-  border: 1px solid red;
+  /* border: 1px solid red; */
+  background-color: #7286a0;
+  padding: 2rem;
 }
 
 .footer {
-  border: 1px solid red;
-  margin: 2rem;
+  /* border: 1px solid red; */
+  /* margin: 2rem; */
 }

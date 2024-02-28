@@ -4,8 +4,20 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /* background-color: purple; */
 }
 
 .test {
   border: 1px solid red;
+}
+.page__bg {
+  /* border: 1px solid purple; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #c7faf9;
+}
+.page__width {
+  width: 90%;
+  /* border: 1px solid red; */
 }
