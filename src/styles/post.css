@@ -132,4 +132,5 @@
 
 .MuiButtonBase-root {
   position: inherit;
+  padding: 10px !important;
 }
