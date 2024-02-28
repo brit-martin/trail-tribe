@@ -6,6 +6,9 @@ import TextField from "@mui/material/TextField";
 import { useTheme } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import { useState } from "react";
+import PhoneIcon from "@mui/icons-material/Phone";
+import EmailIcon from "@mui/icons-material/Email";
+import BusinessIcon from "@mui/icons-material/Business";
 //CSS
 import "../styles/contact.css";
 //SweetAlert
@@ -27,12 +30,18 @@ function Contact() {
   const contactContainerText = {
     color: theme.palette.white.main,
     fontFamily: theme.fontStyle.secondaryFont,
+    margin: "10px",
   };
 
   const contactButton = {
     color: theme.palette.white.main,
     backgroundColor: theme.palette.quadratiary.light,
     fontFamily: theme.fontStyle.secondaryFont,
+  };
+
+  const contactContainerIcon = {
+    color: theme.palette.white.main,
+    marginRight: "8px",
   };
 
   function submitFormHandler(event) {
@@ -63,21 +72,85 @@ function Contact() {
     <>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container>
-          <Grid item xs={7}>
+          <Grid item xs={7} className="contact-container">
             <div style={contactContainer} className="contact-info">
               <h1 className="contact-header" style={contactContainerText}>
                 Contact Us
               </h1>
-              <h3 className="contact-number" style={contactContainerText}>
-                Phone: 1-800-HIKE-NOW (1-800-445-3669)
-              </h3>
-              <h3 className="contact-email" style={contactContainerText}>
-                Email: trailTribe@gmail.com
-              </h3>
-              <h3 className="contact-address" style={contactContainerText}>
-                Address: 1550 Digital Dr #400, Lehi, UT 84043
-              </h3>
+              <div className="contact-number">
+                <PhoneIcon fontSize="large" style={contactContainerIcon} />
+                <h3 style={contactContainerText}>
+                  1-800-HIKE-NOW (1-800-445-3669)
+                </h3>
+              </div>
+
+              <div className="contact-email">
+                <EmailIcon fontSize="large" style={contactContainerIcon} />
+                <h3 style={contactContainerText}>trailTribe@gmail.com</h3>
+              </div>
+
+              <div className="contact-address">
+                <BusinessIcon fontSize="large" style={contactContainerIcon} />
+                <h3 style={contactContainerText}>
+                  1550 Digital Dr #400, Lehi, UT 84043
+                </h3>
+              </div>
             </div>
+            <Box
+              sx={{
+                "& .MuiTextField-root": { m: 1, width: "25ch" },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <form
+                className="contact-message-container"
+                onSubmit={submitFormHandler}
+              >
+                <h1 className="contact-message-header">Send us a message</h1>
+                <TextField
+                  className="contact-message-name"
+                  required
+                  color="black"
+                  id="outlined-required"
+                  label="Name"
+                  value={nameInput}
+                  onChange={(e) => setNameInput(e.target.value)}
+                />
+                <TextField
+                  className="contact-message-email"
+                  required
+                  color="black"
+                  id="outlined-required"
+                  label="Email"
+                  value={emailInput}
+                  onChange={(e) => setEmailInput(e.target.value)}
+                />
+                <TextField
+                  className="contact-message-subject"
+                  required
+                  color="black"
+                  id="outlined-required"
+                  label="Subject"
+                  value={subjectInput}
+                  onChange={(e) => setSubjectInput(e.target.value)}
+                />
+                <TextField
+                  className="contact-message-comment"
+                  color="black"
+                  required
+                  id="outlined-required"
+                  label="Comment or message"
+                  multiline
+                  maxRows={8}
+                  value={commentInput}
+                  onChange={(e) => setCommentInput(e.target.value)}
+                />
+                <Button type="submit" style={contactButton}>
+                  Send Message
+                </Button>
+              </form>
+            </Box>
           </Grid>
           <Grid item xs={5}>
             <div className="contact-image-container">
@@ -85,61 +158,6 @@ function Contact() {
             </div>
           </Grid>
         </Grid>
-      </Box>
-      <Box
-        sx={{
-          "& .MuiTextField-root": { m: 1, width: "25ch" },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <form
-          className="contact-message-container"
-          onSubmit={submitFormHandler}
-        >
-          <h1 className="contact-message-header">Send us a message</h1>
-          <TextField
-            className="contact-message-name"
-            required
-            color="black"
-            id="outlined-required"
-            label="Name"
-            value={nameInput}
-            onChange={(e) => setNameInput(e.target.value)}
-          />
-          <TextField
-            className="contact-message-email"
-            required
-            color="black"
-            id="outlined-required"
-            label="Email"
-            value={emailInput}
-            onChange={(e) => setEmailInput(e.target.value)}
-          />
-          <TextField
-            className="contact-message-subject"
-            required
-            color="black"
-            id="outlined-required"
-            label="Subject"
-            value={subjectInput}
-            onChange={(e) => setSubjectInput(e.target.value)}
-          />
-          <TextField
-            className="contact-message-comment"
-            color="black"
-            required
-            id="outlined-required"
-            label="Comment or message"
-            multiline
-            maxRows={8}
-            value={commentInput}
-            onChange={(e) => setCommentInput(e.target.value)}
-          />
-          <Button type="submit" style={contactButton}>
-            Send Message
-          </Button>
-        </form>
       </Box>
     </>
   );

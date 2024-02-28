@@ -1,91 +1,13 @@
-// == IMPORTS ==
-//packages
-import React, { useState, useEffect } from "react";
-
-//material ui
-import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material/styles";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import { CardActionArea } from "@mui/material";
-
-// css
-import "../styles/testimonials.css";
-
-function Testimonials() {
-  const theme = useTheme();
-
-  //styling
-  const testimonialCard = {
-    backgroundColor: theme.palette.quadratiary.light,
-    // height: "475px",
-    maxWidth: "325px",
-    padding: "0px",
-  };
-  const textPadding = {
-    padding: "0px",
-  };
-
-  const testimonialHeading = {
-    fontFamily: theme.fontStyle.primaryFont,
-  };
-  const testimonialText = {
-    fontFamily: theme.fontStyle.secondaryFont,
-  };
-
-  const responsive = {
-    superLargeDesktop: {
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
-
-  return (
-    <div className="testimonial-main-container">
-      <h1 className="section__header" style={testimonialHeading}>
-        What Others Say About TrailTribe
-      </h1>
-      <Carousel
-        responsive={responsive}
-        swipeable={false}
-        draggable={false}
-        showDots={true}
-        ssr={true} // means to render carousel on server-side.
-        infinite={true}
-        autoPlaySpeed={1000}
-        keyBoardControl={true}
-        allowScrollButtonsMobile
-        customTransition="all 1s"
-        transitionDuration={500}
-        containerClass="carousel-container"
-        dotListClass="custom-dot-list-style"
-        itemClass="carousel-item-padding-40-px"
-      >
-        <div className="testimonial-container">
+<div className="testimonial-container">
           <Card className="testimonial-card" style={testimonialCard}>
             <CardActionArea>
-              <div className="image-name-container">
-                <CardMedia
-                  className="testimonial-image"
-                  component="img"
-                  image="public/testimonials-one.jpeg"
-                  alt="pine trees"
-                />
+              <CardMedia
+                className="testimonial-image"
+                component="img"
+                image="public/testimonials-one.jpeg"
+                alt="pine trees"
+              />
+              <CardContent>
                 <Typography
                   className="testimonial-name"
                   variant="h4"
@@ -93,8 +15,6 @@ function Testimonials() {
                 >
                   Evan
                 </Typography>
-              </div>
-              <CardContent style={textPadding}>
                 <Typography
                   variant="body2"
                   className="testimonial-text"
@@ -147,13 +67,13 @@ function Testimonials() {
         <div className="testimonial-container">
           <Card className="testimonial-card" style={testimonialCard}>
             <CardActionArea>
-              <div className="image-name-container">
-                <CardMedia
-                  className="testimonial-image"
-                  component="img"
-                  image="public/testimonials-one.jpeg"
-                  alt="pine trees"
-                />
+              <CardMedia
+                className="testimonial-image"
+                component="img"
+                image="public/testimonials-one.jpeg"
+                alt="pine trees"
+              />
+              <CardContent>
                 <Typography
                   className="testimonial-name"
                   variant="h4"
@@ -161,8 +81,6 @@ function Testimonials() {
                 >
                   Danny
                 </Typography>
-              </div>
-              <CardContent style={textPadding}>
                 <Typography
                   variant="body2"
                   className="testimonial-text"
@@ -181,13 +99,13 @@ function Testimonials() {
         <div className="testimonial-container">
           <Card className="testimonial-card" style={testimonialCard}>
             <CardActionArea>
-              <div className="image-name-container">
-                <CardMedia
-                  className="testimonial-image"
-                  component="img"
-                  image="public/testimonials-one.jpeg"
-                  alt="pine trees"
-                />
+              <CardMedia
+                className="testimonial-image"
+                component="img"
+                image="public/testimonials-one.jpeg"
+                alt="pine trees"
+              />
+              <CardContent>
                 <Typography
                   className="testimonial-name"
                   variant="h4"
@@ -195,8 +113,6 @@ function Testimonials() {
                 >
                   Brittany
                 </Typography>
-              </div>
-              <CardContent style={textPadding}>
                 <Typography
                   variant="body2"
                   className="testimonial-text"
@@ -215,13 +131,13 @@ function Testimonials() {
         <div className="testimonial-container">
           <Card className="testimonial-card" style={testimonialCard}>
             <CardActionArea>
-              <div className="image-name-container">
-                <CardMedia
-                  className="testimonial-image"
-                  component="img"
-                  image="public/testimonials-one.jpeg"
-                  alt="pine trees"
-                />
+              <CardMedia
+                className="testimonial-image"
+                component="img"
+                image="public/testimonials-one.jpeg"
+                alt="pine trees"
+              />
+              <CardContent>
                 <Typography
                   className="testimonial-name"
                   variant="h4"
@@ -229,17 +145,15 @@ function Testimonials() {
                 >
                   Jake
                 </Typography>
-              </div>
-              <CardContent style={textPadding}>
                 <Typography
                   variant="body2"
                   className="testimonial-text"
                   style={testimonialText}
                 >
-                  "I've always been drawn to the wilderness, but it wasn't until
-                  I joined this hiking group that I truly found my tribe.
-                  Together, we've conquered challenging trails, and made
-                  friendships."
+                  "I've always been drawn to the tranquility of the wilderness,
+                  but it wasn't until I joined this hiking group that I truly
+                  found my tribe. Together, we've conquered challenging trails,
+                  and forged friendships thatwill last a lifetime."
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -249,13 +163,13 @@ function Testimonials() {
         <div className="testimonial-container">
           <Card className="testimonial-card" style={testimonialCard}>
             <CardActionArea>
-              <div className="image-name-container">
-                <CardMedia
-                  className="testimonial-image"
-                  component="img"
-                  image="public/testimonials-one.jpeg"
-                  alt="pine trees"
-                />
+              <CardMedia
+                className="testimonial-image"
+                component="img"
+                image="public/testimonials-one.jpeg"
+                alt="pine trees"
+              />
+              <CardContent>
                 <Typography
                   className="testimonial-name"
                   variant="h4"
@@ -263,23 +177,17 @@ function Testimonials() {
                 >
                   Cody
                 </Typography>
-              </div>
-              <CardContent style={textPadding}>
                 <Typography
                   variant="body2"
                   className="testimonial-text"
                   style={testimonialText}
                 >
-                  "Whether you're a seasoned hiker or just starting out, you'll
-                  find encouragement, support, and a whole lot of fun along the
-                  way."
+                  "This hiking community isn't just about exploring nature; it's
+                  about fostering a sense of belonging and camaraderie. Whether
+                  you're a seasoned hiker or just starting out, you'll find
+                  encouragement, support, and a whole lot of fun along the way."
                 </Typography>
               </CardContent>
             </CardActionArea>
           </Card>
         </div>
-      </Carousel>
-    </div>
-  );
-}
-export default Testimonials;

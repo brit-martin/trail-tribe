@@ -6,6 +6,10 @@
     position: relative;
 }
 
+.contact-container{
+    /* border: 1px solid red; */
+    position: relative;
+}
 .contact-image {
     /* height: 400; */
     width: 100%;
@@ -24,32 +28,40 @@
     padding: 10px;
 }
 .contact-number {
-    padding: 35px 25px 0px 25px;
-    border-bottom: 1px solid white;
+    /* padding: 35px 25px 0px 25px; */
+    display: flex;
+    flex-direction: row;
 }
+
 .contact-email {
-    padding: 35px 25px 0px 25px;
-    border-bottom: 1px solid white;
+    /* padding: 35px 25px 0px 25px; */
+    display: flex;
+    flex-direction: row;
 }
+
 .contact-address {
-    padding: 35px 25px 0px 25px;
-    border-bottom: 1px solid white;
+    /* padding: 35px 25px 0px 25px; */
+    display: flex;
+    flex-direction: row;
 }
+
 .contact-message-container {
-    /* border: 1px solid red; */
+    /* border: 1px solid blue; */
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 190px;
-    right: 330px;
+    top: 50%;
+    right: 0;
     padding: 15px;
     height: 475px;
     justify-content: center;
     align-items: center;
     font-family: "Montserrat", sans-serif;
     background-color: rgb(219, 119, 94, 0.9);
-
+    transform: translate( 50%, -50%);
+    z-index: 1;
+    
 }
 
 .my-swal {
