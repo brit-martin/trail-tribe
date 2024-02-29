@@ -34,7 +34,7 @@ const EditSwitch = styled(Switch)(({ theme }) => ({
   padding: 7,
   "& .MuiSwitch-switchBase": {
     margin: 1,
-    padding: 0,
+    padding: '0 !important',
     transform: "translateX(6px)",
     "&.Mui-checked": {
       color: "#fff",
@@ -483,7 +483,7 @@ export default function EditInfo() {
                     <div>Last Name: {reduxUser.lname}</div>
                   </div>
                   <div className="edit__field">
-                    <div>Email :{reduxUser.email}</div>
+                    <div>Email: {reduxUser.email}</div>
                   </div>
                   <div className="edit__field">
                     <div>Bio: {reduxUser.bio}</div>
