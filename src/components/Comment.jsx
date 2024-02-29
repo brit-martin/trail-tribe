@@ -11,9 +11,12 @@ function Comment({ fname, lname, comment, onClick }) {
 
   const paperStyles = {
     borderRadius: theme.shape.innerBorderRadius,
-    padding: '20px 10px',
+    paddingTop: '10px',
+    paddingBottom: '20px',
+    paddingLeft: '60px',
+    paddingRight: '60px',
     backgroundColor: theme.palette.tertiary.light,
-    width: '320px',
+    width: '500px',
     overflow: 'hidden',
     '&:hover': {
       cursor: 'pointer',

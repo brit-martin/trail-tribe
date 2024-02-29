@@ -30,7 +30,7 @@ function Footer() {
               Login
             </Link>
             <Link href="/signup" underline="none">
-              signup
+              Sign Up
             </Link>
             <Link href="/about" underline="none">
               About

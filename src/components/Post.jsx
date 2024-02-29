@@ -147,6 +147,34 @@ function Post(props) {
     alignItems: 'center',
   };
 
+  const postButton = {
+    backgroundColor: theme.palette.primary.light,
+    color: "white",
+    fontFamily: theme.fontStyle.secondaryFont,
+    padding: "5px",
+    borderRadius: "4px"
+  }
+
+  const postTitle = {
+    fontFamily: theme.fontStyle.secondaryFont,
+    marginRight: "20px"
+  }
+
+  const date = {
+    fontFamily: theme.fontStyle.secondaryFont,
+  }
+
+  const user = {
+    fontFamily: theme.fontStyle.secondaryFont,
+  }
+
+  const reaction = {
+    fontFamily: theme.fontStyle.secondaryFont,
+  }
+
+  const reactions = {
+  }
+
   const commentBody = {
     height: 200,
     overflowY: 'scroll',
@@ -168,10 +196,13 @@ function Post(props) {
     // border: '1px solid red',
     display: 'flex',
     height: '10rem',
+    width: '600px',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: '20px 10px',
-    // width: '100rem',
+    paddingTop: '20px',
+    paddingBottom: 0,
+    marginTop: '10px',
+    marginBottom: '10px',
     backgroundColor: theme.palette.white.main,
     borderRadius: theme.shape.innerBorderRadius,
     boxShadow: 'inset -5px 0 10px lightgray, inset 0 -5px 10px gray, inset 5px 0 10px lightgray',
@@ -247,7 +278,7 @@ function Post(props) {
       </>
     );
   } else if (props.page === 'explore') {
-    followButton = <Button onClick={() => submitFriendBtn()}>follow {postData.user.fname}</Button>;
+    followButton = <Button style = {postButton}onClick={() => submitFriendBtn()}>follow {postData.user.fname}</Button>;
   }
 
   return (
@@ -255,16 +286,16 @@ function Post(props) {
       {/* == CONTENT == */}
       {/* == TITLE == */}
       <Container className='post__title' disableGutters={true}>
-        <Typography variant='h4' className='post__name'>
+        <Typography variant='h4' className='post__name' style={postTitle}>
           {postData.hikeName}
         </Typography>
-        <Typography className='post__date'>{new Date(postData.createdAt).toDateString()}</Typography>
+        <Typography style={date} className='post__date'>{new Date(postData.createdAt).toDateString()}</Typography>
       </Container>
 
       {/* == USER == */}
       <Container className='post__user' disableGutters={true}>
         <img className='post__user-pic' src='https://picsum.photos/200/300' />
-        <Typography className='post__user-name' variant='h6'>
+        <Typography style={user} className='post__user-name' variant='h6'>
           {postData.user.fname} {postData.user.lname}
         </Typography>
         {followButton}
@@ -272,7 +303,7 @@ function Post(props) {
 
       {/* == DESCRIPTION == */}
       <Container className='post__description' align='left' disableGutters={true}>
-        <Typography variant='h6'>{postData.description}</Typography>
+        <Typography style={user} variant='h6'>{postData.description}</Typography>
       </Container>
 
       {/* == RATINGS == */}
@@ -291,42 +322,42 @@ function Post(props) {
       </Stack>
 
       {/* REACTIONS */}
-      <Stack className='post__reactions' direction='row' spacing={2}>
+      <Stack style={reaction} className='post__reactions' direction='row' >
         {/* likes */}
-        <Stack className='post__reaction' direction='row' spacing={2}>
-          <Button onClick={() => submitReaction('likes')}>
+        <Stack className='post__reaction' direction='row'>
+          <Button style={reactions} onClick={() => submitReaction('likes')}>
             <ThumbUpIcon sx={{ color: 'blue' }} />
           </Button>
           <Typography variant='h6'>{postData.likes}</Typography>
         </Stack>
 
         {/* Hearts */}
-        <Stack className='post__reaction' direction='row' spacing={2}>
-          <Button onClick={() => submitReaction('hearts')}>
+        <Stack className='post__reaction' direction='row'>
+          <Button style={reactions} onClick={() => submitReaction('hearts')}>
             <FavoriteIcon sx={{ color: 'red' }} />
           </Button>
           <Typography variant='h6'>{postData.hearts}</Typography>
         </Stack>
 
         {/* animals */}
-        <Stack className='post__reaction' direction='row' spacing={2}>
-          <Button onClick={() => submitReaction('animals')}>
+        <Stack className='post__reaction' direction='row'>
+          <Button style={reactions} onClick={() => submitReaction('animals')}>
             <PetsIcon sx={{ color: 'brown' }} />
           </Button>
           <Typography variant='h6'>{postData.animals}</Typography>
         </Stack>
 
         {/* Celebrates */}
-        <Stack className='post__reaction' direction='row' spacing={2}>
-          <Button onClick={() => submitReaction('celebrates')}>
+        <Stack className='post__reaction' direction='row' >
+          <Button style={reactions} onClick={() => submitReaction('celebrates')}>
             <CelebrationIcon sx={{ color: 'purple' }} />
           </Button>
           <Typography variant='h6'>{postData.celebrates}</Typography>
         </Stack>
 
         {/* Trees */}
-        <Stack className='post__reaction' direction='row' spacing={2}>
-          <Button onClick={() => submitReaction('trees')}>
+        <Stack className='post__reaction' direction='row'>
+          <Button style={reactions} onClick={() => submitReaction('trees')}>
             <ParkIcon sx={{ color: 'green' }} />
           </Button>
           <Typography variant='h6'>{postData.trees}</Typography>
@@ -342,7 +373,7 @@ function Post(props) {
       {/* COMMENTS CAROUSEL */}
       <Container className='post__comments' disableGutters={true}>
         <Container sx={containerStyles}>
-          <Carousel sx={carouselStyles}>
+          <Carousel navButtonsAlwaysVisible={true} sx={carouselStyles}>
             {comments.length > 0 ? (
               comments.map((comment, idx) => {
                 return (

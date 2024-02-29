@@ -39,9 +39,9 @@
   /* border: 1px solid blue; */
   position: absolute;
   height: calc(100vh - 6rem);
-  width: 10rem;
+  width: 600px;
   top: 1rem;
-  left: -30rem;
+  left: -40rem;
   background-color: white;
   /* transform: translateX(-110%); */
   transition: all 0.5s ease-out;
@@ -49,12 +49,12 @@
 }
 
 .show-posts {
-  transform: translateX(31rem);
+  transform: translateX(41rem);
 }
 
 .explore__clear-posts {
   position: absolute !important;
   top: 0rem;
-  left: 26.6rem;
+  left: 35rem;
   z-index: 1;
 }

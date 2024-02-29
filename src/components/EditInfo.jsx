@@ -34,12 +34,12 @@ const EditSwitch = styled(Switch)(({ theme }) => ({
   padding: 7,
   '& .MuiSwitch-switchBase': {
     margin: 1,
-    padding: 0,
-    transform: 'translateX(6px)',
-    '&.Mui-checked': {
-      color: '#fff',
-      transform: 'translateX(22px)',
-      '& .MuiSwitch-thumb:before': {
+    padding: '0 !important',
+    transform: "translateX(6px)",
+    "&.Mui-checked": {
+      color: "#fff",
+      transform: "translateX(22px)",
+      "& .MuiSwitch-thumb:before": {
         backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50">\
         <path fill="${encodeURIComponent(
           '#fff'
@@ -475,8 +475,8 @@ export default function EditInfo() {
                   <div className='edit__field'>
                     <div>Last Name: {reduxUser.lname}</div>
                   </div>
-                  <div className='edit__field'>
-                    <div>Email :{reduxUser.email}</div>
+                  <div className="edit__field">
+                    <div>Email: {reduxUser.email}</div>
                   </div>
                   <div className='edit__field'>
                     <div>Bio: {reduxUser.bio}</div>
