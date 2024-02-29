@@ -126,7 +126,7 @@ function Newsfeed() {
         </Typography>
 
         {/* User Profile Pic & Name */}
-        <Stack direction='row'>
+        <Stack className='newsfeed__profile-row' direction='row'>
           <img className='post__user-pic' src='https://picsum.photos/200/300' />
           <Typography>
             {userInfo && userInfo.user.fname} {userInfo && userInfo.user.lname}

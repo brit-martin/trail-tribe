@@ -350,7 +350,7 @@ function Explore() {
         className='explore__posts'
         maxWidth={false}
         disableGutters={true}
-        sx={{ width: '30rem' }}
+        sx={{ width: '40rem' }}
       >
         {posts.length > 0
           ? posts.map((post, idx) => {
