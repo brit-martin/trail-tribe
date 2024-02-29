@@ -56,7 +56,7 @@ const postData = [
     hikeName: 'Almost Died again!',
     trailId: '850607924',
     description:
-      'I went on the same hike and came face to face with that same mongoose! we battled to the death and I was victorious!',
+      'I went on the same hike and came face to face with that same mongoose! We battled to the death and I was victorious!',
     pictureArray: ['placeholder_blob', 'placeholder_blob', 'placeholder_blob'],
     userId: 2,
     difficulty: '4',

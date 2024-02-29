@@ -124,7 +124,7 @@ function About() {
           <Grid item xs={1.5} className="about-bio">
             <div style={isBrittanyHovered ? seen : notSeen }>
               {" "}
-              Brittany info: A sun-loving explorer always seeking new adventures in the great outdoors.I hate slurping, like mimicking Shannon Sharpe, and I'll only listen when I tell people I'm ready to listen. 
+              Brittany info: A sun-loving explorer always seeking new adventures in the great outdoors. I like mimicking Shannon Sharpe, and I'll only listen when I tell people I'm ready to listen. 
             </div>
           </Grid>
           <Grid item xs={1.5} className="about-bio">

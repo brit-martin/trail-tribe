@@ -13,7 +13,7 @@ const userData = [
     "email": "jnichols@gmail.com",
     "password": "test1234",
     "profilePic": "placeholder",
-    "bio": "I love hiking and I am the man"
+    "bio": "I love hiking and I am the man."
   },
   {
     "fname": "Cody",
@@ -21,15 +21,15 @@ const userData = [
     "email": "cfarrington@gmail.com",
     "password": "test1234",
     "profilePic": "placeholder",
-    "bio": "I can easily squat twice your body wait fool"
+    "bio": "I can easily squat twice your body weight."
   },
   {
     "fname": "Brittany",
-    "lname": "Larson",
-    "email": "blarson@gmail.com",
+    "lname": "Martin",
+    "email": "bmartin@gmail.com",
     "password": "test1234",
     "profilePic": "placeholder",
-    "bio": "I clean teeth and rob bitches"
+    "bio": "Always up for a new adventure."
   },
   {
     "fname": "Evan",
@@ -37,7 +37,7 @@ const userData = [
     "email": "emarmer@gmail.com",
     "password": "test1234",
     "profilePic": "placeholder",
-    "bio": "I make vans to live in cuz fuck paying rent"
+    "bio": "I love traveling around the world and seeing new places."
   }
 ]
 export default userData
