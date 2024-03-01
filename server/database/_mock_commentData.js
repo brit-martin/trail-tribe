@@ -7,7 +7,7 @@ const commentData= [
   {
     "postId": 2,
     "userId": 1,
-    "text": "Lol sounds like you shouldn't be on the mountains fool"
+    "text": "Lol sounds like you need to be more careful."
   },
   {
     "postId": 3,
@@ -17,12 +17,12 @@ const commentData= [
   {
     "postId": 4,
     "userId": 5,
-    "text": "You are so cute"
+    "text": "Wow, way to go!"
   },
   {
     "postId": 5,
     "userId": 4,
-    "text": "XD 8=====D"
+    "text": "That trail is so fun."
   }
 ]
 export default commentData
